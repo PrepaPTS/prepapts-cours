@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prépa PTS — Module 0</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#1B3A6B; --navy2:#142D54; --navy3:#0E2040;
+  --gold:#C8A45A; --gold2:#E8C47A; --gold-pale:#FDF6E8;
+  --sky:#EEF3FA; --sky2:#D6E4F7; --sky3:#F4F7FB;
+  --white:#FFFFFF; --ink:#111827; --ink2:#374151;
+  --muted:#6B7280; --line:#E5E9F2; --bg:#F4F6FB;
+  --green:#1A7A5E; --green-pale:#E6F7F2;
+  --red:#C0392B; --red-pale:#FDECEA;
+  --purple:#7C3AED; --purple-pale:#EDE9FE;
+  --orange:#D97706; --orange-pale:#FEF3C7;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.7;font-size:15px;}
+
+/* ── PAGE HEADER ── */
+.page-header{background:var(--navy3);padding:48px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(200,164,90,.06);}
+.page-header::after{content:'';position:absolute;left:-40px;bottom:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.02);}
+.header-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:12px;display:block;position:relative;z-index:1;}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px;letter-spacing:-1px;position:relative;z-index:1;}
+.header-title em{color:var(--gold);font-style:normal;}
+.header-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:600px;line-height:1.7;position:relative;z-index:1;}
+.header-sub strong{color:rgba(255,255,255,.85);}
+
+/* ── BODY ── */
+.page-body{max-width:900px;margin:0 auto;padding:48px 24px 80px;}
+
+/* ── INTRO ── */
+.intro-box{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:20px 24px;margin-bottom:40px;font-size:14px;color:var(--ink2);line-height:1.8;}
+.intro-box p{margin:0;}
+.intro-box strong{color:var(--navy);}
+
+/* ── SECTION ── */
+.sec{margin-bottom:48px;}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid var(--line);}
+.sec-num{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--gold);background:var(--navy);padding:5px 11px;border-radius:6px;letter-spacing:1px;flex-shrink:0;}
+.sec-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--navy3);letter-spacing:-.3px;}
+.sec-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+
+/* ── TABLEAU ÉPREUVES ── */
+.ep-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
+.ep-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;position:relative;overflow:hidden;transition:box-shadow .2s;}
+.ep-card:hover{box-shadow:0 4px 18px rgba(27,58,107,.08);}
+.ep-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.ep-card.bleu::before{background:var(--navy);}
+.ep-card.vert::before{background:var(--green);}
+.ep-card.or::before{background:var(--gold);}
+.ep-card.gris::before{background:var(--muted);}
+.ep-card-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.ep-card-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--navy3);margin-bottom:10px;}
+.ep-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.ep-badge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:100px;}
+.ep-badge.navy{background:var(--sky);color:var(--navy);}
+.ep-badge.red{background:var(--red-pale);color:var(--red);}
+.ep-badge.green{background:var(--green-pale);color:var(--green);}
+.ep-badge.gold{background:var(--gold-pale);color:#92630A;}
+.ep-desc{font-size:13px;color:var(--muted);line-height:1.65;}
+.ep-card-full{grid-column:1/-1;}
+
+/* ── TABLEAU RECAP ── */
+.table-wrap{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:24px;}
+.table-header{background:var(--navy);display:grid;padding:12px 20px;}
+.table-header span{font-size:11px;font-weight:700;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;}
+table.recap{width:100%;border-collapse:collapse;}
+table.recap thead{background:var(--sky);}
+table.recap thead th{padding:12px 16px;font-size:12px;font-weight:700;color:var(--navy);text-align:left;border-bottom:2px solid var(--line);}
+table.recap tbody tr{border-bottom:1px solid var(--line);}
+table.recap tbody tr:last-child{border-bottom:none;}
+table.recap tbody tr:hover{background:var(--sky3);}
+table.recap td{padding:12px 16px;font-size:13px;color:var(--ink2);}
+table.recap td:first-child{font-weight:600;color:var(--navy3);}
+.td-badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;}
+
+/* ── ALERTE ── */
+.alert{border-radius:10px;padding:16px 20px;font-size:13px;line-height:1.75;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;}
+.alert-ico{font-size:18px;flex-shrink:0;margin-top:2px;}
+.alert p{margin:0;}
+.alert.gold{background:var(--gold-pale);border:1px solid rgba(200,164,90,.3);border-left:4px solid var(--gold);}
+.alert.navy{background:var(--sky);border:1px solid var(--sky2);border-left:4px solid var(--navy);}
+.alert.red{background:var(--red-pale);border:1px solid rgba(192,57,43,.2);border-left:4px solid var(--red);}
+.alert.green{background:var(--green-pale);border:1px solid rgba(26,122,94,.2);border-left:4px solid var(--green);}
+.alert strong{color:var(--navy);}
+.alert.red strong{color:var(--red);}
+.alert.green strong{color:var(--green);}
+
+/* ── LISTE CHECKLIST ── */
+.check-list{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:20px;}
+.check-list li{display:flex;align-items:flex-start;gap:12px;background:var(--white);border:1px solid var(--line);border-radius:9px;padding:13px 16px;font-size:14px;color:var(--ink2);line-height:1.6;transition:box-shadow .15s;}
+.check-list li:hover{box-shadow:0 2px 10px rgba(27,58,107,.06);}
+.check-ico{font-size:16px;flex-shrink:0;margin-top:1px;}
+.check-list li strong{color:var(--navy);display:block;font-size:14px;margin-bottom:2px;}
+.check-list li.warn{background:var(--gold-pale);border-color:rgba(200,164,90,.25);}
+
+/* ── INFO CARDS ── */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.info-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.info-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.info-card p,.info-card li{font-size:13px;color:var(--ink2);line-height:1.7;}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.info-card ul li{display:flex;align-items:flex-start;gap:7px;}
+.info-card ul li::before{content:'·';color:var(--navy);font-weight:700;flex-shrink:0;font-size:16px;line-height:1.2;}
+
+/* ── REMUNERATION ── */
+.remun-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;}
+.remun-card{background:var(--navy);border-radius:12px;padding:24px;text-align:center;}
+.remun-zone{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.remun-val{font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--gold);line-height:1;margin-bottom:4px;}
+.remun-label{font-size:11px;color:rgba(255,255,255,.45);}
+.remun-range{font-size:13px;color:rgba(255,255,255,.55);margin-top:8px;}
+
+/* ── FORMATION INITIALE ── */
+.fi-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.fi-step{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px;text-align:center;}
+.fi-step-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--navy);line-height:1;margin-bottom:6px;}
+.fi-step-unit{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.fi-step-title{font-size:13px;font-weight:600;color:var(--navy3);margin-bottom:4px;}
+.fi-step-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* ── ZONES GRID ── */
+.zones-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:20px;}
+.zone-item{background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:10px;}
+.zone-dot{width:8px;height:8px;border-radius:50%;background:var(--navy);flex-shrink:0;}
+.zone-name{font-size:13px;font-weight:600;color:var(--navy3);}
+
+/* ── NAV LECONS ── */
+.lecons-nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:48px;}
+.lecon-btn{padding:8px 16px;border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid var(--line);color:var(--muted);background:var(--white);transition:all .2s;}
+.lecon-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.lecon-btn:hover:not(.active){border-color:var(--navy);color:var(--navy);}
+
+/* ── LECON PANEL ── */
+.lecon-panel{display:none;}
+.lecon-panel.active{display:block;}
+
+/* ── KEY DATE ── */
+.key-date{background:var(--navy);border-radius:12px;padding:18px 24px;display:flex;align-items:center;gap:20px;margin-bottom:24px;}
+.kd-ico{font-size:28px;flex-shrink:0;}
+.kd-label{font-size:14px;font-weight:700;color:#fff;}
+.kd-sub{font-size:12px;color:rgba(255,255,255,.45);margin-top:2px;}
+
+@media(max-width:700px){
+  .ep-grid,.info-grid,.remun-grid,.fi-steps,.zones-grid{grid-template-columns:1fr;}
+  .ep-card-full{grid-column:1;}
+  .page-header{padding:28px 20px;}
+  .page-body{padding:24px 16px;}
+  table.recap{font-size:12px;}
+  table.recap td,table.recap th{padding:9px 10px;}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <span class="header-tag">Module 0 · Comprendre le concours</span>
+  <h1 class="header-title">Les bases avant<br>de <em>tout commencer.</em></h1>
+  <p class="header-sub">Épreuves, coefficients, conditions d'accès, calendrier et rémunération — tout ce que vous devez savoir avant d'ouvrir le premier cours.</p>
+</div>
+
+<div class="page-body">
+
+  <!-- NAV LEÇONS -->
+  <div class="lecons-nav">
+    <button class="lecon-btn active" onclick="showLecon('l1',this)">📋 Épreuves & Coefficients</button>
+    <button class="lecon-btn" onclick="showLecon('l2',this)">📅 Calendrier</button>
+    <button class="lecon-btn" onclick="showLecon('l3',this)">✅ Conditions d'accès</button>
+    <button class="lecon-btn" onclick="showLecon('l4',this)">💰 Rémunération & Formation</button>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       LEÇON 1 — ÉPREUVES & COEFFICIENTS
+  ════════════════════════════════════════ -->
+  <div id="l1" class="lecon-panel active">
+
+    <div class="intro-box">
+      <p>Le concours TPTS se déroule en <strong>deux phases</strong> — admissibilité (écrits) puis admission (oral). Chaque épreuve a un coefficient et certaines sont éliminatoires. Un candidat absent à une épreuve ne peut pas se présenter à la suivante.</p>
+    </div>
+
+    <!-- PHASE 1 -->
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Phase 1</span>
+        <div><div class="sec-title">Admissibilité — Épreuves écrites</div><div class="sec-sub">3 épreuves · 2 notées · 1 non notée</div></div>
+      </div>
+
+      <div class="ep-grid">
+        <div class="ep-card bleu">
+          <div class="ep-card-label">Épreuve 1</div>
+          <div class="ep-card-title">Étude de texte & Composition</div>
+          <div class="ep-meta">
+            <span class="ep-badge navy">2h30</span>
+            <span class="ep-badge red">Éliminatoire &lt; 5/20</span>
+            <span class="ep-badge navy">Coeff. 2 externe</span>
+            <span class="ep-badge gold">Coeff. 3 interne</span>
+          </div>
+          <div class="ep-desc">Analyse d'un texte de portée générale + réponses aux questions + composition sur la problématique soulevée par le texte.</div>
+        </div>
+        <div class="ep-card bleu">
+          <div class="ep-card-label">Épreuve 2</div>
+          <div class="ep-card-title">Sciences — Maths, Biologie & Chimie</div>
+          <div class="ep-meta">
+            <span class="ep-badge navy">2h</span>
+            <span class="ep-badge red">Éliminatoire &lt; 5/20</span>
+            <span class="ep-badge gold">Coeff. 3 externe</span>
+            <span class="ep-badge navy">Coeff. 2 interne</span>
+          </div>
+          <div class="ep-desc">QCM, questions à réponse courte et/ou résolution de problèmes en mathématiques, biologie/SVT et chimie.</div>
+        </div>
+        <div class="ep-card vert ep-card-full">
+          <div class="ep-card-label">Tests Psychotechniques</div>
+          <div class="ep-card-title">Évaluation du profil psychologique</div>
+          <div class="ep-meta">
+            <span class="ep-badge navy">2h</span>
+            <span class="ep-badge green">Non notés</span>
+            <span class="ep-badge gold">Résultats transmis au jury oral</span>
+          </div>
+          <div class="ep-desc">Séries logiques, dominos, cartes, séries alphanumériques. Les résultats sont interprétés par un psychologue obligatoirement présent lors de l'oral.</div>
+        </div>
+      </div>
+
+      <div class="alert gold">
+        <span class="alert-ico">⚠️</span>
+        <p><strong>Important :</strong> Les épreuves sont obligatoires. Un candidat absent à une épreuve ne peut pas se présenter à la suivante. Les notes éliminatoires (&lt;5/20) entraînent l'élimination quelle que soit la somme des autres points.</p>
+      </div>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Phase 2</span>
+        <div><div class="sec-title">Admission — Épreuves orales</div><div class="sec-sub">1 épreuve obligatoire + 1 épreuve facultative</div></div>
+      </div>
+
+      <div class="ep-grid">
+        <div class="ep-card or">
+          <div class="ep-card-label">Épreuve orale obligatoire</div>
+          <div class="ep-card-title">Entretien avec le jury</div>
+          <div class="ep-meta">
+            <span class="ep-badge navy">25 min dont 5 min présentation</span>
+            <span class="ep-badge red">Éliminatoire &lt; 5/20</span>
+            <span class="ep-badge gold">Coeff. 5</span>
+          </div>
+          <div class="ep-desc">Le jury dispose de vos résultats psychotechniques (interprétés par un psychologue — obligatoirement présent) et de votre CV détaillé remis préalablement.</div>
+        </div>
+        <div class="ep-card gris">
+          <div class="ep-card-label">Épreuve orale facultative</div>
+          <div class="ep-card-title">Langue étrangère</div>
+          <div class="ep-meta">
+            <span class="ep-badge navy">15 min</span>
+            <span class="ep-badge green">Facultative</span>
+            <span class="ep-badge navy">Coeff. 1</span>
+          </div>
+          <div class="ep-desc">Anglais, allemand, espagnol ou italien. Sur demande à l'inscription — choix définitif. Seuls les points <strong>supérieurs à 10/20</strong> sont pris en compte.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLEAU RÉCAP -->
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Récap</span>
+        <div><div class="sec-title">Tableau des coefficients</div></div>
+      </div>
+      <div class="table-wrap">
+        <table class="recap">
+          <thead>
+            <tr>
+              <th>Épreuve</th>
+              <th>Durée</th>
+              <th>Coeff. externe</th>
+              <th>Coeff. interne</th>
+              <th>Éliminatoire</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Texte & Composition</td>
+              <td>2h30</td>
+              <td><span class="td-badge" style="background:#EEF3FA;color:#1B3A6B;">2</span></td>
+              <td><span class="td-badge" style="background:#FDF6E8;color:#92630A;">3</span></td>
+              <td><span class="td-badge" style="background:#FDECEA;color:#C0392B;">&lt; 5/20</span></td>
+            </tr>
+            <tr>
+              <td>Sciences</td>
+              <td>2h</td>
+              <td><span class="td-badge" style="background:#FDF6E8;color:#92630A;">3</span></td>
+              <td><span class="td-badge" style="background:#EEF3FA;color:#1B3A6B;">2</span></td>
+              <td><span class="td-badge" style="background:#FDECEA;color:#C0392B;">&lt; 5/20</span></td>
+            </tr>
+            <tr>
+              <td>Psychotechniques</td>
+              <td>2h</td>
+              <td colspan="2" style="text-align:center;"><span class="td-badge" style="background:#E6F7F2;color:#1A7A5E;">Non notés</span></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td>Entretien oral</td>
+              <td>25 min</td>
+              <td><span class="td-badge" style="background:#FDF6E8;color:#92630A;">5</span></td>
+              <td><span class="td-badge" style="background:#FDF6E8;color:#92630A;">5</span></td>
+              <td><span class="td-badge" style="background:#FDECEA;color:#C0392B;">&lt; 5/20</span></td>
+            </tr>
+            <tr>
+              <td>Langue étrangère</td>
+              <td>15 min</td>
+              <td><span class="td-badge" style="background:#EEF3FA;color:#1B3A6B;">1</span></td>
+              <td><span class="td-badge" style="background:#EEF3FA;color:#1B3A6B;">1</span></td>
+              <td><span class="td-badge" style="background:#E6F7F2;color:#1A7A5E;">Facultative</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- fin l1 -->
+
+  <!-- ════════════════════════════════════════
+       LEÇON 2 — CALENDRIER
+  ════════════════════════════════════════ -->
+  <div id="l2" class="lecon-panel">
+
+    <div class="intro-box">
+      <p>Le concours TPTS est un concours <strong>déconcentré</strong> : vous vous inscrivez dans la zone où vous souhaitez être affecté en cas de réussite. Vous ne pouvez pas changer de zone après la clôture des inscriptions. Les écrits sont communs à toutes les zones, les oraux varient par région.</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Écrits</span>
+        <div><div class="sec-title">Dates communes à toutes les zones</div></div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <h4>📝 Inscriptions</h4>
+          <p>Les inscriptions durent généralement <strong>environ 4 semaines</strong>. Vérifiez la date d'ouverture sur le site officiel de la Police Nationale dès le début de l'année.</p>
+        </div>
+        <div class="info-card">
+          <h4>✍️ Épreuves écrites</h4>
+          <p>Les épreuves écrites (É1, É2 et tests psychotechniques) se déroulent la même journée pour tous les candidats, quelle que soit leur zone d'inscription.</p>
+        </div>
+      </div>
+
+      <div class="alert navy">
+        <span class="alert-ico">📌</span>
+        <p><strong>Où trouver les dates officielles :</strong> rendez-vous sur <strong>police-nationale.interieur.gouv.fr</strong> → "Nous rejoindre" → "Devenir scientifique" → "TPTS" → "Dates à retenir".</p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Zones</span>
+        <div><div class="sec-title">Les 8 zones du concours déconcentré</div><div class="sec-sub">Choisissez votre zone à l'inscription — choix définitif</div></div>
+      </div>
+
+      <div class="zones-grid">
+        <div class="zone-item"><div class="zone-dot"></div><div class="zone-name">🗼 Île-de-France</div></div>
+        <div class="zone-item"><div class="zone-dot"></div><div class="zone-name">🔵 Zone Nord</div></div>
+        <div class="zone-item"><div class="zone-dot"></div><div class="zone-name">🟠 Zone Est</div></div>
+        <div class="zone-item"><div class="zone-dot"></div><div class="zone-name">🟢 Zone Ouest</div></div>
+        <div class="zone-item"><div class="zone-dot"></div><div class="zone-name">☀️ Zone Sud</div></div>
+        <div class="zone-item"><div class="zone-dot"></div><div class="zone-name">🌊 Zone Sud-Est</div></div>
+        <div class="zone-item"><div class="zone-dot"></div><div class="zone-name">🌻 Zone Sud-Ouest</div></div>
+        <div class="zone-item"><div class="zone-dot"></div><div class="zone-name">🌴 Outre-mer</div></div>
+      </div>
+
+      <div class="alert gold">
+        <span class="alert-ico">⚠️</span>
+        <p><strong>Attention :</strong> les résultats d'admissibilité et les dates d'oraux varient selon les zones. L'IDF passe généralement ses oraux plus tôt que les autres zones. Vérifiez les dates spécifiques à votre zone sur le site officiel.</p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Après</span>
+        <div><div class="sec-title">Aussi pour le TPPTS et l'IPTS</div><div class="sec-sub">Les autres concours de la filière scientifique</div></div>
+      </div>
+      <div class="table-wrap">
+        <table class="recap">
+          <thead>
+            <tr><th>Concours</th><th>Niveau</th><th>Type</th><th>Organisation</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>TPTS — Technicien</td>
+              <td>Bac</td>
+              <td>Externe & Interne</td>
+              <td><span class="td-badge" style="background:#EEF3FA;color:#1B3A6B;">Déconcentré</span></td>
+            </tr>
+            <tr>
+              <td>TPPTS — Technicien Principal</td>
+              <td>Bac+2</td>
+              <td>Externe & Interne</td>
+              <td><span class="td-badge" style="background:#E6F7F2;color:#1A7A5E;">National</span></td>
+            </tr>
+            <tr>
+              <td>IPTS — Ingénieur</td>
+              <td>Bac+5</td>
+              <td>Externe & Interne</td>
+              <td><span class="td-badge" style="background:#E6F7F2;color:#1A7A5E;">National</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- fin l2 -->
+
+  <!-- ════════════════════════════════════════
+       LEÇON 3 — CONDITIONS D'ACCÈS
+  ════════════════════════════════════════ -->
+  <div id="l3" class="lecon-panel">
+
+    <div class="intro-box">
+      <p>Pour vous inscrire au concours TPTS externe, vous devez remplir <strong>toutes</strong> les conditions listées ci-dessous. Si l'une d'elles n'est pas remplie à la date de la première épreuve, votre candidature sera refusée.</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Requis</span>
+        <div><div class="sec-title">Conditions obligatoires — Concours externe</div></div>
+      </div>
+
+      <ul class="check-list">
+        <li>
+          <span class="check-ico">🎓</span>
+          <div><strong>Baccalauréat ou équivalent</strong>Titulaire du bac ou d'un titre/diplôme de niveau IV, ou d'une qualification reconnue comme équivalente.</div>
+        </li>
+        <li>
+          <span class="check-ico">🎂</span>
+          <div><strong>18 ans minimum — aucune limite d'âge maximale</strong>Avoir 18 ans révolus à la date de la première épreuve. Il n'existe aucune limite d'âge supérieure pour ce concours.</div>
+        </li>
+        <li>
+          <span class="check-ico">🇫🇷</span>
+          <div><strong>Nationalité française</strong>Les candidats en instance d'acquisition de la nationalité française peuvent postuler, sous réserve de l'obtenir au plus tard à la date des écrits.</div>
+        </li>
+        <li>
+          <span class="check-ico">📋</span>
+          <div><strong>Casier judiciaire (bulletin n°2) vierge</strong>Ou sans mention incompatible avec l'exercice des fonctions envisagées.</div>
+        </li>
+        <li>
+          <span class="check-ico">🚗</span>
+          <div><strong>Permis B obligatoire</strong>Le permis de conduire de catégorie B est exigé pour exercer les fonctions de technicien de police scientifique.</div>
+        </li>
+        <li>
+          <span class="check-ico">💪</span>
+          <div><strong>Aptitude physique</strong>Être apte physiquement à exercer les fonctions sur lesquelles vous postulez.</div>
+        </li>
+        <li>
+          <span class="check-ico">🎖️</span>
+          <div><strong>JDC accomplie</strong>Avoir accompli la Journée Défense et Citoyenneté. Pour les moins de 25 ans n'ayant pas encore effectué leur JDC, une attestation provisoire suffit.</div>
+        </li>
+        <li>
+          <span class="check-ico">⚖️</span>
+          <div><strong>Jouir de ses droits civiques</strong>Ne pas avoir été privé de ses droits civiques par une décision judiciaire.</div>
+        </li>
+        <li class="warn">
+          <span class="check-ico">🌟</span>
+          <div><strong>Dérogation à la condition de diplôme</strong>La condition de diplôme est supprimée pour les parents d'au moins 3 enfants élevés effectivement, et pour les sportifs de haut niveau (liste officielle du ministère des Sports).</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Interne</span>
+        <div><div class="sec-title">Spécificités du concours interne</div></div>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <h4>📁 Dossier RAEP</h4>
+          <p>Le concours interne requiert la constitution d'un dossier de <strong>Reconnaissance des Acquis de l'Expérience Professionnelle</strong>, utilisé lors de l'entretien oral.</p>
+        </div>
+        <div class="info-card">
+          <h4>⚖️ Coefficients différents</h4>
+          <ul>
+            <li>Épreuve de texte : coeff. <strong>3</strong> (vs 2 en externe)</li>
+            <li>Épreuve sciences : coeff. <strong>2</strong> (vs 3 en externe)</li>
+            <li>Oral : coeff. 5 (identique)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- fin l3 -->
+
+  <!-- ════════════════════════════════════════
+       LEÇON 4 — RÉMUNÉRATION & FORMATION
+  ════════════════════════════════════════ -->
+  <div id="l4" class="lecon-panel">
+
+    <div class="intro-box">
+      <p>Le technicien de police scientifique est un fonctionnaire de <strong>catégorie B</strong>. Sa rémunération évolue selon les échelons et le lieu d'affectation. Après réussite, une formation initiale obligatoire est dispensée à Écully.</p>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Salaire</span>
+        <div><div class="sec-title">Rémunération nette mensuelle</div><div class="sec-sub">Données au 1er janvier 2026 · Hors primes</div></div>
+      </div>
+
+      <div class="remun-grid">
+        <div class="remun-card">
+          <div class="remun-zone">🗼 Île-de-France</div>
+          <div class="remun-val">2 445€</div>
+          <div class="remun-label">net/mois · 1er échelon</div>
+          <div class="remun-range">→ 2 989€ net/mois au 13e échelon</div>
+        </div>
+        <div class="remun-card">
+          <div class="remun-zone">🇫🇷 Province</div>
+          <div class="remun-val">2 278€</div>
+          <div class="remun-label">net/mois · 1er échelon</div>
+          <div class="remun-range">→ 2 804€ net/mois au 13e échelon</div>
+        </div>
+      </div>
+
+      <div class="alert navy">
+        <span class="alert-ico">ℹ️</span>
+        <p>Ces montants correspondent au 1er échelon du groupe 1. Ils n'incluent pas les primes et indemnités éventuelles (indemnité de sujétion, prime de résultats, etc.).</p>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hd">
+        <span class="sec-num">Formation</span>
+        <div><div class="sec-title">Formation initiale à Écully (69)</div><div class="sec-sub">Obligatoire pour tous les lauréats</div></div>
+      </div>
+
+      <div class="key-date">
+        <div class="kd-ico">🏛️</div>
+        <div>
+          <div class="kd-label">École Nationale de Police Scientifique — Écully (Rhône)</div>
+          <div class="kd-sub">Les lauréats choisissent leur affectation selon leur rang de mérite, puis suivent cette formation obligatoire.</div>
+        </div>
+      </div>
+
+      <div class="fi-steps">
+        <div class="fi-step">
+          <div class="fi-step-num">10</div>
+          <div class="fi-step-unit">semaines</div>
+          <div class="fi-step-title">Socle initial</div>
+          <div class="fi-step-desc">5 sem. généraliste (institution policière, juridique, secourisme) + 5 sem. technique (fondamentaux forensiques)</div>
+        </div>
+        <div class="fi-step">
+          <div class="fi-step-num">2</div>
+          <div class="fi-step-unit">semaines</div>
+          <div class="fi-step-title">Stage immersion</div>
+          <div class="fi-step-desc">Découverte des services de police et partenaires institutionnels, organisé par le service d'affectation</div>
+        </div>
+        <div class="fi-step">
+          <div class="fi-step-num">+</div>
+          <div class="fi-step-unit">variable</div>
+          <div class="fi-step-title">Professionnalisation</div>
+          <div class="fi-step-desc">Modules métiers selon l'affectation — durée variable</div>
+        </div>
+      </div>
+
+      <div class="alert green">
+        <span class="alert-ico">✅</span>
+        <p><strong>Bonne nouvelle :</strong> des dispenses partielles sont possibles si certains socles ont été suivis antérieurement par l'agent dans le cadre de ses fonctions passées (pour les candidats au concours interne notamment).</p>
+      </div>
+    </div>
+
+  </div><!-- fin l4 -->
+
+</div>
+
+<script>
+function showLecon(id, btn) {
+  document.querySelectorAll('.lecon-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.lecon-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
