@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prépa PTS — Module 6 · Organisation de la Police Scientifique</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --navy:#1B3A6B;--navy2:#142D54;--navy3:#0E2040;
+  --gold:#C8A45A;--gold-pale:#FDF6E8;
+  --sky:#EEF3FA;--sky2:#D6E4F7;--sky3:#F4F7FB;
+  --white:#fff;--ink:#111827;--ink2:#374151;
+  --muted:#6B7280;--line:#E5E9F2;--bg:#F4F6FB;
+  --green:#1A7A5E;--green-pale:#E6F7F2;
+  --red:#C0392B;--red-pale:#FDECEA;
+  --purple:#7C3AED;--purple-pale:#EDE9FE;
+  --orange:#D97706;--orange-pale:#FEF3C7;
+  --ps:#C0392B;--ps-pale:#FDECEA;
+  --gray-old:#8A9BB0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;}
+
+/* ── HEADER ── */
+.page-header{background:var(--navy3);padding:48px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(200,164,90,.06);}
+.header-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;display:block;position:relative;z-index:1;}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px;letter-spacing:-1px;position:relative;z-index:1;}
+.header-title em{color:var(--gold);font-style:normal;}
+.header-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:620px;line-height:1.7;position:relative;z-index:1;}
+.header-sub strong{color:rgba(255,255,255,.85);}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,164,90,.15);border:1px solid rgba(200,164,90,.3);border-radius:100px;padding:5px 14px;font-size:12px;color:var(--gold);font-weight:600;margin-bottom:14px;position:relative;z-index:1;}
+
+/* ── BODY ── */
+.page-body{max-width:920px;margin:0 auto;padding:48px 24px 80px;}
+
+/* ── INTRO ── */
+.intro-box{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:20px 24px;margin-bottom:40px;font-size:14px;color:var(--ink2);line-height:1.85;}
+.intro-box strong{color:var(--navy);}
+
+/* ── SECTION ── */
+.sec{margin-bottom:56px;}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:26px;padding-bottom:16px;border-bottom:2px solid var(--line);}
+.sec-num{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--gold);background:var(--navy);padding:5px 11px;border-radius:6px;letter-spacing:1px;flex-shrink:0;}
+.sec-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--navy3);letter-spacing:-.3px;}
+.sec-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.body-text{font-size:14px;color:var(--ink2);line-height:1.85;margin-bottom:18px;}
+.body-text strong{color:var(--navy3);}
+
+/* ── ANCIEN / NOUVEAU COMPARATIF ── */
+.avant-apres{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:start;margin-bottom:24px;}
+.avant-box,.apres-box{border-radius:12px;overflow:hidden;}
+.avant-box{border:2px dashed var(--gray-old);opacity:.8;}
+.apres-box{border:2px solid var(--navy);}
+.box-header{padding:12px 18px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.avant-box .box-header{background:#f0f2f5;color:var(--gray-old);}
+.apres-box .box-header{background:var(--navy);color:#fff;}
+.box-content{padding:14px 18px;background:var(--white);font-size:13px;color:var(--ink2);line-height:1.7;}
+.avant-apres-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;font-size:24px;color:var(--navy);padding-top:40px;}
+
+/* ── ORGANIGRAMME FLÈCHES ── */
+.orgchart{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:24px;}
+.org-node{border-radius:10px;padding:14px 22px;text-align:center;min-width:280px;max-width:560px;width:100%;position:relative;}
+.org-node-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;line-height:1.3;margin-bottom:4px;}
+.org-node-sub{font-size:11px;line-height:1.5;opacity:.8;}
+.org-node-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-top:6px;}
+
+/* niveaux couleurs */
+.node-l0{background:var(--navy3);color:#fff;}
+.node-l0 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l1{background:var(--navy2);color:#fff;}
+.node-l1 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l2{background:var(--navy);color:#fff;}
+.node-l2 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l3{background:#2A5298;color:#fff;}
+.node-l3 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l4{background:var(--sky);color:var(--navy);border:1px solid var(--sky2);}
+.node-l4 .org-node-badge{background:var(--sky2);color:var(--navy);}
+.node-ps{background:var(--ps);color:#fff;}
+.node-ps .org-node-badge{background:rgba(255,255,255,.2);color:#fff;}
+.node-ps-light{background:var(--ps-pale);color:var(--ps);border:1px solid rgba(192,57,43,.25);}
+.node-ps-light .org-node-badge{background:var(--ps);color:#fff;}
+.node-gray{background:#e8ecf2;color:var(--gray-old);border:2px dashed var(--gray-old);}
+.node-gray .org-node-badge{background:var(--gray-old);color:#fff;}
+
+/* flèches */
+.org-arrow-down{display:flex;justify-content:center;align-items:center;height:32px;}
+.org-arrow-down::before{content:'';width:2px;height:20px;background:var(--line);display:block;}
+.org-arrow-down.has-arrow::after{content:'▼';color:var(--muted);font-size:10px;position:absolute;margin-top:20px;}
+.org-arrow-wrap{position:relative;display:flex;flex-direction:column;align-items:center;}
+
+/* branchement horizontal */
+.org-split{display:flex;justify-content:center;gap:12px;margin-bottom:0;width:100%;}
+.org-split-col{display:flex;flex-direction:column;align-items:center;flex:1;max-width:220px;}
+.org-branch-line{width:100%;height:2px;background:var(--line);position:relative;}
+.org-branch-line::before,.org-branch-line::after{content:'';position:absolute;top:0;width:2px;height:20px;background:var(--line);}
+.org-branch-line::before{left:calc(25% - 1px);}
+.org-branch-line::after{right:calc(25% - 1px);}
+.org-top-line{height:20px;width:2px;background:var(--line);}
+.org-split-wrap{display:flex;flex-direction:column;align-items:center;width:100%;}
+
+/* légende */
+.org-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+
+/* ── TIMELINE RÉFORME ── */
+.timeline-reform{display:grid;grid-template-columns:80px 1fr;gap:0;margin-bottom:28px;}
+.tl-year{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--gold);padding:14px 0 14px 0;border-right:2px solid var(--line);text-align:right;padding-right:20px;line-height:1.6;}
+.tl-content{padding:14px 0 14px 24px;border-bottom:1px solid var(--line);}
+.tl-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:4px;}
+.tl-content p{font-size:13px;color:var(--ink2);line-height:1.7;}
+.tl-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--navy);color:#fff;margin-left:8px;vertical-align:middle;}
+.tl-tag.old{background:var(--gray-old);}
+
+/* ── ALERTE ── */
+.alert{border-radius:10px;padding:16px 20px;font-size:13px;line-height:1.8;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;}
+.alert-ico{font-size:18px;flex-shrink:0;margin-top:2px;}
+.alert p,.alert div{margin:0;}
+.alert.gold{background:var(--gold-pale);border:1px solid rgba(200,164,90,.3);border-left:4px solid var(--gold);}
+.alert.navy{background:var(--sky);border:1px solid var(--sky2);border-left:4px solid var(--navy);}
+.alert.red{background:var(--ps-pale);border:1px solid rgba(192,57,43,.2);border-left:4px solid var(--ps);}
+.alert.green{background:var(--green-pale);border:1px solid rgba(26,122,94,.2);border-left:4px solid var(--green);}
+.alert strong{color:var(--navy);}
+.alert.red strong{color:var(--ps);}
+.alert.gold strong{color:#92630A;}
+
+/* ── CORPS GRADES ── */
+.corps-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.corps-card{border-radius:12px;overflow:hidden;}
+.corps-head{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.corps-head-left{}
+.corps-cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:.6;margin-bottom:2px;}
+.corps-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.corps-cat-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;flex-shrink:0;}
+.corps-body{padding:14px 20px;display:flex;flex-direction:column;gap:8px;}
+.grade-row{display:flex;align-items:flex-start;gap:12px;}
+.grade-num{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);width:20px;flex-shrink:0;margin-top:2px;}
+.grade-name{font-size:13px;font-weight:600;}
+.grade-desc{font-size:12px;opacity:.7;line-height:1.5;}
+/* CCD */
+.corps-ccd .corps-head{background:#0a1628;}.corps-ccd .corps-name,.corps-ccd .corps-cat-label{color:#fff;}.corps-ccd .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-ccd .corps-body{background:#142D54;}.corps-ccd .grade-name{color:#fff;}.corps-ccd .grade-desc{color:rgba(255,255,255,.55);}
+/* CC */
+.corps-cc .corps-head{background:#1B3A6B;}.corps-cc .corps-name,.corps-cc .corps-cat-label{color:#fff;}.corps-cc .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cc .corps-body{background:#2A5298;}.corps-cc .grade-name{color:#fff;}.corps-cc .grade-desc{color:rgba(255,255,255,.55);}
+/* CEA */
+.corps-cea .corps-head{background:#2A5298;}.corps-cea .corps-name,.corps-cea .corps-cat-label{color:#fff;}.corps-cea .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cea .corps-body{background:#3A6BC8;}.corps-cea .grade-name{color:#fff;}.corps-cea .grade-desc{color:rgba(255,255,255,.6);}
+/* Scientifiques */
+.corps-sci .corps-head{background:var(--ps);}.corps-sci .corps-name,.corps-sci .corps-cat-label{color:#fff;}.corps-sci .corps-cat-badge{background:rgba(255,255,255,.15);color:#fff;}
+.corps-sci .corps-body{background:var(--ps-pale);}.corps-sci .grade-name{color:var(--ps);}.corps-sci .grade-desc{color:var(--muted);}
+.corps-sci-ing .corps-head{background:#1a4a7a;}.corps-sci-ing .corps-name,.corps-sci-ing .corps-cat-label{color:#fff;}.corps-sci-ing .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-sci-ing .corps-body{background:var(--sky);}.corps-sci-ing .grade-name{color:var(--navy);}.corps-sci-ing .grade-desc{color:var(--muted);}
+.corps-sep{text-align:center;font-size:13px;font-weight:600;color:var(--muted);padding:8px 0;display:flex;align-items:center;gap:10px;}
+.corps-sep::before,.corps-sep::after{content:'';flex:1;height:1px;background:var(--line);}
+
+/* ── INFOS GRID ── */
+.info-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.info-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.info-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.info-card p{font-size:13px;color:var(--ink2);line-height:1.75;}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.info-card ul li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:8px;line-height:1.55;}
+.info-card ul li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0;margin-top:1px;}
+
+/* ── CADRES ENQUÊTE ── */
+.cadres-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.cadre{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.cadre-head{padding:14px 18px;border-bottom:1px solid var(--line);}
+.cadre-head h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:3px;}
+.cadre-head .art{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.5px;}
+.cadre-body{padding:16px 18px;}
+.cadre-body p{font-size:13px;color:var(--ink2);line-height:1.75;margin-bottom:10px;}
+.cadre-body p:last-child{margin-bottom:0;}
+.cadre-scenario{background:var(--bg);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.65;font-style:italic;border-left:3px solid var(--line);}
+.cadre.fl .cadre-head{background:#EEF3FA;}.cadre.fl .cadre-head h4{color:var(--navy);}.cadre.fl .cadre-head .art{color:var(--navy);}
+.cadre.prel .cadre-head{background:var(--purple-pale);}.cadre.prel .cadre-head h4{color:var(--purple);}.cadre.prel .cadre-head .art{color:var(--purple);}
+.cadre.fc .cadre-head{background:var(--green-pale);}.cadre.fc .cadre-head h4{color:var(--green);}.cadre.fc .cadre-head .art{color:var(--green);}
+.cadre.cr .cadre-head{background:var(--orange-pale);}.cadre.cr .cadre-head h4{color:var(--orange);}.cadre.cr .cadre-head .art{color:var(--orange);}
+
+/* ── INFRACTIONS ── */
+.inf-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.inf-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;position:relative;overflow:hidden;}
+.inf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.inf-c::before{background:#10B981;}.inf-d::before{background:var(--orange);}.inf-cr::before{background:var(--ps);}
+.inf-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.inf-c .inf-label{color:#10B981;}.inf-d .inf-label{color:var(--orange);}.inf-cr .inf-label{color:var(--ps);}
+.inf-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy3);margin-bottom:14px;}
+.inf-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px;}
+.inf-row:last-of-type{border-bottom:none;}
+.inf-row-label{color:var(--muted);}
+.inf-row-val{font-weight:600;color:var(--ink);}
+.inf-exemples{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic;line-height:1.55;}
+
+/* ── DÉONTOLOGIE ── */
+.deon-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.deon-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.deon-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.deon-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.deon-list li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:9px;line-height:1.55;}
+.deon-list li .deon-ico{flex-shrink:0;font-size:14px;margin-top:1px;}
+.deon-item-title{font-weight:600;color:var(--navy3);display:block;margin-bottom:2px;}
+.deon-item-desc{font-size:12px;color:var(--muted);display:block;line-height:1.55;}
+.police-special{background:var(--navy);border-radius:12px;padding:20px 24px;color:#fff;margin-top:16px;}
+.police-special h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;}
+.police-special p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;}
+.police-special p strong{color:#fff;}
+
+/* ── NON IMPACTÉS ── */
+.non-imp{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.ni-tag{background:var(--white);border:1px solid var(--line);border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:5px;}
+.ni-tag::before{content:'✓';color:var(--green);font-weight:700;}
+
+/* ── TABLE ── */
+.table-wrap{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+table.t{width:100%;border-collapse:collapse;}
+table.t thead th{padding:11px 16px;font-size:12px;font-weight:700;color:var(--navy);background:var(--sky);text-align:left;border-bottom:2px solid var(--line);}
+table.t tbody tr{border-bottom:1px solid var(--line);}
+table.t tbody tr:last-child{border-bottom:none;}
+table.t tbody tr:hover{background:var(--sky3);}
+table.t td{padding:11px 16px;font-size:13px;color:var(--ink2);vertical-align:top;}
+table.t td:first-child{font-weight:600;color:var(--navy3);}
+.td-b{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;}
+
+@media(max-width:720px){
+  .avant-apres{grid-template-columns:1fr;}.avant-apres-arrow{transform:rotate(90deg);padding:10px 0;}
+  .info-2,.cadres-grid,.inf-3,.deon-2{grid-template-columns:1fr;}
+  .org-split{flex-direction:column;align-items:center;}
+  .page-header{padding:28px 20px;}.page-body{padding:24px 16px;}
+  table.t td,table.t th{padding:8px 10px;font-size:12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-badge">Module 6 · Préparation à l'oral</div>
+  <span class="header-tag">Leçon 2</span>
+  <h1 class="header-title">Organisation de la<br><em>Police Scientifique</em></h1>
+  <p class="header-sub">Les missions de la PS, sa chaîne hiérarchique, les niveaux de compétence, les structures analytiques et les laboratoires — tout ce que vous devez maîtriser pour l'oral.</p>
+</div>
+
+<div class="page-body">
+
+  <div class="intro-box">
+    <p>Cette leçon est le cœur de ce que vous devez savoir en tant que futur technicien PTS. Vous allez intégrer cette organisation — il faut la comprendre de l'intérieur, pas seulement la réciter. Le jury attendra que vous soyez capable d'expliquer <strong>comment et pourquoi</strong> la PS est organisée ainsi.</p>
+  </div>
+
+  <!-- ══════════ 0bis. LES MISSIONS DE LA PS (sera renuméroté en 01) ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">01</span>
+      <div><div class="sec-title">Les missions de la police scientifique</div><div class="sec-sub">Cadre judiciaire (mission première) et cadre extrajudiciaire — doctrine du 16/02/2024</div></div>
+    </div>
+
+    <p class="body-text">Selon l'article 14 du Code de procédure pénale, la police judiciaire est chargée de <strong>constater les infractions, en rassembler les preuves et en rechercher les auteurs</strong>. La police scientifique participe à ces missions de trois manières :</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;">
+        <div style="font-size:18px;margin-bottom:6px;">📍</div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Intervenir sur les scènes</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.55;">Fixer les lieux, rechercher et recueillir traces et indices sur les scènes d'infraction ou de découverte de corps</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;">
+        <div style="font-size:18px;margin-bottom:6px;">🔬</div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Exploiter et interpréter</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.55;">Exploiter les éléments découverts par des méthodes analytiques et interpréter les résultats obtenus</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;">
+        <div style="font-size:18px;margin-bottom:6px;">🗂️</div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Comparer et alimenter</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.55;">Comparer le résultat des analyses avec les fichiers de criminalistique et assurer leur alimentation</div>
+      </div>
+    </div>
+
+    <div class="encart navy"><strong>Une mission qui couvre tout le spectre :</strong> la PS intervient <strong>dans tous les cadres judiciaires et à tous les stades de la procédure</strong>, depuis la délinquance du quotidien jusqu'aux crimes les plus complexes — y compris en sécurité routière. Les agents accomplissent les missions confiées par l'autorité judiciaire et les services de PJ, sous leur autorité.</div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;margin-top:24px;">Les missions extrajudiciaires</div>
+    <p class="body-text">Au-delà du cadre judiciaire, la PS intervient dans des domaines <strong>circonscrits par convention ou par la réglementation</strong> :</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 16px;font-size:13px;color:var(--ink2);line-height:1.7;"><strong>🛂 Police des étrangers</strong> — signalisation administrative lorsqu'un individu étranger ne justifie pas de son droit de circulation/séjour, ou fait l'objet d'une décision d'éloignement.</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 16px;font-size:13px;color:var(--ink2);line-height:1.7;"><strong>💥 Identification des victimes de catastrophes</strong> — sous l'autorité du procureur compétent, même sans ouverture d'enquête (catastrophe naturelle ou accidentelle, en France ou à l'étranger).</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 16px;font-size:13px;color:var(--ink2);line-height:1.7;"><strong>🔍 Identification de personnes décédées ou disparues</strong> — même hors procédure judiciaire, des relevés d'empreintes et prélèvements biologiques peuvent être réalisés en vue d'une identification.</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 16px;font-size:13px;color:var(--ink2);line-height:1.7;"><strong>💊 Alimentation de STUPS</strong> — analyses d'échantillons de stupéfiants pour la base STUPS, dans le cadre de la lutte contre les trafics en mer ou via le dispositif SINTES (convention SNPS / OFDT).</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 16px;font-size:13px;color:var(--ink2);line-height:1.7;"><strong>🔫 Recherches sur les armes</strong> — examens balistiques de recherche d'antériorité, dans un cadre de police administrative relative à la réglementation sur les armes et munitions.</div>
+    </div>
+
+    <div class="encart gold"><strong>Le rôle de conseiller technique :</strong> les agents de la PS ont également un <strong>rôle de conseillers techniques</strong> des services d'enquête et des magistrats — pour la préservation des traces, le choix des techniques de prélèvement et des procédés analytiques les mieux adaptés. Ils assurent aussi des missions support liées à leurs activités : <strong>formation, recherche et développement</strong>.</div>
+  </div>
+
+  <!-- ══════════ 1. HISTORIQUE ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">02</span>
+      <div><div class="sec-title">Une organisation en mouvement constant</div><div class="sec-sub">De la SDPTS aux DPS — histoire récente de la police scientifique</div></div>
+    </div>
+
+    <p class="body-text">La Police Scientifique n'a pas toujours eu son organisation actuelle. En à peine 40 ans, elle a été profondément restructurée à plusieurs reprises — chaque réforme visant à mieux répondre aux évolutions de la criminalité et des techniques forensiques.</p>
+
+    <div class="timeline-reform">
+      <div class="tl-year">1985</div>
+      <div class="tl-content"><h4>Création de la SDPTS <span class="tl-tag old">Avant</span></h4><p>Sous-Direction de la Police Technique et Scientifique — première organisation structurée de la PS au sein de la Sécurité Publique.</p></div>
+      <div class="tl-year">2001</div>
+      <div class="tl-content"><h4>Création de l'INPS</h4><p>Institut National de Police Scientifique — regroupe les 5 laboratoires de police scientifique (Lyon, Paris, Toulouse, Lille, Marseille). Sous tutelle directe de la DGPN.</p></div>
+      <div class="tl-year">2017</div>
+      <div class="tl-content"><h4>Création du SCPTS</h4><p>Service Central de Police Technique et Scientifique — cohabite avec l'INPS. Deux structures pour piloter la PS terrain et les laboratoires.</p></div>
+      <div class="tl-year">2021</div>
+      <div class="tl-content"><h4>Création du SNPS <span class="tl-tag">Fusion</span></h4><p>Suite au décret du 30 décembre 2020, le SNPS naît de la fusion du SCPTS et de l'INPS. Les 5 laboratoires intègrent le SNPS. Une seule structure nationale pour toute la PS.</p></div>
+      <div class="tl-year" style="color:var(--ps);font-weight:700;">2024</div>
+      <div class="tl-content" style="border-left:3px solid var(--ps);padding-left:21px;"><h4>Réforme — Rattachement à la DNPJ <span class="tl-tag" style="background:var(--ps);">En vigueur</span></h4><p>La PS est rattachée à la DNPJ (Police Judiciaire). Les anciennes dénominations (SRPTS, SDPTS, BPTS) sont remplacées par DPS, DLPS et BPS. Chaîne hiérarchique unifiée sur tout le territoire.</p></div>
+    </div>
+
+    <!-- AVANT/APRÈS PS avec bonnes autorités -->
+    <div class="avant-apres" style="margin-bottom:24px;">
+      <div class="avant-box">
+        <div class="box-header">Avant 2024 — Deux chaînes séparées</div>
+        <div class="box-content">
+          <p style="margin-bottom:8px;"><strong>Côté Sécurité Publique :</strong></p>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">DCSP → DDSP → <strong>BPTS</strong> / <strong>SDPTS 1</strong> / <strong>SDPTS 2</strong></p>
+          <p style="margin-bottom:8px;"><strong>Côté Police Judiciaire :</strong></p>
+          <p style="font-size:12px;color:var(--muted);">DCPJ → DRPJ/SRPJ → <strong>SRPTS</strong> (niveau 3)</p>
+          <p style="font-size:12px;color:var(--red);margin-top:10px;">⚠️ Protocoles nécessaires pour travailler ensemble</p>
+        </div>
+      </div>
+      <div class="avant-apres-arrow">→</div>
+      <div class="apres-box">
+        <div class="box-header">Depuis 2024 — Commandement unique, autorités distinctes</div>
+        <div class="box-content">
+          <p style="margin-bottom:6px;"><strong>DGPN</strong> → autorité directe → <strong>SNPS</strong></p>
+          <p style="font-size:11px;color:var(--muted);margin-bottom:8px;padding-left:12px;">Le SNPS est rattaché <em>fonctionnellement</em> à la DNPJ</p>
+          <p style="margin-bottom:6px;"><strong>SNPS</strong> → autorité fonctionnelle → <strong>toutes les structures PS</strong></p>
+          <p style="font-size:11px;color:var(--muted);margin-bottom:8px;padding-left:12px;">Doctrine d'emploi, formation, équipements, contrôle qualité</p>
+          <p style="margin-bottom:6px;"><strong>DIPN/DDPN</strong> → autorité hiérarchique → <strong>DPS</strong></p>
+          <p style="font-size:11px;color:var(--muted);margin-bottom:0;padding-left:12px;">La DPS est rattachée au SIPJ/SDPJ du département</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LÉGENDE DES AUTORITÉS -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:24px;">
+      <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:10px;">Comprendre les types d'autorité — essentiel pour l'oral</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:32px;height:3px;background:var(--ps);border-radius:999px;flex-shrink:0;margin-top:8px;"></div>
+          <div><div style="font-size:13px;font-weight:700;color:var(--ps);margin-bottom:3px;">Autorité hiérarchique</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">Le supérieur hiérarchique donne des ordres, note les agents, décide des affectations. Lien de subordination direct et complet.</div></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <div style="width:32px;height:2px;background:var(--navy);border-radius:999px;flex-shrink:0;margin-top:8px;border-top:2px dashed var(--navy);background:none;"></div>
+          <div><div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px;">Autorité fonctionnelle</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">L'autorité fonctionnelle encadre les méthodes, la doctrine, les équipements et la qualité du travail — sans gérer les agents au quotidien.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ 2. ORGANISATION COMPLÈTE ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">03</span>
+      <div><div class="sec-title">Organisation complète de la PS — autorités et rattachements</div><div class="sec-sub">Organigramme avec distinction autorité hiérarchique / fonctionnelle</div></div>
+    </div>
+
+    <p class="body-text">C'est le point le plus délicat de cette leçon — et l'un des plus demandés à l'oral. Il faut distinguer <strong>qui commande qui au quotidien</strong> (autorité hiérarchique) de <strong>qui fixe les règles du métier</strong> (autorité fonctionnelle). Dans la PS, ces deux autorités ne viennent pas toujours du même endroit.</p>
+
+    <!-- ORGANIGRAMME VISUEL -->
+    <img src="/mnt/user-data/uploads/1781014383457_preview.webp" alt="Organigramme Police Scientifique — autorités hiérarchique et fonctionnelle" style="width:100%;border-radius:12px;display:block;margin-bottom:16px;">
+    <div style="font-size:11px;color:var(--muted);font-style:italic;margin-bottom:24px;text-align:center;">Organigramme officiel — les flèches rouges indiquent le Pôle Police Scientifique (PS) à chaque échelon</div>
+
+    <!-- DÉTAIL PAR ÉCHELON -->
+    <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:24px;">
+
+      <!-- SNPS -->
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--ps);padding:13px 20px;display:flex;align-items:center;gap:12px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;background:rgba(255,255,255,.2);color:#fff;padding:3px 9px;border-radius:5px;flex-shrink:0;">National</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;">SNPS — Service National de la Police Scientifique</div>
+        </div>
+        <div style="padding:16px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--ps);margin-bottom:6px;">Qui le dirige ?</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;">Placé sous l'<strong>autorité directe du DGPN</strong>. Rattaché <em>fonctionnellement</em> à la DNPJ. Ce n'est pas la DNPJ qui "commande" le SNPS — c'est le DGPN. La DNPJ fixe les orientations métier de la filière judiciaire dans laquelle s'inscrit la PS.</p>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Ce qu'il fait concrètement</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;">Fixe la <strong>doctrine d'emploi</strong> commune à toutes les structures PS · Définit les <strong>référentiels d'équipement et de formation</strong> · Gère le budget matériels scientifiques · Intègre les 5 LPS · Héberge le plateau national d'odorologie et le LCCN (criminalistique numérique) · Exerce une <strong>autorité fonctionnelle sur toutes les structures PS</strong> du territoire.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PPS -->
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--ps-pale);border-bottom:1px solid rgba(192,57,43,.2);padding:13px 20px;display:flex;align-items:center;gap:12px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;background:var(--ps);color:#fff;padding:3px 9px;border-radius:5px;flex-shrink:0;">Zonal</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--ps);">Pôle Police Scientifique — 6 pôles + 1 délégation</div>
+        </div>
+        <div style="padding:16px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--ps);margin-bottom:6px;">Rattachement</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;">Le pôle PS est placé sous l'<strong>autorité hiérarchique du directeur zonal adjoint de la police judiciaire (DZA-PJ)</strong>. Pour exercer son pilotage, le SNPS s'appuie sur <strong>6 pôles</strong> répartis sur le territoire.</p>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Son autorité</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;"><strong>Autorité fonctionnelle</strong> sur l'ensemble des structures PS de son ressort (hors LPS du SNPS) — sans interférer au quotidien dans les opérations. Conseille les chaînes hiérarchiques locales, évalue les besoins en moyens, suit l'activité et réalise les audits.</p>
+            </div>
+          </div>
+          <div style="background:var(--sky);border-radius:7px;padding:10px 14px;margin-top:10px;font-size:12px;color:var(--navy);line-height:1.65;">
+            🗺️ <strong>Cas particulier IDF :</strong> la <strong>délégation zonale de police scientifique d'Île-de-France</strong> est placée sous l'<strong>autorité hiérarchique du chef du SNPS</strong> directement (et non d'un DZA-PJ). Elle assure le pilotage fonctionnel des structures PS dépendant de la préfecture de police de Paris, des départements de la grande couronne (77, 78, 91, 95) et des Outre-mer.
+          </div>
+        </div>
+      </div>
+
+      <!-- DPS -->
+      <div style="background:var(--white);border:1px solid rgba(192,57,43,.3);border-radius:12px;overflow:hidden;">
+        <div style="background:#a93226;padding:13px 20px;display:flex;align-items:center;gap:12px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;background:rgba(255,255,255,.2);color:#fff;padding:3px 9px;border-radius:5px;flex-shrink:0;">Interdép.</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;">DPS — Division de Police Scientifique · 92 divisions</div>
+        </div>
+        <div style="padding:16px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px;">
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--ps);margin-bottom:6px;">Rattachement</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;">Rattachée au <strong>SIPJ/SDPJ</strong> de la DIPN/DDPN. Le chef de DPS est soumis à l'<strong>autorité hiérarchique</strong> du chef du SIPJ/SDPJ. Il a lui-même une <strong>autorité hiérarchique</strong> sur les personnels qui lui sont directement rattachés, et une <strong>autorité fonctionnelle</strong> sur les DLPS et BPS du département.</p>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Son rôle de pilotage départemental</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;">À l'exception de la PP de Paris, le chef de DPS exerce une <strong>mission de pilotage départemental</strong> sous le contrôle du pôle PS de zone : coordonner l'action de la PS et veiller à la couverture optimale des scènes selon la technicité requise · assurer le suivi qualitatif et quantitatif de l'activité · suivre les formations des agents du département.</p>
+            </div>
+          </div>
+
+          <!-- SECTIONS INTERNES DPS développées -->
+          <div style="background:var(--ps-pale);border-radius:10px;padding:16px;margin-bottom:10px;">
+            <div style="font-size:12px;font-weight:700;color:var(--ps);margin-bottom:10px;">Sections possibles au sein d'une DPS (selon le niveau de criminalité du département)</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="background:var(--white);border-radius:7px;padding:10px 12px;">
+                <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:3px;">Section intervention niv. 3 — Scènes criminelles complexes</div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.5;">Homicides, viols graves, scènes multisites, attentats · Managers de scènes de crime · Méthodologie attentat · Compétence interdépartementale</div>
+              </div>
+              <div style="background:var(--white);border-radius:7px;padding:10px 12px;">
+                <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:3px;">Section intervention niv. 2 ou 1 — Délits et délinquance de masse</div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.5;">Ressort départemental (niv. 2) ou circonscription (niv. 1) · Cambriolages, vols, dégradations, signalisation</div>
+              </div>
+              <div style="background:var(--white);border-radius:7px;padding:10px 12px;">
+                <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:3px;">Section criminalistique conventionnelle — Plateau technique</div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.5;">Révélation physico-chimique des traces papillaires sur scellés · Compétence interdépartementale · Travail de laboratoire sédentaire</div>
+              </div>
+              <div style="background:var(--white);border-radius:7px;padding:10px 12px;">
+                <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:3px;">Section identification — Comparaison FAED</div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.5;">Comparaison des traces papillaires révélées avec les empreintes du FAED · Alimentation du fichier · Identification des auteurs</div>
+              </div>
+              <div style="background:#EDE9FE;border:1px solid rgba(124,58,237,.2);border-radius:7px;padding:10px 12px;">
+                <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:3px;">Section criminalistique numérique (SCN) — en transition vers l'OFAC</div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.5;">Extraction et analyse de traces numériques · Certaines SCN intégrées aux antennes OFAC (décret 23 nov. 2023) · 20 SCN supplémentaires prévues · LCCN à Écully garde l'autorité fonctionnelle</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DLPS -->
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--ps-pale);border-bottom:1px solid rgba(192,57,43,.2);padding:13px 20px;display:flex;align-items:center;gap:12px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;background:var(--ps);color:#fff;padding:3px 9px;border-radius:5px;flex-shrink:0;">Local</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--ps);">DLPS — Division Locale de Police Scientifique · 107 divisions</div>
+        </div>
+        <div style="padding:16px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px;">
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--ps);margin-bottom:6px;">Rattachement</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;">Rattachée à un <strong>Service Local de Police Judiciaire (SLPJ)</strong> d'une CPN. Hors ville siège du SIPJ. Sous <strong>autorité fonctionnelle</strong> du chef de DPS du département. L'autorité hiérarchique des agents relève du chef du SLPJ de la CPN.</p>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Composition</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;">Une section intervention de niveau 1 ou 2 · Peut également abriter une section criminalistique conventionnelle · Dans les villes avec ASA, peut coexister avec la DPS — dans ce cas uniquement composée d'une section intervention niv. 1.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BPS -->
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;border-style:dashed;">
+        <div style="background:var(--bg);border-bottom:1px solid var(--line);padding:13px 20px;display:flex;align-items:center;gap:12px;">
+          <div style="font-family:'DM Mono',monospace;font-size:10px;background:var(--muted);color:#fff;padding:3px 9px;border-radius:5px;flex-shrink:0;">Local</div>
+          <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);">BPS — Base de Police Scientifique · 73 bases</div>
+        </div>
+        <div style="padding:16px 20px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:6px;">Ce que c'est</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;">Une <strong>unité non constituée</strong> — pas un service à proprement parler. Implantée dans les CPN sans service PS constitué. Composée de <strong>policiers actifs polyvalents</strong> (gardiens de la paix, brigadiers) ayant reçu une formation spécifique et habilités pour réaliser signalisations et constatations de délinquance de masse.</p>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Rattachement</div>
+              <p style="font-size:13px;color:var(--ink2);line-height:1.7;">Rattachée <strong>fonctionnellement</strong> à la DPS ou DLPS du département. La DPS assure le pilotage fonctionnel : formation, doctrine, contrôle qualité — sans autorité hiérarchique sur ces agents qui restent sous commandement de leur chef de circonscription.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert red">
+      <span class="alert-ico">⚠️</span>
+      <p><strong>Les 3 erreurs à ne pas faire à l'oral :</strong><br>
+      1. Dire que la DNPJ commande le SNPS — non : c'est le DGPN. La DNPJ a seulement une autorité <em>fonctionnelle</em>.<br>
+      2. Dire que le SNPS commande hiérarchiquement les DPS — non : le SNPS exerce une autorité <em>fonctionnelle</em> (doctrine, équipements, formation).<br>
+      3. Dire que le PPS commande les DPS — non : le PPS n'interfère pas dans les opérations quotidiennes. Il coordonne, pilote et contrôle la performance.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ 3. LES SECTIONS EN DÉTAIL ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">04</span>
+      <div><div class="sec-title">Les sections — ce que fait concrètement un technicien PTS</div><div class="sec-sub">Section intervention · Criminalistique conventionnelle · Identification · Criminalistique numérique · LPS</div></div>
+    </div>
+
+    <p class="body-text">En réussissant le concours, vous serez affecté dans la zone géographique de votre concours. Mais la nature de votre travail au quotidien dépendra entièrement de votre section d'affectation. Voici le détail de chaque type de poste.</p>
+
+    <!-- SCHÉMA AFFECTATIONS POSSIBLES -->
+    <div style="background:var(--navy);border-radius:12px;padding:20px 24px;margin-bottom:28px;">
+      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:14px;">Où peut être affecté un technicien de PTS ?</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+        <div style="background:rgba(255,255,255,.08);border-radius:9px;padding:14px;text-align:center;">
+          <div style="font-size:20px;margin-bottom:6px;">🏙️</div>
+          <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Service territorial</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.5;">DPS · DLPS · BPS<br>Terrain + plateau technique + identification + numérique</div>
+        </div>
+        <div style="background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.3);border-radius:9px;padding:14px;text-align:center;">
+          <div style="font-size:20px;margin-bottom:6px;">🔬</div>
+          <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">LPS — Laboratoire</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.5;">Lyon · Paris · Toulouse · Lille · Marseille<br>Travail analytique sédentaire</div>
+        </div>
+        <div style="background:rgba(200,164,90,.12);border:1px solid rgba(200,164,90,.25);border-radius:9px;padding:14px;text-align:center;">
+          <div style="font-size:20px;margin-bottom:6px;">🏛️</div>
+          <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:4px;">Services centraux</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.55);line-height:1.5;">SNPS · Plateau technique Écully · LCCN · Unités nationales (UPIVC, CONSTOX, UNI)</div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:12px;">Le major de promotion choisit en premier parmi les postes ouverts — le rang de classement détermine votre choix.</div>
+    </div>
+
+    <!-- SECTION INTERVENTION -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;">
+      <div style="background:var(--ps);padding:16px 22px;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:24px;">🚨</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;">Section intervention</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:2px;">Niveaux 1, 2 ou 3 — le cœur du métier terrain</div>
+        </div>
+      </div>
+      <div style="padding:20px 24px;">
+        <p class="body-text" style="margin-bottom:16px;">C'est la section la plus emblématique du métier. Le technicien PTS est appelé sur les <strong>scènes d'infraction</strong> pour réaliser toutes les opérations de police scientifique in situ — souvent de nuit, le week-end, et dans des conditions parfois difficiles sur le plan psychologique.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
+          <div style="background:var(--sky);border-radius:9px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Niveau 1</div>
+            <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:8px;"><strong>Délinquance de masse</strong> : cambriolages, vols de véhicules, dégradations, tags, découvertes de cadavres non suspectes.</p>
+            <div style="font-size:11px;color:var(--muted);line-height:1.55;">Ressort : circonscription · Horaires : souvent en journée mais peut être décalé</div>
+          </div>
+          <div style="background:var(--orange-pale);border-radius:9px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Niveau 2</div>
+            <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:8px;"><strong>Infractions délictuelles</strong> : tous les délits, certains crimes ne nécessitant pas de technique spéciale.</p>
+            <div style="font-size:11px;color:var(--muted);line-height:1.55;">Ressort : département · Soutien aux niveaux 1 du département</div>
+          </div>
+          <div style="background:var(--ps-pale);border-radius:9px;padding:14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--ps);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Niveau 3</div>
+            <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:8px;"><strong>Scènes criminelles complexes</strong> : homicides, viols graves, enlèvements, attentats, scènes multisites.</p>
+            <div style="font-size:11px;color:var(--muted);line-height:1.55;">Ressort : interdépartemental · Astreintes · Déplacements fréquents</div>
+          </div>
+        </div>
+
+        <div style="background:var(--bg);border-radius:10px;padding:16px 18px;margin-bottom:14px;">
+          <div style="font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:10px;">Ce que fait concrètement le technicien sur une scène d'infraction</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div style="display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.55;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Fixation des lieux</strong> : photographies d'ensemble, de détail et d'identification · Parfois numérisation 3D</span></div>
+            <div style="display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.55;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Recherche de traces papillaires</strong> : poudre dactyloscopique, révélation par lampe polychromatique</span></div>
+            <div style="display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.55;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Prélèvements biologiques</strong> : sang, salive, cellules — pour analyse ADN et alimentation du FNAEG</span></div>
+            <div style="display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.55;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Mise sous scellés</strong> : conditionnement des objets prélevés avec traçabilité · Constitution du scellé judiciaire</span></div>
+            <div style="display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.55;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Traces de semelles, d'outils</strong> : relevé et moulage · Traces de pneus</span></div>
+            <div style="display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.55;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Signalisation</strong> : empreintes digitales et palmaires + photos + ADN des personnes mises en cause → FAED et FNAEG</span></div>
+            <div style="display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.55;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Rédaction du procès-verbal</strong> de constatations techniques versé à la procédure judiciaire</span></div>
+            <div style="display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--ink2);line-height:1.55;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Traçabilité numérique</strong> : tablette numérique pour rassembler et tracer tous les actes techniques effectués sur les lieux</span></div>
+          </div>
+        </div>
+
+        <div style="background:var(--ps-pale);border-radius:8px;padding:12px 16px;font-size:12px;color:var(--ps);line-height:1.7;">
+          ⚠️ <strong>Aspect psychologique :</strong> le travail de terrain confronte régulièrement aux homicides, violences, viols, infanticides, suicides. Être conscient de cet aspect et le mentionner à l'oral montre une vraie maturité au jury.
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION CRIMINALISTIQUE CONVENTIONNELLE -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;">
+      <div style="background:#2A5298;padding:16px 22px;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:24px;">🧫</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;">Section criminalistique conventionnelle</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:2px;">Plateau technique de révélation des traces papillaires — travail de laboratoire sédentaire</div>
+        </div>
+      </div>
+      <div style="padding:20px 24px;">
+        <p class="body-text" style="margin-bottom:14px;">Après avoir été prélevés et mis sous scellés sur la scène d'infraction, les objets sont envoyés au <strong>plateau technique</strong> pour y faire révéler des traces papillaires par des procédés physico-chimiques. C'est un travail de laboratoire, sédentaire, qui requiert une grande rigueur et une maîtrise des procédés de révélation.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px;">Ce que fait le technicien au quotidien</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#2A5298;font-weight:700;flex-shrink:0;">→</span>Réception et enregistrement des scellés envoyés par les services d'intervention</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#2A5298;font-weight:700;flex-shrink:0;">→</span>Choix du procédé de révélation adapté selon la nature de l'objet et du support</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#2A5298;font-weight:700;flex-shrink:0;">→</span>Application des procédés physico-chimiques : poudres spéciales, cyanoacrylate (Super Glue), ninhydrine, DFO, VMD (dépôt de métal en phase vapeur)...</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#2A5298;font-weight:700;flex-shrink:0;">→</span>Photographie et conservation des traces révélées</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#2A5298;font-weight:700;flex-shrink:0;">→</span>Transmission à la section identification pour comparaison FAED</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#2A5298;font-weight:700;flex-shrink:0;">→</span>Rédaction des rapports d'examen versés à la procédure</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px;">Spécificités du poste</div>
+            <div style="background:var(--sky);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--ink2);line-height:1.7;margin-bottom:10px;">
+              <strong>Compétence interdépartementale :</strong> les plateaux techniques ont une compétence plus large que les sections d'intervention. Un plateau peut recevoir des scellés provenant de plusieurs départements.
+            </div>
+            <div style="background:var(--sky);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--ink2);line-height:1.7;">
+              <strong>Accréditation :</strong> les méthodes employées doivent respecter des modes opératoires validés et accrédités. Le SNPS (via le plateau technique référent d'Écully) définit les procédures autorisées. Cette rigueur garantit la recevabilité des preuves devant les tribunaux.
+            </div>
+            <div style="background:var(--gold-pale);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--ink2);line-height:1.7;margin-top:10px;">
+              <strong>Délestage en cas d'incident :</strong> si un plateau technique connaît un dysfonctionnement entraînant l'arrêt temporaire de son activité, un <strong>délestage zonal ou inter-zonal</strong> peut être proposé par le pôle PS de zone — et doit être validé par le SNPS, qui régule les flux entre laboratoires pour garantir une prise en charge optimale.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION IDENTIFICATION -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;">
+      <div style="background:#1a5276;padding:16px 22px;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:24px;">🖐️</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;">Section identification</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:2px;">Comparaison des traces papillaires avec le FAED — identification des auteurs</div>
+        </div>
+      </div>
+      <div style="padding:20px 24px;">
+        <p class="body-text" style="margin-bottom:14px;">La section identification est au cœur de la mission d'élucidation des infractions. Elle reçoit les traces papillaires révélées par les sections d'intervention ou les plateaux techniques, et les compare avec les empreintes contenues dans le <strong>FAED (Fichier Automatisé des Empreintes Digitales)</strong> — 6,4 millions d'individus fichés.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#1a5276;margin-bottom:8px;">Le travail au quotidien</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#1a5276;font-weight:700;flex-shrink:0;">→</span>Réception des traces papillaires révélées (physiquement ou via photos numérisées)</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#1a5276;font-weight:700;flex-shrink:0;">→</span>Saisie et codage des caractéristiques de la trace dans le système d'exploitation du FAED (AFIS)</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#1a5276;font-weight:700;flex-shrink:0;">→</span>Interrogation du FAED : recherche d'une correspondance parmi les empreintes enregistrées</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#1a5276;font-weight:700;flex-shrink:0;">→</span>Analyse et validation des concordances proposées par le logiciel (la machine propose, l'expert valide)</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#1a5276;font-weight:700;flex-shrink:0;">→</span>Rédaction du rapport d'identification versé à la procédure judiciaire</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:#1a5276;font-weight:700;flex-shrink:0;">→</span>Alimentation et maintenance du FAED via les signalisations réalisées par les services d'intervention</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:#1a5276;margin-bottom:8px;">Les fichiers mobilisés</div>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div style="background:var(--sky);border-radius:8px;padding:12px 14px;">
+                <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:3px;">FAED — Fichier Automatisé des Empreintes Digitales</div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.5;">6,4 millions d'individus · Empreintes digitales et palmaires · Interrogeable à partir d'une trace partielle</div>
+              </div>
+              <div style="background:var(--green-pale);border-radius:8px;padding:12px 14px;">
+                <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:3px;">FNAEG — Fichier National Automatisé des Empreintes Génétiques</div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.5;">Profils ADN des mis en cause · Comparaison avec traces biologiques prélevées sur les scènes</div>
+              </div>
+              <div style="background:var(--orange-pale);border-radius:8px;padding:12px 14px;">
+                <div style="font-size:12px;font-weight:700;color:var(--orange);margin-bottom:3px;">FNIB — Fichier National d'Identification Balistique</div>
+                <div style="font-size:11px;color:var(--muted);line-height:1.5;">Douilles et projectiles · Rapprochement entre crimes commis avec la même arme</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION CRIMINALISTIQUE NUMÉRIQUE -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;">
+      <div style="background:var(--purple);padding:16px 22px;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:24px;">💻</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;">Section criminalistique numérique (SCN / DCN)</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:2px;">Traces technologiques — en transition vers l'OFAC</div>
+        </div>
+      </div>
+      <div style="padding:20px 24px;">
+        <p class="body-text" style="margin-bottom:14px;">La criminalistique numérique est le secteur qui connaît la plus forte croissance dans la PS. En moins de vingt ans, les affaires impliquant des traces numériques sont devenues <strong>quotidiennes</strong>. Tous les types d'infractions — du cambriolage au terrorisme — génèrent aujourd'hui des traces technologiques exploitables.</p>
+
+        <div style="background:var(--purple-pale);border-radius:10px;padding:16px;margin-bottom:14px;">
+          <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:10px;">Les 4 niveaux de criminalistique numérique (doctrine PS — pilotage OFAC)</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="background:var(--white);border-radius:7px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+              <div style="background:var(--purple);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;flex-shrink:0;">Niv. 1</div>
+              <div style="font-size:12px;color:var(--ink2);line-height:1.6;"><strong>Services locaux de PJ</strong> — circonscriptions de police nationale équipées d'<strong>outils d'extraction simples</strong> pour la délinquance du quotidien. Pas de qualification ICN requise.</div>
+            </div>
+            <div style="background:var(--white);border-radius:7px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+              <div style="background:var(--purple);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;flex-shrink:0;">Niv. 2</div>
+              <div style="font-size:12px;color:var(--ink2);line-height:1.6;"><strong>Détachements cyber de l'OFAC</strong> — les <strong>DCN (Départements de Criminalistique Numérique)</strong> y sont une composante. Méthodes d'analyse et d'extraction sur supports variés (informatique, téléphonie, électronique, audio, vidéo).</div>
+            </div>
+            <div style="background:var(--white);border-radius:7px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+              <div style="background:var(--purple);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;flex-shrink:0;">Niv. 3</div>
+              <div style="font-size:12px;color:var(--ink2);line-height:1.6;"><strong>Antennes de l'OFAC</strong> — les DCN y sont également une composante, pour les affaires numériques complexes à dimension interdépartementale. En attendant leur création, les SCN restent rattachées aux divisions de PS.</div>
+            </div>
+            <div style="background:var(--white);border-radius:7px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;">
+              <div style="background:var(--gold);color:var(--navy3);font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;flex-shrink:0;">Niv. 4</div>
+              <div style="font-size:12px;color:var(--ink2);line-height:1.6;"><strong>LCCN (Laboratoire Central de Criminalistique Numérique)</strong> du SNPS, à Écully — apporte son expertise à l'OFAC sur les contentieux les plus complexes, forme et conseille les structures territoriales, réalise les expertises au titre de l'art. 157-2 CPP. À Paris, le LCCN exerce un pilotage fonctionnel sur les 4 sections de criminalistique numérique de la DRPJ.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="encart navy" style="margin:0 0 14px 0;"><strong>Pilotage :</strong> la criminalistique numérique est une composante de la <strong>filière cyber</strong> de la Police Nationale, pilotée par l'<strong>OFAC (Office Anti-Cybercriminalité)</strong>, qui exerce une autorité fonctionnelle en termes d'organisation et de coordination opérationnelle sur l'ensemble de ces structures — sans préjudice des compétences des policiers investigateurs en cybercriminalité (ICC).</div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;">Ce que fait le technicien en SCN</div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:var(--purple);font-weight:700;flex-shrink:0;">→</span>Extraction des données de téléphones, ordinateurs, tablettes</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:var(--purple);font-weight:700;flex-shrink:0;">→</span>Analyse des données extraites (contacts, déplacements GPS, communications)</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:var(--purple);font-weight:700;flex-shrink:0;">→</span>Exploitation des données cloud, réseaux sociaux, messageries chiffrées</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:var(--purple);font-weight:700;flex-shrink:0;">→</span>Analyse des systèmes embarqués : tableaux de bord, boîtes noires de véhicules</div>
+              <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.55;"><span style="color:var(--purple);font-weight:700;flex-shrink:0;">→</span>Exploitation de vidéosurveillances et d'objets connectés</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--purple);margin-bottom:8px;">Maillage territorial</div>
+            <p style="font-size:12px;color:var(--ink2);line-height:1.7;">L'objectif de la réforme est un <strong>maillage numérique cohérent</strong> du territoire, en miroir du maillage territorial de la PS conventionnelle (niveaux 1 à 4). Les DCN seront progressivement créés au sein des antennes et détachements de l'OFAC ; en attendant, les sections de criminalistique numérique existantes restent rattachées aux divisions de PS.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LPS -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px;">
+      <div style="background:var(--navy3);padding:16px 22px;display:flex;align-items:center;gap:12px;">
+        <div style="font-size:24px;">🧪</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:#fff;">Affectation en LPS — Laboratoire de Police Scientifique</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:2px;">5 LPS : Lyon · Paris · Toulouse · Lille · Marseille — travail analytique sédentaire</div>
+        </div>
+      </div>
+      <div style="padding:20px 24px;">
+        <p class="body-text" style="margin-bottom:14px;">Une affectation en laboratoire est <strong>radicalement différente</strong> du terrain. Pas d'astreinte, pas de déplacement sur les scènes — mais un travail d'analyse approfondie sur les scellés reçus des services territoriaux. Les volumes sont importants et la traçabilité est primordiale pour l'accréditation.</p>
+
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+          <div style="background:var(--sky);border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:18px;margin-bottom:5px;">🧬</div>
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Biologie / ADN</div>
+            <div style="font-size:10px;color:var(--muted);line-height:1.5;">Analyse des traces biologiques · Profils ADN · Alimentation du FNAEG · Recherche en parentèle</div>
+          </div>
+          <div style="background:var(--sky);border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:18px;margin-bottom:5px;">🔫</div>
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Balistique</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Douilles · Projectiles · Comparaison FNIB · Tirs de comparaison · Classification des armes</div>
+          </div>
+          <div style="background:var(--sky);border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:18px;margin-bottom:5px;">🔥</div>
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Incendies / Explosions</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Détermination de l'origine · Recherche d'accélérateurs · Analyse de résidus d'explosifs</div>
+          </div>
+          <div style="background:var(--sky);border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:18px;margin-bottom:5px;">💊</div>
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Toxicologie / Stupéfiants</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Analyse de drogues · Dosages · Recherche de poisons · Alcoolémie · Médicaments</div>
+          </div>
+          <div style="background:var(--sky);border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:18px;margin-bottom:5px;">📄</div>
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Documents / Écritures</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Faux documents · Falsifications · Comparaison graphologique · Encres et papiers</div>
+          </div>
+          <div style="background:var(--sky);border-radius:8px;padding:12px;text-align:center;">
+            <div style="font-size:18px;margin-bottom:5px;">⚗️</div>
+            <div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Physique-Chimie</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Fibres · Peintures · Verre · Sols · Matériaux divers — comparaison de compositions</div>
+          </div>
+        </div>
+
+        <div style="background:var(--gold-pale);border:1px solid rgba(200,164,90,.3);border-radius:8px;padding:12px 16px;font-size:12px;color:var(--ink2);line-height:1.7;">
+          💡 <strong>L'accréditation des LPS</strong> : les laboratoires sont accrédités selon la norme ISO 17025, qui garantit la fiabilité et la répétabilité des méthodes d'analyse. Cela implique une rigueur administrative très importante — traçabilité des scellés, validation des protocoles, contrôles qualité réguliers. Chaque rapport d'expertise doit respecter des standards stricts pour être recevable devant les tribunaux.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════ 4. LES 4 NIVEAUX DE COMPÉTENCE ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">05</span>
+      <div><div class="sec-title">Les 4 niveaux de compétence</div><div class="sec-sub">Du cambriolage au crime international — une organisation pyramidale</div></div>
+    </div>
+
+    <p class="body-text">La PS ne traite pas tous les crimes avec les mêmes moyens. Elle est organisée en <strong>4 niveaux de compétence</strong>, du plus simple au plus spécialisé. Chaque service peut traiter certains types de scènes selon son équipement et la formation de ses agents — et apporter son soutien aux niveaux inférieurs.</p>
+
+    <!-- NIVEAU 1 -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px;">
+      <div style="background:var(--sky);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;align-items:center;gap:12px;">
+        <div style="background:var(--navy);color:#fff;font-family:'DM Mono',monospace;font-size:12px;padding:4px 12px;border-radius:6px;flex-shrink:0;">Niveau 1</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);">Délinquance de masse — BPS, DLPS ou DPS niveau 1</div>
+          <div style="font-size:11px;color:var(--muted);">Ressort : circonscription de police nationale ou agglomération</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;">
+        <div style="padding:18px 20px;border-right:1px solid var(--line);">
+          <p class="body-text" style="margin-bottom:10px;">Mission principale : traiter les <strong>scènes sans complexité technique</strong> — cambriolages, vols de véhicules, dégradations, tags. Les agents réalisent la fixation photographique des lieux, la recherche de traces papillaires à la poudre dactyloscopique, des prélèvements biologiques et la mise sous scellés.</p>
+          <p class="body-text" style="margin-bottom:10px;">Ces unités assurent également la <strong>signalisation des individus</strong> : photographies, empreintes digitales et palmaires, prélèvements ADN alimentant le FAED et le FNAEG. Mission fondamentale pour l'identification des auteurs.</p>
+          <p class="body-text" style="margin-bottom:0;">Dans certains cas, les constatations de niveau 1 peuvent être assurées par des <strong>policiers polyvalents</strong> (gardiens de la paix formés) — c'est le cas des BPS.</p>
+        </div>
+        <div style="padding:18px 20px;">
+          <img src="https://www.police-scientifique.com/wp-content/uploads/2020/06/poudre-dactyloscopique-1024x683.jpg" alt="Révélation traces papillaires" style="width:100%;border-radius:8px;object-fit:cover;max-height:160px;display:block;">
+          <div style="font-size:11px;color:var(--muted);margin-top:6px;font-style:italic;">Révélation de traces papillaires à la poudre dactyloscopique</div>
+          <div style="background:var(--sky);border-radius:7px;padding:10px;margin-top:12px;font-size:12px;color:var(--navy);line-height:1.65;">
+            <strong>Techniques mises en œuvre :</strong><br>
+            Photographie · Poudre dactyloscopique · Prélèvements bio · Mise sous scellés · Signalisation (FAED/FNAEG)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIVEAU 2 -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px;">
+      <div style="background:var(--orange-pale);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;align-items:center;gap:12px;">
+        <div style="background:var(--orange);color:#fff;font-family:'DM Mono',monospace;font-size:12px;padding:4px 12px;border-radius:6px;flex-shrink:0;">Niveau 2</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);">Délits et certains crimes — DLPS ou DPS niveau 2</div>
+          <div style="font-size:11px;color:var(--muted);">Ressort : département (et parfois départements limitrophes)</div>
+        </div>
+      </div>
+      <div style="padding:18px 20px;">
+        <p class="body-text" style="margin-bottom:10px;">Les unités de niveau 2 couvrent <strong>toutes les infractions délictuelles</strong> et les crimes ne nécessitant pas de technique spéciale. Certaines sont dotées d'équipements spécialisés selon la criminalité locale (secteur touristique, zones frontalières, criminalité particulière).</p>
+        <p class="body-text" style="margin-bottom:0;">Elles apportent leur <strong>soutien technique aux unités de niveau 1</strong> du département et peuvent se déplacer dans les départements limitrophes. Elles assurent aussi la signalisation des individus et gèrent les plateaux techniques de révélation de traces papillaires.</p>
+      </div>
+    </div>
+
+    <!-- NIVEAU 3 -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px;">
+      <div style="background:var(--ps-pale);border-bottom:1px solid rgba(192,57,43,.2);padding:14px 20px;display:flex;align-items:center;gap:12px;">
+        <div style="background:var(--ps);color:#fff;font-family:'DM Mono',monospace;font-size:12px;padding:4px 12px;border-radius:6px;flex-shrink:0;">Niveau 3</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--ps);">Scènes criminelles complexes — DPS niveau 3</div>
+          <div style="font-size:11px;color:var(--muted);">Ressort : interdépartemental — soutien possible sur tout le territoire</div>
+        </div>
+      </div>
+      <div style="padding:18px 20px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div>
+            <p class="body-text" style="margin-bottom:10px;">Les DPS de niveau 3 traitent les scènes les plus complexes : <strong>homicides avec auteur inconnu, scènes multisites, attentats</strong>. Leurs agents incluent des managers de scènes de crime formés à la gestion des situations les plus difficiles, y compris la "méthodologie attentat".</p>
+            <p class="body-text" style="margin-bottom:10px;">Certains agents font partie de <strong>viviers spécialisés</strong> pouvant intervenir partout en France ou à l'étranger : IVC (identification victimes catastrophes), CONSTOX (milieu toxique).</p>
+            <p class="body-text" style="margin-bottom:0;">Les DPS de niveau 3 ont aussi un <strong>rôle de pilotage</strong> : elles suivent l'activité, mesurent les performances et assurent le suivi des formations de tous les services PS du département.</p>
+          </div>
+          <div>
+            <div style="background:var(--ps-pale);border-radius:9px;padding:16px;">
+              <div style="font-size:12px;font-weight:700;color:var(--ps);margin-bottom:10px;">Structure type d'une DPS niveau 3</div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Direction</strong> : chef + adjoint(s) — ingénieurs PS</span></div>
+                <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Section intervention niv. 3</strong> : scènes complexes</span></div>
+                <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Section intervention niv. 1</strong> : délinquance de masse</span></div>
+                <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Section criminalistique conventionnelle</strong> : plateau technique physico-chimique</span></div>
+                <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Section identification</strong> : comparaison traces / FAED</span></div>
+                <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;"><span style="color:var(--ps);font-weight:700;flex-shrink:0;">→</span><span><strong>Section criminalistique numérique</strong> (transition vers OFAC en cours)</span></div>
+              </div>
+              <div style="font-size:11px;color:var(--muted);margin-top:10px;padding-top:8px;border-top:1px solid rgba(192,57,43,.15);">Les chefs de sections sont des Techniciens Principaux ou Techniciens en chef de PTS.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NIVEAU 4 -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px;">
+      <div style="background:var(--navy);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;align-items:center;gap:12px;">
+        <div style="background:var(--gold);color:var(--navy3);font-family:'DM Mono',monospace;font-size:12px;padding:4px 12px;border-radius:6px;flex-shrink:0;">Niveau 4</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;">Unités nationales spécialisées — intervention nationale ou internationale</div>
+        </div>
+      </div>
+      <div style="padding:18px 20px;">
+        <p class="body-text" style="margin-bottom:16px;">Les unités projetables du SNPS ont une <strong>compétence nationale</strong> et peuvent intervenir à l'étranger. CONSTOX et l'UPIVC sont composées d'agents du SNPS <strong>et des viviers nationaux</strong> — personnels spécialement formés et affectés dans des unités de niveau 3, permettant un réseau rapidement mobilisable sur tout le territoire. Lors de leur déploiement, les agents déconcentrés membres de ces unités sont placés sous l'autorité du chef du dispositif PS du SNPS.</p>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+          <div style="background:var(--sky);border:1px solid var(--sky2);border-radius:9px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:6px;">💥</div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px;">UPIVC</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Unité Police Identification des Victimes de Catastrophes — catastrophes naturelles ou accidentelles, en France ou à l'étranger</div>
+          </div>
+          <div style="background:var(--sky);border:1px solid var(--sky2);border-radius:9px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:6px;">☣️</div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px;">CONSTOX</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Gestion des scènes d'infraction contaminées par un agent toxique NRBC-e (nucléaire, radiologique, biologique, chimique, explosif)</div>
+          </div>
+          <div style="background:var(--sky);border:1px solid var(--sky2);border-radius:9px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:6px;">🎯</div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px;">UNI</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Unité Nationale d'Intervention — coordonne la méthodologie d'intervention des unités de niv. 3 sur les scènes de crimes majeurs (complexes, multi-sites, nombreuses victimes) et d'attentats. Peut intervenir seule ou en renfort avec ses compétences multidisciplinaires (morphoanalyse de sang, documents/écritures, criminalistique numérique) et ses moyens d'imagerie (drones, laser scanner, photogrammétrie, reconstitution 3D).</div>
+          </div>
+          <div style="background:var(--ps-pale);border:1px solid rgba(192,57,43,.2);border-radius:9px;padding:14px;text-align:center;">
+            <div style="font-size:20px;margin-bottom:6px;">🧪</div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--ps);margin-bottom:4px;">Sections LPS & LCCN</div>
+            <div style="font-size:11px;color:var(--muted);line-height:1.5;">Pour leurs missions d'intervention terrain, les sections balistique et incendies/explosions des LPS, ainsi que le LCCN (criminalistique numérique), relèvent également du 4e niveau</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ 5. LES LABORATOIRES ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">06</span>
+      <div><div class="sec-title">Les laboratoires de Police Scientifique</div><div class="sec-sub">5 LPS intégrés au SNPS depuis 2021 — analyse de haut niveau</div></div>
+    </div>
+
+    <p class="body-text">Les <strong>5 Laboratoires de Police Scientifique (LPS)</strong> constituent l'échelon analytique de la chaîne criminalistique. Intégrés au SNPS depuis la fusion de 2021, ils reçoivent les scellés envoyés par les services territoriaux pour des analyses qui dépassent les capacités des plateaux techniques locaux.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;">
+      <div style="background:var(--ps);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:18px;margin-bottom:6px;">🏙️</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;">Lyon</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-top:3px;">Siège national du SNPS à Écully (69)</div>
+      </div>
+      <div style="background:var(--ps-pale);border:1px solid rgba(192,57,43,.25);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:18px;margin-bottom:6px;">🗼</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--ps);">Paris</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">LPS île de France</div>
+      </div>
+      <div style="background:var(--ps-pale);border:1px solid rgba(192,57,43,.25);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:18px;margin-bottom:6px;">🌹</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--ps);">Toulouse</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">LPS Sud-Ouest</div>
+      </div>
+      <div style="background:var(--ps-pale);border:1px solid rgba(192,57,43,.25);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:18px;margin-bottom:6px;">⬛</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--ps);">Lille</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">LPS Nord</div>
+      </div>
+      <div style="background:var(--ps-pale);border:1px solid rgba(192,57,43,.25);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:18px;margin-bottom:6px;">☀️</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--ps);">Marseille</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px;">LPS Sud-Est</div>
+      </div>
+    </div>
+
+    <div class="info-2">
+      <div class="info-card">
+        <h4>🧬 Domaines d'analyse des LPS</h4>
+        <ul>
+          <li>Biologie et génétique forensique (ADN)</li>
+          <li>Balistique et armes à feu</li>
+          <li>Incendies et explosions</li>
+          <li>Toxicologie et stupéfiants</li>
+          <li>Documents et faux</li>
+          <li>Traces et empreintes (niveau national)</li>
+          <li>Odorologie (plateau national à Écully)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>🔗 Articulation avec les services territoriaux</h4>
+        <p style="margin-bottom:10px;">Les LPS reçoivent les <strong>scellés envoyés par les services territoriaux</strong> (DPS, DLPS) lorsque les analyses requises dépassent les capacités locales. Les résultats analytiques sont ensuite versés à la procédure judiciaire.</p>
+        <p style="margin-bottom:0;">Certaines sections des LPS interviennent <strong>directement sur le terrain</strong> pour les scènes les plus complexes (incendies, explosions, catastrophes) — elles font alors partie des structures de niveau 4.</p>
+      </div>
+    </div>
+
+    <div class="alert navy">
+      <span class="alert-ico">🗄️</span>
+      <p><strong>Les grandes bases de données forensiques :</strong> le FAED (Fichier Automatisé des Empreintes Digitales), le FNAEG (Fichier National des Empreintes Génétiques) et le FNIB (Fichier National d'Identification Balistique) permettent de rapprocher les traces relevées sur les scènes avec les auteurs d'infractions connus. Ces fichiers sont alimentés par les signalisations et les analyses des services PS.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ 6. LA CHAÎNE CRIMINALISTIQUE ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">07</span>
+      <div><div class="sec-title">La chaîne criminalistique</div><div class="sec-sub">Du prélèvement à l'identification — comment tout s'articule</div></div>
+    </div>
+
+    <p class="body-text">Le travail de la police scientifique ne s'arrête pas à la scène d'infraction. Il s'inscrit dans une <strong>chaîne complète</strong> qui part du prélèvement jusqu'à la base de données. Comprendre cette chaîne, c'est comprendre pourquoi la PS est organisée comme elle l'est.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px;">
+      <div style="padding:20px;border-right:1px solid var(--line);text-align:center;">
+        <div style="font-size:30px;margin-bottom:8px;">🔍</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">1. Constatations</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5;">Fixation des lieux · Recherche et prélèvement de traces · Mise sous scellés · Niveaux 1 à 3</div>
+      </div>
+      <div style="padding:20px;border-right:1px solid var(--line);text-align:center;">
+        <div style="font-size:30px;margin-bottom:8px;">🧪</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">2. Analyse</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5;">Plateaux techniques · Révélation traces papillaires · Analyses LPS (ADN, balistique, toxicologie...)</div>
+      </div>
+      <div style="padding:20px;border-right:1px solid var(--line);text-align:center;">
+        <div style="font-size:30px;margin-bottom:8px;">🗄️</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">3. Comparaison</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5;">Rapprochement avec FAED (empreintes) · FNAEG (ADN) · FNIB (balistique)</div>
+      </div>
+      <div style="padding:20px;text-align:center;">
+        <div style="font-size:30px;margin-bottom:8px;">✅</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">4. Identification</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.5;">Identification de l'auteur ou d'une victime · Élément de preuve à charge ou à décharge</div>
+      </div>
+    </div>
+
+    <div class="alert red">
+      <span class="alert-ico">⚠️</span>
+      <p><strong>Questions fréquentes à l'oral :</strong><br>
+      — "Quelle est la différence entre DPS et DLPS ?" → La DPS est en ville siège du SIPJ, peut être niveau 3, ressort interdépartemental. La DLPS est hors ville siège, niveau 1 ou 2, ressort départemental.<br>
+      — "Qu'est-ce que le SNPS ?" → Service National de la Police Scientifique, né en 2021 de la fusion du SCPTS et de l'INPS, rattaché à la DNPJ, intègre les 5 LPS, siège à Écully.<br>
+      — "Pourquoi la PS est-elle rattachée à la DNPJ et pas à la DNSP ?" → Parce que ses missions s'inscrivent dans la chaîne judiciaire — ses constatations alimentent les procédures pénales, sous la direction des OPJ.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ 7. HISTOIRE & PIONNIERS ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">08</span>
+      <div><div class="sec-title">Histoire et pionniers de la criminalistique</div><div class="sec-sub">Des fondateurs qui ont tout changé — des noms à connaître pour l'oral</div></div>
+    </div>
+
+    <p class="body-text">La France n'est pas seulement dotée d'une bonne police scientifique — elle en est l'un des <strong>pays fondateurs</strong>. Deux noms en particulier sont incontournables, et le jury peut très bien vous demander de les citer.</p>
+
+    <div class="info-2" style="margin-bottom:20px;">
+      <div class="info-card" style="border-top:3px solid var(--ps);">
+        <h4>🔬 Edmond Locard (1877–1966)</h4>
+        <p style="margin-bottom:10px;">Médecin et criminologue lyonnais, Locard est considéré comme <strong>l'un des fondateurs de la criminalistique moderne</strong>. En 1909, il crée dans les combles du palais de justice de Lyon le <strong>premier laboratoire de police scientifique au monde</strong>. Son <em>Traité de criminalistique</em> reste aujourd'hui l'un des ouvrages les plus complets sur le sujet.</p>
+        <div style="background:var(--ps-pale);border-left:3px solid var(--ps);border-radius:7px;padding:12px 16px;font-size:12px;color:var(--ink2);line-height:1.75;font-style:italic;">
+          « La vérité est que nul ne peut agir avec l'intensité que suppose l'action criminelle sans laisser des marques multiples de son passage. Tantôt le malfaiteur a laissé sur les lieux les marques de son passage, tantôt, par une action inverse, il a emporté sur son corps ou sur ses vêtements les indices de son séjour ou de son geste. »
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:8px;font-weight:600;">→ C'est le célèbre <strong>principe de l'échange de Locard</strong> — fondement de toute la criminalistique moderne.</div>
+      </div>
+      <div class="info-card" style="border-top:3px solid var(--navy);">
+        <h4>📋 Alphonse Bertillon (1853–1914)</h4>
+        <p style="margin-bottom:10px;">Modeste archiviste à la Préfecture de Police de Paris, Bertillon s'interroge sur les limites des fiches de signalement de l'époque — une simple description physique, facilement contournée par un changement de tenue ou une fausse identité.</p>
+        <p style="margin-bottom:10px;">Il élabore alors un <strong>système d'identification unique au monde</strong> basé sur des mesures anthropométriques précises : taille, longueur des membres, forme du crâne... C'est <strong>l'anthropométrie judiciaire</strong>, plus connue sous le nom de <strong>"Bertillonnage"</strong>.</p>
+        <div style="background:var(--sky);border-radius:7px;padding:10px 14px;font-size:12px;color:var(--navy);line-height:1.65;">
+          💡 Le Bertillonnage a été progressivement remplacé par les empreintes digitales comme système d'identification — mais Bertillon reste le premier à avoir mis la mesure scientifique au service de l'identification criminelle.
+        </div>
+      </div>
+    </div>
+
+    <p class="body-text">Pendant longtemps, la police scientifique n'intervenait que sur les <strong>affaires criminelles les plus complexes et médiatiques</strong> : homicides, viols en série. C'est depuis les années 2000, dans le cadre de plans de lutte contre la délinquance, que l'État a décidé de déployer la PS sur l'ensemble des scènes d'infraction — y compris les vols avec effraction, les vols de véhicules, les dégradations. <strong>L'activité des laboratoires a été multipliée par 8 entre 2010 et 2020.</strong></p>
+
+    <div class="alert gold">
+      <span class="alert-ico">💡</span>
+      <p><strong>À citer à l'oral :</strong> Pierre Margot, professeur à l'École des Sciences Criminelles de l'Université de Lausanne : <em>« Il n'y a pas de crime parfait, tout comme il n'existe pas non plus d'enquête judiciaire parfaite. »</em></p>
+    </div>
+  </div>
+
+  <!-- ══════════ 8. LE MÉTIER AU QUOTIDIEN ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">09</span>
+      <div><div class="sec-title">Le métier au quotidien</div><div class="sec-sub">Ce que vous ferez concrètement — terrain et laboratoire</div></div>
+    </div>
+
+    <p class="body-text">Après avoir réussi le concours, le technicien de PTS est <strong>affecté dans la zone géographique</strong> où il a passé son examen. Mais au sein de cette zone, le poste exact dépend de son rang de classement — le major de promotion choisit en premier parmi les postes ouverts.</p>
+
+    <div class="info-2" style="margin-bottom:20px;">
+      <div class="info-card" style="border-top:3px solid var(--ps);">
+        <h4>🔍 Technicien en service d'identité judiciaire</h4>
+        <ul>
+          <li>Déplacements sur les lieux d'infraction — <strong>24h/24, 7j/7</strong>, sans horaire fixe</li>
+          <li>Recherche de traces et indices sur les scènes délictuelles ou criminelles</li>
+          <li>Alimentation du FAED et du FNAEG (signalisation des individus)</li>
+          <li>Révélation de traces papillaires en plateau technique</li>
+          <li>Exploitation de données numériques (téléphones, ordinateurs)</li>
+          <li>Constitution et bris de scellés judiciaires (nouvelle prérogative)</li>
+        </ul>
+        <div style="background:var(--ps-pale);border-radius:7px;padding:10px 14px;font-size:12px;color:var(--ps);margin-top:10px;line-height:1.65;">
+          ⚠️ <strong>Aspect psychologique à ne pas négliger :</strong> le travail de terrain confronte régulièrement aux homicides, violences, viols, infanticides, suicides. C'est un aspect du métier à mentionner à l'oral — montrer qu'on en est conscient est apprécié du jury.
+        </div>
+      </div>
+      <div class="info-card" style="border-top:3px solid var(--navy);">
+        <h4>🧪 Technicien en laboratoire de police scientifique</h4>
+        <ul>
+          <li>Travail essentiellement <strong>sédentaire</strong> — pas d'interventions terrain</li>
+          <li>Traitement et analyse des scellés envoyés par les services territoriaux</li>
+          <li>Opérations administratives rigoureuses : traçabilité des scellés, accréditation des méthodes</li>
+          <li>Rédaction de rapports d'expertise versés à la procédure judiciaire</li>
+          <li>Spécialisation possible : ADN, balistique, toxicologie, traces papillaires, numérique...</li>
+        </ul>
+        <div style="background:var(--sky);border-radius:7px;padding:10px 14px;font-size:12px;color:var(--navy);margin-top:10px;line-height:1.65;">
+          💡 L'accréditation des laboratoires impose des standards de qualité très stricts. Les forts volumes de dossiers nécessitent une rigueur administrative au moins aussi importante que la compétence technique.
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin-bottom:20px;">
+      <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:14px;">Les qualités attendues — peu importe l'affectation</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:20px;margin-bottom:5px;">🔎</div><div style="font-size:13px;font-weight:600;color:var(--navy3);">Curiosité</div></div>
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:20px;margin-bottom:5px;">📐</div><div style="font-size:13px;font-weight:600;color:var(--navy3);">Rigueur</div></div>
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:20px;margin-bottom:5px;">⭐</div><div style="font-size:13px;font-weight:600;color:var(--navy3);">Professionnalisme</div></div>
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:20px;margin-bottom:5px;">💡</div><div style="font-size:13px;font-weight:600;color:var(--navy3);">Esprit d'initiative</div></div>
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:20px;margin-bottom:5px;">🤝</div><div style="font-size:13px;font-weight:600;color:var(--navy3);">Travail en équipe</div></div>
+        <div style="background:var(--bg);border-radius:8px;padding:12px;text-align:center;"><div style="font-size:20px;margin-bottom:5px;">🕐</div><div style="font-size:13px;font-weight:600;color:var(--navy3);">Disponibilité</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ 9. RÉMUNÉRATION ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">10</span>
+      <div><div class="sec-title">Rémunération et évolution de carrière</div><div class="sec-sub">Grille au 1er janvier 2026</div></div>
+    </div>
+
+    <p class="body-text">La rémunération dépend du <strong>grade, de l'échelon, de la zone géographique</strong> et du niveau de responsabilité du poste occupé. Les agents affectés dans des services de nuit perçoivent en plus une <strong>prime de travail de nuit</strong>.</p>
+
+    <div class="table-wrap" style="margin-bottom:20px;">
+      <table class="t">
+        <thead>
+          <tr><th>Grade</th><th>Province — début</th><th>Province — fin</th><th>IDF — début</th><th>IDF — fin</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Technicien de PTS</td>
+            <td>~2 190€ net/mois</td>
+            <td>—</td>
+            <td>~2 350€ net/mois</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Technicien principal de PTS</td>
+            <td colspan="2" style="text-align:center;color:var(--muted);">Progression par échelon</td>
+            <td colspan="2" style="text-align:center;color:var(--muted);">Légèrement majoré en IDF</td>
+          </tr>
+          <tr>
+            <td>Technicien en chef de PTS</td>
+            <td>—</td>
+            <td>~3 200€ net/mois</td>
+            <td>—</td>
+            <td>~3 450€ net/mois</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert navy">
+      <span class="alert-ico">ℹ️</span>
+      <p>Ces montants correspondent au traitement net au <strong>1er janvier 2026</strong>. Ils n'incluent pas les primes (travail de nuit, astreintes, responsabilités particulières). Les chiffres officiels publiés par le Ministère de l'Intérieur font foi.</p>
+    </div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--navy3);margin-bottom:14px;margin-top:8px;">Évolution de carrière</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;">
+        <div style="background:var(--navy);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:6px;flex-shrink:0;margin-top:2px;">Concours interne</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin:0;">Possible après <strong>4 années de services publics effectifs</strong>. Permet d'accéder aux autres grades et corps (technicien principal, ingénieur…). Vous pouvez aussi participer aux concours externes si vous remplissez les conditions de diplôme.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;">
+        <div style="background:var(--gold);color:var(--navy3);font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:6px;flex-shrink:0;margin-top:2px;">Avancement au choix</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin:0;">Inscription sur un tableau d'avancement · Justifier d'<strong>1 an d'ancienneté dans le 6e échelon</strong> · Comptabiliser au moins <strong>5 années de services effectifs</strong> dans le corps. Permet d'atteindre le grade supérieur.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px 20px;display:flex;align-items:flex-start;gap:14px;">
+        <div style="background:var(--ps);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border-radius:6px;flex-shrink:0;margin-top:2px;">Examen professionnel</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.7;margin:0;">Accès au grade supérieur si vous avez atteint le <strong>4e échelon du grade</strong> et comptabilisé au moins <strong>3 années de services effectifs</strong> dans le corps. Voie la plus courante pour passer technicien → technicien principal → technicien en chef.</p>
+      </div>
+    </div>
+
+    <div class="alert gold" style="margin-top:20px;">
+      <span class="alert-ico">⚠️</span>
+      <p><strong>Note importante :</strong> le corps d'emploi des <strong>Agents Spécialisés de Police Technique et Scientifique (ASPTS)</strong> de catégorie C est en cours de disparition. Plus aucun concours ni recrutement n'est organisé depuis 2021. Les ASPTS en activité basculent progressivement dans le corps des Techniciens de PTS.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ 10. ÉVOLUTION DES TECHNIQUES ══════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">11</span>
+      <div><div class="sec-title">L'évolution des techniques</div><div class="sec-sub">La PS en pleine mutation technologique</div></div>
+    </div>
+
+    <p class="body-text">La Police Scientifique est un métier en <strong>évolution permanente</strong>. Les outils, les méthodes, les législations changent tout au long d'une carrière. C'est l'un des aspects les plus attractifs du métier — et l'un des arguments à développer à l'oral lorsqu'on vous demande vos motivations.</p>
+
+    <div class="info-2" style="margin-bottom:20px;">
+      <div class="info-card">
+        <h4>🧬 Révolution ADN</h4>
+        <ul>
+          <li><strong>Portrait-robot génétique</strong> — Depuis un arrêt de la Cour de cassation du 25 juin 2014, il est légal d'identifier les caractères morphologiques apparents d'un suspect à partir de traces ADN retrouvées sur les victimes</li>
+          <li><strong>Recherche en parentèle</strong> — Identifier un individu par le biais d'un proche parent fiché au FNAEG. Utilisée pour la première fois en France en 2011 dans l'affaire Élodie Kulik (enlèvement, viol et meurtre de janvier 2002)</li>
+          <li>Ces techniques permettent d'utiliser l'ADN non plus seulement pour <em>prouver</em> la culpabilité, mais pour <em>rechercher</em> l'auteur d'une infraction</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>💻 Révolution numérique</h4>
+        <ul>
+          <li>Tablettes numériques sur les scènes de crime — rassembler et tracer tous les actes techniques effectués sur les lieux en temps réel</li>
+          <li>Numérisation tridimensionnelle des scènes d'infraction</li>
+          <li>Lampes polychromatiques de plus en plus perfectionnées pour la révélation de traces</li>
+          <li>Explosion de la criminalistique numérique : téléphones, GPS, ordinateurs, objets connectés, cloud, vidéosurveillance, tableaux de bord de véhicules</li>
+          <li>Intelligence artificielle intégrée dans certains processus d'analyse</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert navy">
+      <span class="alert-ico">🌍</span>
+      <p><strong>La dimension internationale :</strong> les sciences forensiques s'organisent à l'échelle européenne et mondiale. Le <strong>traité de Prüm</strong> permet l'échange automatisé de données entre pays européens pour interroger des bases de données forensiques (ADN, empreintes). À l'ère de la <em>criminalité itinérante</em>, ce partage est devenu indispensable.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prépa PTS — Module 6 · Les spécialités de la PTS</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --navy:#1B3A6B;--navy2:#142D54;--navy3:#0E2040;
+  --gold:#C8A45A;--gold-pale:#FDF6E8;
+  --sky:#EEF3FA;--sky2:#D6E4F7;--sky3:#F4F7FB;
+  --white:#fff;--ink:#111827;--ink2:#374151;
+  --muted:#6B7280;--line:#E5E9F2;--bg:#F4F6FB;
+  --green:#1A7A5E;--green-pale:#E6F7F2;
+  --red:#C0392B;--red-pale:#FDECEA;
+  --purple:#7C3AED;--purple-pale:#EDE9FE;
+  --orange:#D97706;--orange-pale:#FEF3C7;
+  --ps:#C0392B;--ps-pale:#FDECEA;
+  --gray-old:#8A9BB0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;}
+
+/* ── HEADER ── */
+.page-header{background:var(--navy3);padding:48px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(200,164,90,.06);}
+.header-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;display:block;position:relative;z-index:1;}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px;letter-spacing:-1px;position:relative;z-index:1;}
+.header-title em{color:var(--gold);font-style:normal;}
+.header-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:620px;line-height:1.7;position:relative;z-index:1;}
+.header-sub strong{color:rgba(255,255,255,.85);}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,164,90,.15);border:1px solid rgba(200,164,90,.3);border-radius:100px;padding:5px 14px;font-size:12px;color:var(--gold);font-weight:600;margin-bottom:14px;position:relative;z-index:1;}
+
+/* ── BODY ── */
+.page-body{max-width:920px;margin:0 auto;padding:48px 24px 80px;}
+
+/* ── INTRO ── */
+.intro-box{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:20px 24px;margin-bottom:40px;font-size:14px;color:var(--ink2);line-height:1.85;}
+.intro-box strong{color:var(--navy);}
+
+/* ── SECTION ── */
+.sec{margin-bottom:56px;}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:26px;padding-bottom:16px;border-bottom:2px solid var(--line);}
+.sec-num{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--gold);background:var(--navy);padding:5px 11px;border-radius:6px;letter-spacing:1px;flex-shrink:0;}
+.sec-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--navy3);letter-spacing:-.3px;}
+.sec-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.body-text{font-size:14px;color:var(--ink2);line-height:1.85;margin-bottom:18px;}
+.body-text strong{color:var(--navy3);}
+
+/* ── ANCIEN / NOUVEAU COMPARATIF ── */
+.avant-apres{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:start;margin-bottom:24px;}
+.avant-box,.apres-box{border-radius:12px;overflow:hidden;}
+.avant-box{border:2px dashed var(--gray-old);opacity:.8;}
+.apres-box{border:2px solid var(--navy);}
+.box-header{padding:12px 18px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.avant-box .box-header{background:#f0f2f5;color:var(--gray-old);}
+.apres-box .box-header{background:var(--navy);color:#fff;}
+.box-content{padding:14px 18px;background:var(--white);font-size:13px;color:var(--ink2);line-height:1.7;}
+.avant-apres-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;font-size:24px;color:var(--navy);padding-top:40px;}
+
+/* ── ORGANIGRAMME FLÈCHES ── */
+.orgchart{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:24px;}
+.org-node{border-radius:10px;padding:14px 22px;text-align:center;min-width:280px;max-width:560px;width:100%;position:relative;}
+.org-node-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;line-height:1.3;margin-bottom:4px;}
+.org-node-sub{font-size:11px;line-height:1.5;opacity:.8;}
+.org-node-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-top:6px;}
+
+/* niveaux couleurs */
+.node-l0{background:var(--navy3);color:#fff;}
+.node-l0 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l1{background:var(--navy2);color:#fff;}
+.node-l1 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l2{background:var(--navy);color:#fff;}
+.node-l2 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l3{background:#2A5298;color:#fff;}
+.node-l3 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l4{background:var(--sky);color:var(--navy);border:1px solid var(--sky2);}
+.node-l4 .org-node-badge{background:var(--sky2);color:var(--navy);}
+.node-ps{background:var(--ps);color:#fff;}
+.node-ps .org-node-badge{background:rgba(255,255,255,.2);color:#fff;}
+.node-ps-light{background:var(--ps-pale);color:var(--ps);border:1px solid rgba(192,57,43,.25);}
+.node-ps-light .org-node-badge{background:var(--ps);color:#fff;}
+.node-gray{background:#e8ecf2;color:var(--gray-old);border:2px dashed var(--gray-old);}
+.node-gray .org-node-badge{background:var(--gray-old);color:#fff;}
+
+/* flèches */
+.org-arrow-down{display:flex;justify-content:center;align-items:center;height:32px;}
+.org-arrow-down::before{content:'';width:2px;height:20px;background:var(--line);display:block;}
+.org-arrow-down.has-arrow::after{content:'▼';color:var(--muted);font-size:10px;position:absolute;margin-top:20px;}
+.org-arrow-wrap{position:relative;display:flex;flex-direction:column;align-items:center;}
+
+/* branchement horizontal */
+.org-split{display:flex;justify-content:center;gap:12px;margin-bottom:0;width:100%;}
+.org-split-col{display:flex;flex-direction:column;align-items:center;flex:1;max-width:220px;}
+.org-branch-line{width:100%;height:2px;background:var(--line);position:relative;}
+.org-branch-line::before,.org-branch-line::after{content:'';position:absolute;top:0;width:2px;height:20px;background:var(--line);}
+.org-branch-line::before{left:calc(25% - 1px);}
+.org-branch-line::after{right:calc(25% - 1px);}
+.org-top-line{height:20px;width:2px;background:var(--line);}
+.org-split-wrap{display:flex;flex-direction:column;align-items:center;width:100%;}
+
+/* légende */
+.org-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+
+/* ── TIMELINE RÉFORME ── */
+.timeline-reform{display:grid;grid-template-columns:80px 1fr;gap:0;margin-bottom:28px;}
+.tl-year{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--gold);padding:14px 0 14px 0;border-right:2px solid var(--line);text-align:right;padding-right:20px;line-height:1.6;}
+.tl-content{padding:14px 0 14px 24px;border-bottom:1px solid var(--line);}
+.tl-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:4px;}
+.tl-content p{font-size:13px;color:var(--ink2);line-height:1.7;}
+.tl-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--navy);color:#fff;margin-left:8px;vertical-align:middle;}
+.tl-tag.old{background:var(--gray-old);}
+
+/* ── ALERTE ── */
+.alert{border-radius:10px;padding:16px 20px;font-size:13px;line-height:1.8;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;}
+.alert-ico{font-size:18px;flex-shrink:0;margin-top:2px;}
+.alert p,.alert div{margin:0;}
+.alert.gold{background:var(--gold-pale);border:1px solid rgba(200,164,90,.3);border-left:4px solid var(--gold);}
+.alert.navy{background:var(--sky);border:1px solid var(--sky2);border-left:4px solid var(--navy);}
+.alert.red{background:var(--ps-pale);border:1px solid rgba(192,57,43,.2);border-left:4px solid var(--ps);}
+.alert.green{background:var(--green-pale);border:1px solid rgba(26,122,94,.2);border-left:4px solid var(--green);}
+.alert strong{color:var(--navy);}
+.alert.red strong{color:var(--ps);}
+.alert.gold strong{color:#92630A;}
+
+/* ── CORPS GRADES ── */
+.corps-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.corps-card{border-radius:12px;overflow:hidden;}
+.corps-head{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.corps-head-left{}
+.corps-cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:.6;margin-bottom:2px;}
+.corps-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.corps-cat-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;flex-shrink:0;}
+.corps-body{padding:14px 20px;display:flex;flex-direction:column;gap:8px;}
+.grade-row{display:flex;align-items:flex-start;gap:12px;}
+.grade-num{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);width:20px;flex-shrink:0;margin-top:2px;}
+.grade-name{font-size:13px;font-weight:600;}
+.grade-desc{font-size:12px;opacity:.7;line-height:1.5;}
+/* CCD */
+.corps-ccd .corps-head{background:#0a1628;}.corps-ccd .corps-name,.corps-ccd .corps-cat-label{color:#fff;}.corps-ccd .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-ccd .corps-body{background:#142D54;}.corps-ccd .grade-name{color:#fff;}.corps-ccd .grade-desc{color:rgba(255,255,255,.55);}
+/* CC */
+.corps-cc .corps-head{background:#1B3A6B;}.corps-cc .corps-name,.corps-cc .corps-cat-label{color:#fff;}.corps-cc .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cc .corps-body{background:#2A5298;}.corps-cc .grade-name{color:#fff;}.corps-cc .grade-desc{color:rgba(255,255,255,.55);}
+/* CEA */
+.corps-cea .corps-head{background:#2A5298;}.corps-cea .corps-name,.corps-cea .corps-cat-label{color:#fff;}.corps-cea .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cea .corps-body{background:#3A6BC8;}.corps-cea .grade-name{color:#fff;}.corps-cea .grade-desc{color:rgba(255,255,255,.6);}
+/* Scientifiques */
+.corps-sci .corps-head{background:var(--ps);}.corps-sci .corps-name,.corps-sci .corps-cat-label{color:#fff;}.corps-sci .corps-cat-badge{background:rgba(255,255,255,.15);color:#fff;}
+.corps-sci .corps-body{background:var(--ps-pale);}.corps-sci .grade-name{color:var(--ps);}.corps-sci .grade-desc{color:var(--muted);}
+.corps-sci-ing .corps-head{background:#1a4a7a;}.corps-sci-ing .corps-name,.corps-sci-ing .corps-cat-label{color:#fff;}.corps-sci-ing .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-sci-ing .corps-body{background:var(--sky);}.corps-sci-ing .grade-name{color:var(--navy);}.corps-sci-ing .grade-desc{color:var(--muted);}
+.corps-sep{text-align:center;font-size:13px;font-weight:600;color:var(--muted);padding:8px 0;display:flex;align-items:center;gap:10px;}
+.corps-sep::before,.corps-sep::after{content:'';flex:1;height:1px;background:var(--line);}
+
+/* ── INFOS GRID ── */
+.info-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.info-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.info-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.info-card p{font-size:13px;color:var(--ink2);line-height:1.75;}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.info-card ul li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:8px;line-height:1.55;}
+.info-card ul li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0;margin-top:1px;}
+
+/* ── CADRES ENQUÊTE ── */
+.cadres-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.cadre{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.cadre-head{padding:14px 18px;border-bottom:1px solid var(--line);}
+.cadre-head h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:3px;}
+.cadre-head .art{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.5px;}
+.cadre-body{padding:16px 18px;}
+.cadre-body p{font-size:13px;color:var(--ink2);line-height:1.75;margin-bottom:10px;}
+.cadre-body p:last-child{margin-bottom:0;}
+.cadre-scenario{background:var(--bg);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.65;font-style:italic;border-left:3px solid var(--line);}
+.cadre.fl .cadre-head{background:#EEF3FA;}.cadre.fl .cadre-head h4{color:var(--navy);}.cadre.fl .cadre-head .art{color:var(--navy);}
+.cadre.prel .cadre-head{background:var(--purple-pale);}.cadre.prel .cadre-head h4{color:var(--purple);}.cadre.prel .cadre-head .art{color:var(--purple);}
+.cadre.fc .cadre-head{background:var(--green-pale);}.cadre.fc .cadre-head h4{color:var(--green);}.cadre.fc .cadre-head .art{color:var(--green);}
+.cadre.cr .cadre-head{background:var(--orange-pale);}.cadre.cr .cadre-head h4{color:var(--orange);}.cadre.cr .cadre-head .art{color:var(--orange);}
+
+/* ── INFRACTIONS ── */
+.inf-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.inf-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;position:relative;overflow:hidden;}
+.inf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.inf-c::before{background:#10B981;}.inf-d::before{background:var(--orange);}.inf-cr::before{background:var(--ps);}
+.inf-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.inf-c .inf-label{color:#10B981;}.inf-d .inf-label{color:var(--orange);}.inf-cr .inf-label{color:var(--ps);}
+.inf-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy3);margin-bottom:14px;}
+.inf-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px;}
+.inf-row:last-of-type{border-bottom:none;}
+.inf-row-label{color:var(--muted);}
+.inf-row-val{font-weight:600;color:var(--ink);}
+.inf-exemples{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic;line-height:1.55;}
+
+/* ── DÉONTOLOGIE ── */
+.deon-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.deon-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.deon-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.deon-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.deon-list li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:9px;line-height:1.55;}
+.deon-list li .deon-ico{flex-shrink:0;font-size:14px;margin-top:1px;}
+.deon-item-title{font-weight:600;color:var(--navy3);display:block;margin-bottom:2px;}
+.deon-item-desc{font-size:12px;color:var(--muted);display:block;line-height:1.55;}
+.police-special{background:var(--navy);border-radius:12px;padding:20px 24px;color:#fff;margin-top:16px;}
+.police-special h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;}
+.police-special p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;}
+.police-special p strong{color:#fff;}
+
+/* ── NON IMPACTÉS ── */
+.non-imp{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.ni-tag{background:var(--white);border:1px solid var(--line);border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:5px;}
+.ni-tag::before{content:'✓';color:var(--green);font-weight:700;}
+
+/* ── TABLE ── */
+.table-wrap{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+table.t{width:100%;border-collapse:collapse;}
+table.t thead th{padding:11px 16px;font-size:12px;font-weight:700;color:var(--navy);background:var(--sky);text-align:left;border-bottom:2px solid var(--line);}
+table.t tbody tr{border-bottom:1px solid var(--line);}
+table.t tbody tr:last-child{border-bottom:none;}
+table.t tbody tr:hover{background:var(--sky3);}
+table.t td{padding:11px 16px;font-size:13px;color:var(--ink2);vertical-align:top;}
+table.t td:first-child{font-weight:600;color:var(--navy3);}
+.td-b{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;}
+
+@media(max-width:720px){
+  .avant-apres{grid-template-columns:1fr;}.avant-apres-arrow{transform:rotate(90deg);padding:10px 0;}
+  .info-2,.cadres-grid,.inf-3,.deon-2{grid-template-columns:1fr;}
+  .org-split{flex-direction:column;align-items:center;}
+  .page-header{padding:28px 20px;}.page-body{padding:24px 16px;}
+  table.t td,table.t th{padding:8px 10px;font-size:12px;}
+}
+
+/* ── LECON EXTRAS ── */
+.spec-card{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px;}
+.spec-head{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+.spec-head h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.spec-body{padding:18px 20px;font-size:13px;color:var(--ink2);line-height:1.8;}
+.spec-body p{margin-bottom:10px;}
+.spec-body p:last-child{margin-bottom:0;}
+.spec-body ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
+.spec-body ul li{display:flex;gap:8px;align-items:flex-start;line-height:1.55;}
+.spec-body ul li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0;margin-top:1px;}
+.encart{border-radius:9px;padding:13px 16px;font-size:12px;line-height:1.7;margin:12px 0;}
+.encart.gold{background:var(--gold-pale);border-left:3px solid var(--gold);color:var(--ink2);}
+.encart.gold strong{color:#92630A;}
+.encart.navy{background:var(--sky);border-left:3px solid var(--navy);color:var(--ink2);}
+.encart.navy strong{color:var(--navy);}
+.encart.red{background:var(--ps-pale);border-left:3px solid var(--ps);color:var(--ink2);}
+.encart.red strong{color:var(--ps);}
+.encart.green{background:var(--green-pale);border-left:3px solid var(--green);color:var(--ink2);}
+.step-list{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+.step-item{display:flex;gap:14px;align-items:flex-start;}
+.step-num{background:var(--navy);color:#fff;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-content{flex:1;}
+.step-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:4px;}
+.step-content p{font-size:13px;color:var(--ink2);line-height:1.75;}
+.oral-q{background:var(--white);border-left:4px solid var(--gold);border:1px solid var(--line);border-left-width:4px;border-radius:9px;padding:14px 18px;margin-bottom:10px;}
+.oral-q .q{font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:8px;}
+.oral-q .r{font-size:13px;color:var(--ink2);line-height:1.75;}
+.cv-step{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;}
+.cv-step-num{background:var(--navy);color:#fff;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.cv-step-body h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:4px;}
+.cv-step-body p{font-size:13px;color:var(--ink2);line-height:1.75;}
+
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="header-badge">Module 6 · Préparation à l'oral</div>
+  <span class="header-tag">Leçon 5</span>
+  <h1 class="header-title">Les spécialités de la PTS</h1>
+</div>
+<div class="page-body">
+
+  <div class="intro-box">
+    <p>Les missions de la police scientifique couvrent un très large spectre de disciplines. Chaque spécialité correspond à un poste d'affectation possible pour un technicien PTS. Cette leçon présente chacune d'elles telle qu'elle est décrite dans la réalité du métier — à connaître pour l'oral.</p>
+  </div>
+
+  <!-- 01. IDENTITÉ JUDICIAIRE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">01</span><div><div class="sec-title">L'identité judiciaire — la scène d'infraction</div><div class="sec-sub">Le cœur du métier terrain</div></div></div>
+    <p class="body-text">Réel <strong>conseiller forensique</strong>, le technicien en identité judiciaire accompagne le service d'enquête avec un regard critique pour lui permettre de prouver la réalité d'une infraction, identifier des individus, démontrer des contacts, innocenter quelqu'un, corroborer ou infirmer des témoignages, et reconstruire les faits.</p>
+    <div style="font-size:13px;font-weight:600;color:var(--navy3);margin-bottom:12px;">Méthodologie d'intervention en 4 phases (scènes criminelles)</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content"><h4>Prise en compte de la scène</h4><p>Contact avec l'OPJ. Évacuation de la scène. Mise en place d'un périmètre de protection (rubalise). Équipement contre la contamination. Préservation des éléments les plus fragiles. <strong>Photographies de sécurité</strong> de la scène telle que découverte.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content"><h4>Recherche et matérialisation des traces</h4><p>Définition d'une méthode de progression couvrant l'intégralité de la scène. Utilisation de <strong>lampes polychromatiques</strong> pour révéler les traces invisibles à l'œil nu. Matérialisation de chaque élément pertinent avec des <strong>cavaliers numérotés</strong>.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content"><h4>Fixation de la scène</h4><p>Vues panoramiques, <strong>photographies</strong> d'ensemble, de détail et d'identification, <strong>plan</strong> de la scène. Parfois une <strong>numérisation 3D</strong> pour les scènes complexes.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content"><h4>Prélèvements et révélations des traces latentes</h4><p>Prélèvement de tous les éléments matérialisés (en priorisant les plus fragiles). Puis révélation des dernières traces latentes : poudre dactyloscopique, Sperm Tracker (sous UV pour le sperme), <strong>Bluestar</strong> (sang lavé).</p></div>
+      </div>
+    </div>
+    <div class="encart navy"><strong>L'exploitabilité d'une trace papillaire :</strong> en France, une trace doit disposer d'au moins <strong>12 points caractéristiques (minuties)</strong> reliables entre eux pour être exploitable. Elle est ensuite comparée à la victime, aux témoins, aux familiers des lieux. Si non identifiée, elle est envoyée au <strong>FAED</strong>.</div>
+  </div>
+
+  <!-- 02. ODOROLOGIE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">02</span><div><div class="sec-title">L'odorologie</div><div class="sec-sub">Identification d'odeurs humaines à l'aide de chiens spécialisés · Plateau national d'Écully</div></div></div>
+    <p class="body-text">L'odorologie est une technique permettant la comparaison et l'identification d'<strong>odeurs humaines</strong> à l'aide de chiens de police spécialement formés. Elle permet de déterminer si un individu était présent sur une scène ou en contact avec des objets d'intérêt.</p>
+    <div class="info-2" style="margin-bottom:14px;">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">3 types d'odeurs prélevées</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span><strong>Trace odorante</strong> : sur tout support ayant pu être en contact avec un suspect ou une victime</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span><strong>Odeur corporelle</strong> : prélevée sur un individu vivant</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span><strong>Odeur de cadavre</strong> : récupérée sur le corps d'un individu décédé</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Protocole de comparaison</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;">Les tissus sont conditionnés dans des bocaux hermétiques et envoyés au <strong>Plateau National d'Odorologie d'Écully</strong>. Le chien parcourt une ligne de 5 bocaux et se couche devant celui qu'il reconnaît. L'opération est réalisée 2 fois avec les bocaux repositionnés. Une troisième ligne "à vide" valide l'identification. Un second chien effectue les mêmes opérations.</p>
+      </div>
+    </div>
+    <div class="encart gold"><strong>L'odorothèque :</strong> bien qu'il n'existe pas de base de données en odorologie, une pièce de stockage spécifique à Écully permet de conserver des odeurs issues de scènes de crime pendant des années — pour des comparaisons ultérieures.</div>
+  </div>
+
+  <!-- 03. MORPHOANALYSE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">03</span><div><div class="sec-title">La morphoanalyse des traces de sang</div><div class="sec-sub">Spécialité exercée par une quinzaine d'agents au SNPS et dans quelques DPS</div></div></div>
+    <p class="body-text">Les experts en morphoanalyse observent la <strong>taille, la forme et la dispersion</strong> des traces de sang pour déterminer les événements à leur origine. Ils peuvent émettre des hypothèses sur :</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--ink2);line-height:1.55;">La véracité des déclarations des suspects et témoins</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--ink2);line-height:1.55;">Le nombre d'auteurs</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--ink2);line-height:1.55;">Le type d'arme utilisé</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--ink2);line-height:1.55;">Le nombre de coups portés</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--ink2);line-height:1.55;">Le déroulement chronologique des faits</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--ink2);line-height:1.55;">La reconstitution du scénario criminel</div>
+    </div>
+    <p class="body-text">Les traces se classent en 3 types : <strong>passives</strong> (gouttes, écoulements, flaques — dues à la gravité), <strong>transférées</strong> (traces de mains, corps traîné — dues à un contact avec du sang existant), et <strong>projetées</strong> (éclaboussures, pulvérisation artérielle, cast-off). Le <strong>Luminol</strong> révèle les traces latentes invisibles à l'œil nu en réagissant avec le fer de l'hémoglobine.</p>
+  </div>
+
+  <!-- 04. RÉVÉLATION EN LABO -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">04</span><div><div class="sec-title">La révélation de traces papillaires en laboratoire</div><div class="sec-sub">Plateaux techniques et sections criminalistique conventionnelle · Norme ISO 17025</div></div></div>
+    <div class="encart navy" style="margin-bottom:14px;"><strong>Plateaux techniques ≠ LPS :</strong> les plateaux techniques réalisent <em>uniquement</em> de la révélation de traces papillaires sur scellés. Les 5 LPS sont des laboratoires pluridisciplinaires. Il ne faut pas les confondre. On compte environ <strong>56 plateaux techniques</strong> accrédités COFRAC selon la norme ISO 17025.</div>
+    <p class="body-text">Le technicien choisit la technique adaptée selon la <strong>nature du support</strong> (lisse, poreux, adhésif) et la compatibilité avec des analyses génétiques ultérieures. Les principales techniques :</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Cyanoacrylate / Lumicyanoacrylate</div><div style="font-size:11px;color:var(--muted);">Supports lisses et non poreux</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Ninhydrine</div><div style="font-size:11px;color:var(--muted);">Supports poreux (papier)</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Indanedione / DFO</div><div style="font-size:11px;color:var(--muted);">Supports poreux — fluorescence</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Sticky side / Wetpowder</div><div style="font-size:11px;color:var(--muted);">Supports adhésifs</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Violet de gentiane</div><div style="font-size:11px;color:var(--muted);">Supports plastiques</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:3px;">Recover LFT / Oil red O</div><div style="font-size:11px;color:var(--muted);">Techniques avancées (plateau référent Écully)</div></div>
+    </div>
+    <p class="body-text">Tout ce travail est tracé pour répondre aux exigences de la <strong>norme qualité ISO 17025</strong>. La traçabilité est indispensable pour que les résultats soient recevables devant les tribunaux.</p>
+  </div>
+
+  <!-- 05. CRIMINALISTIQUE NUMÉRIQUE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">05</span><div><div class="sec-title">La criminalistique numérique</div><div class="sec-sub">Traces numériques · Audio · Vidéo · En transition vers l'OFAC</div></div></div>
+    <p class="body-text">Les traces numériques ont une importance capitale pour l'enquête. Les spécialistes en traces technologiques recherchent, extraient et analysent les données numériques avant de synthétiser leurs résultats pour les enquêteurs. Ils sont capables d'analyser la quasi-totalité des supports numériques, <strong>même les plus endommagés</strong>.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;">
+        <div style="font-size:20px;margin-bottom:6px;">💻</div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Traces numériques</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.55;">Extraction et analyse de données issues de téléphones, ordinateurs, tablettes, GPS, cloud, objets connectés, vidéosurveillance, tableaux de bord de véhicules</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;">
+        <div style="font-size:20px;margin-bottom:6px;">🔊</div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Traces audio</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.55;">Transcription · Amélioration et nettoyage de fichiers audio · Authentification · Comparaison de voix (voix enregistrée vs individu)</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;">
+        <div style="font-size:20px;margin-bottom:6px;">📹</div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Fichiers vidéo</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.55;">Détection de modifications · Amélioration de la lisibilité (IA) · Comparaison de visages · Enhancement de plaques d'immatriculation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06. ANALYSES GÉNÉTIQUES -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">06</span><div><div class="sec-title">Les analyses génétiques</div><div class="sec-sub">« La Reine des preuves » — ADN · FNAEG · Recherche en parentèle</div></div></div>
+    <p class="body-text">Détectable en quantités infimes, l'ADN permet de relier des individus à des scènes d'infractions ou à des victimes même lorsqu'ils ont cherché à se protéger ou à nettoyer les lieux. Les prélèvements biologiques (écouvillons, objets) réalisés sur scène sont analysés en LPS pour en extraire un profil génétique.</p>
+    <div class="info-2" style="margin-bottom:14px;">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">La signalisation — kit FTA</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;">Lors de la signalisation d'un mis en cause, un prélèvement biologique est réalisé sur un <strong>kit FTA</strong>. Le technicien en biologie extrait ensuite le profil génétique pour l'insérer dans le <strong>FNAEG</strong>.</p>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">L'ADN mitochondrial</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;">Quand un cheveu sans bulbe est trouvé sur une scène, l'ADN nucléaire (contenu dans le bulbe) est absent. Les experts analysent alors l'<strong>ADN mitochondrial</strong>, transmis par la mère. Tous les membres d'une même lignée maternelle partagent cet ADN.</p>
+      </div>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin-bottom:14px;">
+      <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:10px;">Techniques complémentaires pour les profils inconnus</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Recherche en parentèle</div>
+          <p style="font-size:12px;color:var(--ink2);line-height:1.65;">Partant du principe que l'ADN provient à parts égales du père et de la mère, on cherche dans le FNAEG des individus partageant ~50% de leur ADN avec le profil inconnu. Permet d'identifier un parent du suspect. Utilisée en France depuis 2011 (affaire Élodie Kulik).</p>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Portrait-robot génétique</div>
+          <p style="font-size:12px;color:var(--ink2);line-height:1.65;">Depuis 2015, certains caractères codants de l'ADN permettent de déterminer l'<strong>origine biogéographique</strong>, la couleur de peau, des cheveux et des yeux d'un individu à partir d'une trace. Encadré par l'arrêt de la Cour de cassation du 25 juin 2014.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07. DOCUMENTS ET ÉCRITURES -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">07</span><div><div class="sec-title">Documents et écritures</div><div class="sec-sub">Contrefaçon · Falsification · Authentification</div></div></div>
+    <p class="body-text">Tous les documents peuvent être la cible de fraudes — qu'il s'agisse de contrefaçon ou de falsification. Les missions des techniciens affectés dans cette spécialité sont diverses :</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+      <div style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;background:var(--white);border:1px solid var(--line);border-radius:7px;padding:10px 12px;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span>Authentification de documents (filigranes, sécurités...)</div>
+      <div style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;background:var(--white);border:1px solid var(--line);border-radius:7px;padding:10px 12px;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span>Recherche d'écritures latentes</div>
+      <div style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;background:var(--white);border:1px solid var(--line);border-radius:7px;padding:10px 12px;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span>Analyse et comparaison d'encres</div>
+      <div style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;background:var(--white);border:1px solid var(--line);border-radius:7px;padding:10px 12px;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span>Expertise en comparaison d'écriture</div>
+      <div style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;background:var(--white);border:1px solid var(--line);border-radius:7px;padding:10px 12px;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span>Identification et comparaison de photocopieurs et imprimantes</div>
+      <div style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;background:var(--white);border:1px solid var(--line);border-radius:7px;padding:10px 12px;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span>Datation de document</div>
+    </div>
+  </div>
+
+  <!-- 08. BALISTIQUE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">08</span><div><div class="sec-title">La balistique</div><div class="sec-sub">Armes · Munitions · FNIB · Résidus de tir</div></div></div>
+    <p class="body-text">Les balisticiens examinent les armes, les munitions et les éléments de munitions. <strong>Chaque arme laisse des marques caractéristiques et uniques</strong> — le canon imprime des stries propres sur le projectile. Ces marques permettent de réaliser des comparaisons.</p>
+    <div class="info-2" style="margin-bottom:14px;">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Ce que peut déterminer le balisticien</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span>Trajectoires et distances de tir</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span>Type d'arme utilisé</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span>Nombre de coups tirés</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span>Antécédents balistiques de l'arme (FNIB)</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span>Hypothèses sur les lésions lors d'autopsies</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Le tir de comparaison</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:8px;">Lorsqu'une arme est retrouvée, le balisticien réalise un <strong>tir de comparaison</strong> pour récupérer les éléments balistiques issus de ce tir. C'est l'observation des marques laissées sur ces éléments qui permet la comparaison avec les éléments de question.</p>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Les résidus de tir</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;">Récupérés à l'aide de <strong>tamponnoirs</strong> ou d'écouvillons secs, puis analysés au <strong>microscope électronique à balayage (MEB)</strong> couplé à une microanalyse aux rayons X. Peuvent être prélevés sur le terrain ou en labo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09. TOXICOLOGIE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">09</span><div><div class="sec-title">La toxicologie</div><div class="sec-sub">Recherche de substances toxiques dans les prélèvements biologiques</div></div></div>
+    <p class="body-text">La toxicologie permet de rechercher et d'identifier des substances toxiques dans un organisme et d'en identifier les effets. Les techniciens analysent des prélèvements humains (sang, salive, urine, cheveux) ou des substances pouvant être ingérées.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 14px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px;">🚗 Sécurité routière</div><div style="font-size:11px;color:var(--muted);line-height:1.55;">Alcoolémie, cannabis, cocaïne, opioïdes, amphétamines. Test salivaire de terrain → analyse biologique de vérification en LPS (seule cette analyse prouve le délit).</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 14px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px;">⚕️ Médecine légale</div><div style="font-size:11px;color:var(--muted);line-height:1.55;">Mort suspecte, suicide, overdose, empoisonnement, noyade — recherche des causes toxiques.</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 14px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px;">🚨 Soumission chimique</div><div style="font-size:11px;color:var(--muted);line-height:1.55;">Dans les affaires d'agression sexuelle — GHB (drogue du violeur), benzodiazépines, somnifères. Recherche dans cheveux, sang, urine.</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 14px;"><div style="font-size:11px;font-weight:700;color:var(--navy);margin-bottom:4px;">🧠 Modification comportementale</div><div style="font-size:11px;color:var(--muted);line-height:1.55;">Déterminer si un composé a altéré le comportement du mis en cause (pulsions, déréalisation, dépersonnalisation).</div></div>
+    </div>
+  </div>
+
+  <!-- 10. STUPÉFIANTS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">10</span><div><div class="sec-title">Les stupéfiants</div><div class="sec-sub">Identification · Profilage · Pureté · Base de données STUPS</div></div></div>
+    <p class="body-text">Les analystes de la section stupéfiants étudient toute substance susceptible d'être un stupéfiant ou tout support ayant été en contact avec un tel produit.</p>
+    <div class="info-2" style="margin-bottom:14px;">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Types d'analyses</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span><strong>Profilage chimique</strong> : identification du principe actif + produits de coupage + pureté</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span><strong>Profilage physique</strong> : pour les comprimés — taille, couleur, logo</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span><strong>Pureté</strong> : pour alerter sur la dangerosité d'un produit</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:7px;line-height:1.55;"><span style="color:var(--navy);font-weight:700;">→</span><strong>Recherche de traces</strong> sur supports (balances, emballages, billets)</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;">Base STUPS</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin-bottom:8px;">Gérée par la police scientifique. Contient les données physiques et chimiques des saisies analysées par les LPS. Permet de répertorier plus de <strong>600 molécules</strong>, de rapprocher des affaires, et d'informer les autorités de santé sur les tendances et dangers du trafic.</p>
+        <div style="font-size:12px;font-weight:700;color:var(--navy);margin-bottom:4px;">Technique principale</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;"><strong>Chromatographie en phase gazeuse couplée à un spectromètre de masse</strong> — permet d'obtenir la composition complète et la pureté de l'échantillon.</p>
+      </div>
+    </div>
+    <div class="encart gold"><strong>Tests de terrain ≠ analyse LPS :</strong> les tests colorimétriques d'orientation sur le terrain indiquent la présence possible de stupéfiant mais sont sujets aux faux positifs. Seule l'analyse en laboratoire permet de conclure avec certitude.</div>
+  </div>
+
+  <!-- 11. INCENDIES-EXPLOSIONS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">11</span><div><div class="sec-title">Incendies-Explosions</div><div class="sec-sub">Détermination de l'origine · Recherche d'accélérateurs · Résidus d'explosifs</div></div></div>
+    <p class="body-text">La mission principale est l'analyse de débris et de prélèvements afin de détecter et d'identifier la présence de <strong>liquides inflammables</strong> ou de résidus d'explosifs. Lorsque les services locaux n'arrivent pas à déterminer le foyer de l'incendie, les spécialistes se déplacent sur les lieux.</p>
+    <p class="body-text">Sur place, ils recueillent témoignages et informations auprès des pompiers sur la propagation du feu et la chronologie des événements. Ils réalisent des photographies et des prélèvements ciblés selon leur analyse de la scène.</p>
+  </div>
+
+  <!-- 12. PHYSICO-CHIMIE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">12</span><div><div class="sec-title">La physico-chimie</div><div class="sec-sub">Comparaison de matériaux · Fibres · Verre · Peinture · Outils · Terre</div></div></div>
+    <p class="body-text">La physico-chimie regroupe plusieurs champs d'études : analyse de fragments de verre, analyse de fibres, traces d'outil, analyse de terre, analyse de peinture. Le technicien réalise un <strong>travail de comparaison</strong> entre un élément de question et un élément de comparaison.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--ink2);line-height:1.55;">Comparer une trace laissée par un outil avec un outil retrouvé</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--ink2);line-height:1.55;">Comparer de la terre provenant d'un suspect avec celle de la scène</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:11px;color:var(--ink2);line-height:1.55;">Comparer des fibres ou écailles de peinture entre une victime et un mis en cause</div>
+    </div>
+    <div class="encart navy"><strong>Les produits marquants codés :</strong> ces encres indélébiles (parfois invisibles à l'œil nu) possèdent des marqueurs codés uniques. Elles protègent œuvres d'art, billets de banque, bijoux. Un lien de contact entre un individu et l'objet du vol peut ainsi être établi.</div>
+  </div>
+
+  <!-- 13. LES FICHIERS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">13</span><div><div class="sec-title">Les fichiers de la police scientifique</div><div class="sec-sub">FAED · FNAEG · FNIB · STUPS — les 4 fichiers exclusifs de la PS</div></div></div>
+    <p class="body-text">La Police nationale dispose de nombreux fichiers (TAJ, FOVeS…). <strong>Quatre fichiers sont l'exclusivité de la police scientifique :</strong></p>
+    <div class="table-wrap">
+      <table class="t">
+        <thead><tr><th>Fichier</th><th>Création</th><th>Contenu</th><th>Chiffres clés (2022)</th><th>Conservation</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>FAED<br><small style="font-weight:400;color:var(--muted)">Empreintes digitales et palmaires</small></td>
+            <td>1987</td>
+            <td>Empreintes des mis en cause, décédés non identifiés, TNR (Traces Non Résolues)</td>
+            <td><strong>6,5 M</strong> individus · 14 500 identifications en 2021</td>
+            <td>10 à 25 ans selon âge et qualification</td>
+          </tr>
+          <tr>
+            <td>FNAEG<br><small style="font-weight:400;color:var(--muted)">Profils génétiques</small></td>
+            <td>1998 (opérationnel 2003)</td>
+            <td>Profils ADN des mis en cause, décédés non identifiés, disparues, traces non identifiées</td>
+            <td><strong>3,8 M</strong> individus · 37 000 identifications en 2021</td>
+            <td>25 à 40 ans selon le cas</td>
+          </tr>
+          <tr>
+            <td>FNIB<br><small style="font-weight:400;color:var(--muted)">Éléments balistiques</small></td>
+            <td>2016</td>
+            <td>Scans 3D de douilles et projectiles issus de scènes ou de tirs de comparaison · Système Evofinder</td>
+            <td><strong>70 000</strong> fiches · 139 rapprochements en 2021</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>STUPS<br><small style="font-weight:400;color:var(--muted)">Profils de stupéfiants</small></td>
+            <td>—</td>
+            <td>Données physiques et chimiques des saisies analysées par les LPS</td>
+            <td>Plus de <strong>600 molécules</strong> enregistrées</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="encart navy"><strong>Échanges internationaux :</strong> FAED et FNAEG sont ouverts aux échanges via le <strong>Traité de Prüm</strong> (18 pays pour empreintes, 24 pour ADN), les accords bilatéraux (accord franco-américain) et les bases d'<strong>INTERPOL</strong> (AFIS avec 220 000 fiches dactyloscopiques · Passerelle ADN opérationnelle depuis 2002). FNIB échangeable avec les pays disposant d'Evofinder ou via INTERPOL/Europol.</div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;margin-top:24px;">Le SNPS, administrateur national du FAED et du FNAEG</div>
+    <p class="body-text">Le SNPS assure, <strong>pour le compte de la police ET de la gendarmerie nationales</strong>, la gestion de ces deux fichiers d'identification biométrique. Il en a la <strong>direction d'application</strong> : administration du système, supervision de son utilisation par tous les sites, déploiement du matériel, conduite des évolutions techniques, définition de la doctrine d'emploi, formation des utilisateurs et habilitation des agents.</p>
+    <div class="info-2" style="margin-bottom:16px;">
+      <div class="info-card">
+        <h4>🖐️ FAED — organisation en 3 catégories de sites</h4>
+        <ul>
+          <li><strong>Sites centraux</strong> — contrôle des fiches décadactylaires et exploitation des traces de leur zone de compétence</li>
+          <li><strong>Sites territoriaux</strong> — exploitation des traces papillaires relevées ou révélées par les services de leur zone</li>
+          <li><strong>Services équipés de terminaux</strong> — consultation et alimentation (signalisations et/ou traces non identifiées, selon habilitation)</li>
+        </ul>
+        <p style="font-size:12px;color:var(--muted);">Les services non dotés transmettent fiches et traces à un service de niveau supérieur.</p>
+      </div>
+      <div class="info-card">
+        <h4>🧬 FNAEG — gestion centralisée unique</h4>
+        <p style="margin-bottom:8px;">Le FNAEG est <strong>exclusivement géré sur le site central du SNPS</strong>, pour l'ensemble du territoire national, pour le compte de la police et de la gendarmerie. Le SNPS alimente le fichier et gère les rapprochements à partir des analyses génétiques réalisées par les laboratoires habilités (dont les LPS du SNPS), destinataires des prélèvements biologiques.</p>
+        <p style="margin-bottom:0;">Dans les services de police et de gendarmerie, les requérants accèdent au fichier pour rédiger la demande de consultation/enregistrement, qui vaut également <strong>demande d'analyse</strong> transmise au laboratoire avec les prélèvements.</p>
+      </div>
+    </div>
+    <div class="encart gold"><strong>Compétence exclusive du SNPS :</strong> pour les deux fichiers, le SNPS est <strong>seul compétent pour le traitement des droits d'accès par les particuliers</strong>, et détient une <strong>compétence exclusive pour les échanges opérationnels européens et internationaux</strong> (Prüm, INTERPOL).</div>
+  </div>
+
+</div>
+</body>
+</html>

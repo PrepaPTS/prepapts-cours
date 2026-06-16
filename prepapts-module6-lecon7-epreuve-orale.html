@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prépa PTS — Module 6 · L'épreuve orale</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --navy:#1B3A6B;--navy2:#142D54;--navy3:#0E2040;
+  --gold:#C8A45A;--gold-pale:#FDF6E8;
+  --sky:#EEF3FA;--sky2:#D6E4F7;--sky3:#F4F7FB;
+  --white:#fff;--ink:#111827;--ink2:#374151;
+  --muted:#6B7280;--line:#E5E9F2;--bg:#F4F6FB;
+  --green:#1A7A5E;--green-pale:#E6F7F2;
+  --red:#C0392B;--red-pale:#FDECEA;
+  --purple:#7C3AED;--purple-pale:#EDE9FE;
+  --orange:#D97706;--orange-pale:#FEF3C7;
+  --ps:#C0392B;--ps-pale:#FDECEA;
+  --gray-old:#8A9BB0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;}
+
+/* ── HEADER ── */
+.page-header{background:var(--navy3);padding:48px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(200,164,90,.06);}
+.header-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;display:block;position:relative;z-index:1;}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px;letter-spacing:-1px;position:relative;z-index:1;}
+.header-title em{color:var(--gold);font-style:normal;}
+.header-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:620px;line-height:1.7;position:relative;z-index:1;}
+.header-sub strong{color:rgba(255,255,255,.85);}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,164,90,.15);border:1px solid rgba(200,164,90,.3);border-radius:100px;padding:5px 14px;font-size:12px;color:var(--gold);font-weight:600;margin-bottom:14px;position:relative;z-index:1;}
+
+/* ── BODY ── */
+.page-body{max-width:920px;margin:0 auto;padding:48px 24px 80px;}
+
+/* ── INTRO ── */
+.intro-box{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:20px 24px;margin-bottom:40px;font-size:14px;color:var(--ink2);line-height:1.85;}
+.intro-box strong{color:var(--navy);}
+
+/* ── SECTION ── */
+.sec{margin-bottom:56px;}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:26px;padding-bottom:16px;border-bottom:2px solid var(--line);}
+.sec-num{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--gold);background:var(--navy);padding:5px 11px;border-radius:6px;letter-spacing:1px;flex-shrink:0;}
+.sec-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--navy3);letter-spacing:-.3px;}
+.sec-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.body-text{font-size:14px;color:var(--ink2);line-height:1.85;margin-bottom:18px;}
+.body-text strong{color:var(--navy3);}
+
+/* ── ANCIEN / NOUVEAU COMPARATIF ── */
+.avant-apres{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:start;margin-bottom:24px;}
+.avant-box,.apres-box{border-radius:12px;overflow:hidden;}
+.avant-box{border:2px dashed var(--gray-old);opacity:.8;}
+.apres-box{border:2px solid var(--navy);}
+.box-header{padding:12px 18px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.avant-box .box-header{background:#f0f2f5;color:var(--gray-old);}
+.apres-box .box-header{background:var(--navy);color:#fff;}
+.box-content{padding:14px 18px;background:var(--white);font-size:13px;color:var(--ink2);line-height:1.7;}
+.avant-apres-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;font-size:24px;color:var(--navy);padding-top:40px;}
+
+/* ── ORGANIGRAMME FLÈCHES ── */
+.orgchart{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:24px;}
+.org-node{border-radius:10px;padding:14px 22px;text-align:center;min-width:280px;max-width:560px;width:100%;position:relative;}
+.org-node-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;line-height:1.3;margin-bottom:4px;}
+.org-node-sub{font-size:11px;line-height:1.5;opacity:.8;}
+.org-node-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-top:6px;}
+
+/* niveaux couleurs */
+.node-l0{background:var(--navy3);color:#fff;}
+.node-l0 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l1{background:var(--navy2);color:#fff;}
+.node-l1 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l2{background:var(--navy);color:#fff;}
+.node-l2 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l3{background:#2A5298;color:#fff;}
+.node-l3 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l4{background:var(--sky);color:var(--navy);border:1px solid var(--sky2);}
+.node-l4 .org-node-badge{background:var(--sky2);color:var(--navy);}
+.node-ps{background:var(--ps);color:#fff;}
+.node-ps .org-node-badge{background:rgba(255,255,255,.2);color:#fff;}
+.node-ps-light{background:var(--ps-pale);color:var(--ps);border:1px solid rgba(192,57,43,.25);}
+.node-ps-light .org-node-badge{background:var(--ps);color:#fff;}
+.node-gray{background:#e8ecf2;color:var(--gray-old);border:2px dashed var(--gray-old);}
+.node-gray .org-node-badge{background:var(--gray-old);color:#fff;}
+
+/* flèches */
+.org-arrow-down{display:flex;justify-content:center;align-items:center;height:32px;}
+.org-arrow-down::before{content:'';width:2px;height:20px;background:var(--line);display:block;}
+.org-arrow-down.has-arrow::after{content:'▼';color:var(--muted);font-size:10px;position:absolute;margin-top:20px;}
+.org-arrow-wrap{position:relative;display:flex;flex-direction:column;align-items:center;}
+
+/* branchement horizontal */
+.org-split{display:flex;justify-content:center;gap:12px;margin-bottom:0;width:100%;}
+.org-split-col{display:flex;flex-direction:column;align-items:center;flex:1;max-width:220px;}
+.org-branch-line{width:100%;height:2px;background:var(--line);position:relative;}
+.org-branch-line::before,.org-branch-line::after{content:'';position:absolute;top:0;width:2px;height:20px;background:var(--line);}
+.org-branch-line::before{left:calc(25% - 1px);}
+.org-branch-line::after{right:calc(25% - 1px);}
+.org-top-line{height:20px;width:2px;background:var(--line);}
+.org-split-wrap{display:flex;flex-direction:column;align-items:center;width:100%;}
+
+/* légende */
+.org-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+
+/* ── TIMELINE RÉFORME ── */
+.timeline-reform{display:grid;grid-template-columns:80px 1fr;gap:0;margin-bottom:28px;}
+.tl-year{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--gold);padding:14px 0 14px 0;border-right:2px solid var(--line);text-align:right;padding-right:20px;line-height:1.6;}
+.tl-content{padding:14px 0 14px 24px;border-bottom:1px solid var(--line);}
+.tl-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:4px;}
+.tl-content p{font-size:13px;color:var(--ink2);line-height:1.7;}
+.tl-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--navy);color:#fff;margin-left:8px;vertical-align:middle;}
+.tl-tag.old{background:var(--gray-old);}
+
+/* ── ALERTE ── */
+.alert{border-radius:10px;padding:16px 20px;font-size:13px;line-height:1.8;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;}
+.alert-ico{font-size:18px;flex-shrink:0;margin-top:2px;}
+.alert p,.alert div{margin:0;}
+.alert.gold{background:var(--gold-pale);border:1px solid rgba(200,164,90,.3);border-left:4px solid var(--gold);}
+.alert.navy{background:var(--sky);border:1px solid var(--sky2);border-left:4px solid var(--navy);}
+.alert.red{background:var(--ps-pale);border:1px solid rgba(192,57,43,.2);border-left:4px solid var(--ps);}
+.alert.green{background:var(--green-pale);border:1px solid rgba(26,122,94,.2);border-left:4px solid var(--green);}
+.alert strong{color:var(--navy);}
+.alert.red strong{color:var(--ps);}
+.alert.gold strong{color:#92630A;}
+
+/* ── CORPS GRADES ── */
+.corps-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.corps-card{border-radius:12px;overflow:hidden;}
+.corps-head{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.corps-head-left{}
+.corps-cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:.6;margin-bottom:2px;}
+.corps-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.corps-cat-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;flex-shrink:0;}
+.corps-body{padding:14px 20px;display:flex;flex-direction:column;gap:8px;}
+.grade-row{display:flex;align-items:flex-start;gap:12px;}
+.grade-num{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);width:20px;flex-shrink:0;margin-top:2px;}
+.grade-name{font-size:13px;font-weight:600;}
+.grade-desc{font-size:12px;opacity:.7;line-height:1.5;}
+/* CCD */
+.corps-ccd .corps-head{background:#0a1628;}.corps-ccd .corps-name,.corps-ccd .corps-cat-label{color:#fff;}.corps-ccd .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-ccd .corps-body{background:#142D54;}.corps-ccd .grade-name{color:#fff;}.corps-ccd .grade-desc{color:rgba(255,255,255,.55);}
+/* CC */
+.corps-cc .corps-head{background:#1B3A6B;}.corps-cc .corps-name,.corps-cc .corps-cat-label{color:#fff;}.corps-cc .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cc .corps-body{background:#2A5298;}.corps-cc .grade-name{color:#fff;}.corps-cc .grade-desc{color:rgba(255,255,255,.55);}
+/* CEA */
+.corps-cea .corps-head{background:#2A5298;}.corps-cea .corps-name,.corps-cea .corps-cat-label{color:#fff;}.corps-cea .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cea .corps-body{background:#3A6BC8;}.corps-cea .grade-name{color:#fff;}.corps-cea .grade-desc{color:rgba(255,255,255,.6);}
+/* Scientifiques */
+.corps-sci .corps-head{background:var(--ps);}.corps-sci .corps-name,.corps-sci .corps-cat-label{color:#fff;}.corps-sci .corps-cat-badge{background:rgba(255,255,255,.15);color:#fff;}
+.corps-sci .corps-body{background:var(--ps-pale);}.corps-sci .grade-name{color:var(--ps);}.corps-sci .grade-desc{color:var(--muted);}
+.corps-sci-ing .corps-head{background:#1a4a7a;}.corps-sci-ing .corps-name,.corps-sci-ing .corps-cat-label{color:#fff;}.corps-sci-ing .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-sci-ing .corps-body{background:var(--sky);}.corps-sci-ing .grade-name{color:var(--navy);}.corps-sci-ing .grade-desc{color:var(--muted);}
+.corps-sep{text-align:center;font-size:13px;font-weight:600;color:var(--muted);padding:8px 0;display:flex;align-items:center;gap:10px;}
+.corps-sep::before,.corps-sep::after{content:'';flex:1;height:1px;background:var(--line);}
+
+/* ── INFOS GRID ── */
+.info-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.info-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.info-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.info-card p{font-size:13px;color:var(--ink2);line-height:1.75;}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.info-card ul li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:8px;line-height:1.55;}
+.info-card ul li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0;margin-top:1px;}
+
+/* ── CADRES ENQUÊTE ── */
+.cadres-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.cadre{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.cadre-head{padding:14px 18px;border-bottom:1px solid var(--line);}
+.cadre-head h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:3px;}
+.cadre-head .art{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.5px;}
+.cadre-body{padding:16px 18px;}
+.cadre-body p{font-size:13px;color:var(--ink2);line-height:1.75;margin-bottom:10px;}
+.cadre-body p:last-child{margin-bottom:0;}
+.cadre-scenario{background:var(--bg);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.65;font-style:italic;border-left:3px solid var(--line);}
+.cadre.fl .cadre-head{background:#EEF3FA;}.cadre.fl .cadre-head h4{color:var(--navy);}.cadre.fl .cadre-head .art{color:var(--navy);}
+.cadre.prel .cadre-head{background:var(--purple-pale);}.cadre.prel .cadre-head h4{color:var(--purple);}.cadre.prel .cadre-head .art{color:var(--purple);}
+.cadre.fc .cadre-head{background:var(--green-pale);}.cadre.fc .cadre-head h4{color:var(--green);}.cadre.fc .cadre-head .art{color:var(--green);}
+.cadre.cr .cadre-head{background:var(--orange-pale);}.cadre.cr .cadre-head h4{color:var(--orange);}.cadre.cr .cadre-head .art{color:var(--orange);}
+
+/* ── INFRACTIONS ── */
+.inf-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.inf-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;position:relative;overflow:hidden;}
+.inf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.inf-c::before{background:#10B981;}.inf-d::before{background:var(--orange);}.inf-cr::before{background:var(--ps);}
+.inf-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.inf-c .inf-label{color:#10B981;}.inf-d .inf-label{color:var(--orange);}.inf-cr .inf-label{color:var(--ps);}
+.inf-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy3);margin-bottom:14px;}
+.inf-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px;}
+.inf-row:last-of-type{border-bottom:none;}
+.inf-row-label{color:var(--muted);}
+.inf-row-val{font-weight:600;color:var(--ink);}
+.inf-exemples{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic;line-height:1.55;}
+
+/* ── DÉONTOLOGIE ── */
+.deon-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.deon-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.deon-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.deon-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.deon-list li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:9px;line-height:1.55;}
+.deon-list li .deon-ico{flex-shrink:0;font-size:14px;margin-top:1px;}
+.deon-item-title{font-weight:600;color:var(--navy3);display:block;margin-bottom:2px;}
+.deon-item-desc{font-size:12px;color:var(--muted);display:block;line-height:1.55;}
+.police-special{background:var(--navy);border-radius:12px;padding:20px 24px;color:#fff;margin-top:16px;}
+.police-special h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;}
+.police-special p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;}
+.police-special p strong{color:#fff;}
+
+/* ── NON IMPACTÉS ── */
+.non-imp{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.ni-tag{background:var(--white);border:1px solid var(--line);border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:5px;}
+.ni-tag::before{content:'✓';color:var(--green);font-weight:700;}
+
+/* ── TABLE ── */
+.table-wrap{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+table.t{width:100%;border-collapse:collapse;}
+table.t thead th{padding:11px 16px;font-size:12px;font-weight:700;color:var(--navy);background:var(--sky);text-align:left;border-bottom:2px solid var(--line);}
+table.t tbody tr{border-bottom:1px solid var(--line);}
+table.t tbody tr:last-child{border-bottom:none;}
+table.t tbody tr:hover{background:var(--sky3);}
+table.t td{padding:11px 16px;font-size:13px;color:var(--ink2);vertical-align:top;}
+table.t td:first-child{font-weight:600;color:var(--navy3);}
+.td-b{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;}
+
+@media(max-width:720px){
+  .avant-apres{grid-template-columns:1fr;}.avant-apres-arrow{transform:rotate(90deg);padding:10px 0;}
+  .info-2,.cadres-grid,.inf-3,.deon-2{grid-template-columns:1fr;}
+  .org-split{flex-direction:column;align-items:center;}
+  .page-header{padding:28px 20px;}.page-body{padding:24px 16px;}
+  table.t td,table.t th{padding:8px 10px;font-size:12px;}
+}
+
+.spec-card{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px;}
+.spec-head{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+.spec-head h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.spec-body{padding:18px 20px;}
+.spec-body p{font-size:13px;color:var(--ink2);line-height:1.85;margin-bottom:10px;}
+.spec-body p:last-child{margin-bottom:0;}
+.spec-body ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:10px;}
+.spec-body ul li{font-size:13px;color:var(--ink2);display:flex;gap:9px;align-items:flex-start;line-height:1.6;}
+.spec-body ul li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0;margin-top:2px;}
+.encart{border-radius:9px;padding:13px 16px;font-size:13px;line-height:1.75;margin:12px 0;}
+.encart.gold{background:var(--gold-pale);border-left:3px solid var(--gold);color:var(--ink2);}
+.encart.gold strong{color:#92630A;}
+.encart.navy{background:var(--sky);border-left:3px solid var(--navy);color:var(--ink2);}
+.encart.navy strong{color:var(--navy);}
+.encart.red{background:var(--ps-pale);border-left:3px solid var(--ps);color:var(--ink2);}
+.encart.red strong{color:var(--ps);}
+.encart.green{background:var(--green-pale);border-left:3px solid var(--green);color:var(--ink2);}
+.step-list{display:flex;flex-direction:column;gap:14px;margin-bottom:20px;}
+.step-item{display:flex;gap:16px;align-items:flex-start;}
+.step-num{background:var(--navy);color:#fff;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-content{flex:1;}
+.step-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:5px;}
+.step-content p{font-size:13px;color:var(--ink2);line-height:1.8;}
+.oral-q{background:var(--white);border-left:4px solid var(--gold);border:1px solid var(--line);border-left-width:4px;border-radius:9px;padding:15px 18px;margin-bottom:10px;}
+.oral-q .q{font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:8px;}
+.oral-q .r{font-size:13px;color:var(--ink2);line-height:1.8;}
+.oral-q .tip{font-size:12px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);}
+.present-ex{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px;font-size:13px;color:var(--ink2);line-height:1.9;position:relative;margin-bottom:16px;border-left:4px solid var(--gold);}
+.present-ex p{margin-bottom:12px;}
+.present-ex p:last-child{margin-bottom:0;}
+
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="header-badge">Module 6 · Préparation à l'oral</div>
+  <span class="header-tag">Leçon 7</span>
+  <h1 class="header-title">L'épreuve orale</h1>
+</div>
+<div class="page-body">
+
+  <div class="intro-box">
+    <p>L'oral est l'épreuve déterminante du concours TPTS. Coefficient 5, éliminatoire sous 5/20 — c'est là que se jouent les places, parfois à quelques points. Cette leçon vous prépare à chaque aspect : comprendre ce que le jury évalue vraiment, gérer le stress, maîtriser votre communication non verbale, structurer votre présentation de 5 minutes, et répondre aux questions types.</p>
+  </div>
+
+  <!-- 01. FORMAT ET ATTENTES -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">01</span><div><div class="sec-title">Le format de l'épreuve et les attentes du jury</div><div class="sec-sub">25 minutes · 5 min présentation + 20 min questions · Coeff. 5 · Éliminatoire &lt; 5/20</div></div></div>
+    <p class="body-text">Vous entrez dans la salle. Un jury composé d'<strong>au moins 5 personnes</strong> vous demande de vous asseoir et de vous présenter. Pendant 5 minutes — chronomètre en main. Le jury peut vous couper si vous dépassez. Puis 20 minutes de discussion sur de nombreux sujets : votre parcours, vos intérêts, votre situation personnelle, vos motivations, mais surtout <strong>la connaissance de la PTS et de la Police Nationale</strong>.</p>
+
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px 24px;margin-bottom:20px;">
+      <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:14px;">Composition type du jury</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+        <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.6;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span><span><strong>Un président du jury</strong> — haut gradé de la police</span></div>
+        <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.6;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span><span><strong>Un représentant de la DNPJ ou de la DNSP</strong> (ou PP à Paris)</span></div>
+        <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.6;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span><span><strong>Un ou plusieurs membres de la PTS</strong> — ils connaissent le métier de l'intérieur</span></div>
+        <div style="font-size:12px;color:var(--ink2);display:flex;gap:8px;align-items:flex-start;line-height:1.6;"><span style="color:var(--navy);font-weight:700;flex-shrink:0;">→</span><span><strong>Un psychologue</strong> — présence obligatoire, il a analysé vos résultats aux tests psychotechniques</span></div>
+      </div>
+    </div>
+
+    <p class="body-text">Le jury évalue 5 dimensions :</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center;border-top:3px solid var(--ps);"><div style="font-size:18px;margin-bottom:6px;">🔬</div><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Connaissance du métier</div><div style="font-size:11px;color:var(--muted);line-height:1.5;">Organisation de la PTS, chaîne criminalistique, acteurs, fichiers, spécialités</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center;border-top:3px solid var(--navy);"><div style="font-size:18px;margin-bottom:6px;">🗣️</div><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Capacité d'expression</div><div style="font-size:11px;color:var(--muted);line-height:1.5;">S'exprimer clairement, argumenter, construire un raisonnement cohérent</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center;border-top:3px solid var(--gold);"><div style="font-size:18px;margin-bottom:6px;">💡</div><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Motivation et réalisme</div><div style="font-size:11px;color:var(--muted);line-height:1.5;">Vision concrète du métier, conscience des contraintes, motivations sincères</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center;border-top:3px solid var(--green);"><div style="font-size:18px;margin-bottom:6px;">🧠</div><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Personnalité et caractère</div><div style="font-size:11px;color:var(--muted);line-height:1.5;">Analysé via les tests psychotechniques dont le psychologue restitue les résultats</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center;border-top:3px solid var(--muted);"><div style="font-size:18px;margin-bottom:6px;">👔</div><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Attitude générale</div><div style="font-size:11px;color:var(--muted);line-height:1.5;">Posture, tenue, regard, respect, capacité à travailler avec ces personnes</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;text-align:center;border-top:3px solid var(--navy2);"><div style="font-size:18px;margin-bottom:6px;">📋</div><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:4px;">Présentation du CV</div><div style="font-size:11px;color:var(--muted);line-height:1.5;">Le CV remis est étudié — cohérence du parcours avec le poste</div></div>
+    </div>
+    <div class="encart red"><strong>Ce que le jury NE veut PAS entendre :</strong> "j'ai toujours regardé les Experts à la télé", "je veux résoudre des crimes", "je veux analyser des preuves" sans connaître la réalité du métier. Le jury cherche à détecter les candidats qui, une fois en poste, seraient démissionnaires face à la réalité. Montrez que vous savez ce que vous allez faire.</div>
+  </div>
+
+  <!-- 02. GÉRER LE STRESS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">02</span><div><div class="sec-title">Gérer le stress</div><div class="sec-sub">Le principal facteur d'échec — techniques concrètes</div></div></div>
+    <p class="body-text">Le stress est l'un des principaux facteurs d'échec lors de l'oral : trou noir, balbutiement, incompréhension des questions, débit trop rapide. Il est impossible de l'éliminer totalement — l'objectif est de le <strong>contenir et de l'utiliser</strong> pour rester performant.</p>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content"><h4>Visualisez le succès</h4><p>Ne laissez pas s'installer un dialogue interne négatif. Visualisez concrètement un oral réussi : vous entrez dans la salle serein, vous parlez clairement, le jury hoche la tête. Cette technique de visualisation positive est utilisée par les sportifs de haut niveau — elle fonctionne.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content"><h4>Entraînez-vous à voix haute — c'est le conseil le plus important</h4><p>Multipliez les présentations orales : devant votre miroir, devant vos proches, devant votre téléphone (enregistrez-vous et regardez la vidéo). Vous apprendrez à dominer votre stress, poser votre voix, adapter votre posture. Il ne faut pas réciter — il faut que ça semble naturel et fluide. Il n'y a qu'un seul moyen d'y arriver : pratiquer.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content"><h4>Maîtrisez votre respiration</h4><p>Respirez de manière fluide avant d'entrer, et pendant l'oral. Pendant l'épreuve, n'hésitez pas à faire des pauses entre vos phrases — ces petits moments vous permettent de reprendre pied et de construire une réponse cohérente. Le cerveau a besoin d'oxygène pour fonctionner.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content"><h4>Ralentissez intentionnellement</h4><p>Le stress précipite le débit verbal. Parlez intentionnellement plus lentement que vous ne le feriez normalement — vous paraîtrez posé et maîtrisé, et le jury vous comprendra mieux. Des phrases courtes et structurées valent mieux que des phrases longues incompréhensibles.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content"><h4>Rencontrez des professionnels de la PTS avant l'oral</h4><p>Prenez contact avec le service de PTS de votre ville — demandez si vous pouvez visiter ou vous entretenir avec un agent. Cela vous donnera des anecdotes concrètes à raconter au jury, et montrera que vous avez fait la démarche de vous informer au-delà des livres. C'est un élément qui pèse énormément.</p></div>
+      </div>
+    </div>
+    <div class="encart gold"><strong>La déstabilisation :</strong> les membres du jury peuvent tenter de vous déstabiliser : questions qui vous poussent dans vos retranchements, mine de ne pas vous écouter, regards à la montre, soupirs. C'est une <em>technique délibérée</em> pour évaluer vos réactions. Gardez votre sang-froid et continuez. Ce n'est pas parce qu'un membre du jury regarde sa montre qu'il ne vous écoute pas. <strong>Maintenez votre positivité jusqu'au bout.</strong></div>
+  </div>
+
+  <!-- 03. LA COMMUNICATION NON VERBALE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">03</span><div><div class="sec-title">La communication non verbale</div><div class="sec-sub">Tenue · Voix · Posture · Regard — 93% de la communication passe par là</div></div></div>
+    <p class="body-text">Selon la règle des 3V : <strong>7%</strong> d'une communication est verbale (les mots), <strong>38%</strong> vocale (le ton, l'intonation, le débit), <strong>55%</strong> visuelle (expression du visage, gestuelle, posture). L'épreuve commence donc dès que vous entrez dans la pièce — avant même d'avoir dit un mot.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--navy);padding:14px 18px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;">👔 La tenue vestimentaire</div>
+        <div style="padding:16px 18px;font-size:13px;color:var(--ink2);line-height:1.8;">
+          <p style="margin-bottom:10px;"><strong>Sobre et soignée.</strong> Vous vous présentez à un concours de la fonction publique — les membres du jury doivent pouvoir vous imaginer intervenir dans la boue, monter des astreintes, aller à l'IML. Pas de CSI Miami.</p>
+          <p style="margin-bottom:8px;"><strong>Hommes :</strong> chemise unie + pantalon sobre (uni, sans trous). Le costume-cravate est inutile voire contre-productif pour un concours technicien.</p>
+          <p style="margin-bottom:8px;"><strong>Femmes :</strong> jupe longueur genoux (trapèze ou crayon, couleur sobre) ou pantalon + chemisier/blouse + ballerines ou richelieus. Évitez les talons aiguilles.</p>
+          <p style="color:var(--muted);font-size:12px;"><strong>À éviter :</strong> excès de bijoux/piercings, tatouages visibles (autorisés mais peuvent gêner certains jurés), vêtements troués/froissés/déchirés, tenues transparentes ou trop moulantes, décolleté plongeant, mini-jupe.</p>
+        </div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--navy);padding:14px 18px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;">🎙️ La voix</div>
+        <div style="padding:16px 18px;font-size:13px;color:var(--ink2);line-height:1.8;">
+          <p style="margin-bottom:10px;">La voix révèle votre état intérieur avant même vos mots. Sans vous voir, le jury peut déjà sentir si vous êtes nerveux, posé, sincère.</p>
+          <p style="margin-bottom:8px;"><strong>Volume :</strong> audible sans être agressif. Ne chuchotez pas — ne criez pas.</p>
+          <p style="margin-bottom:8px;"><strong>Intonation :</strong> variez le ton pour capter et maintenir l'attention. Évitez le ton monocorde à tout prix — effet soporifique garanti. Le jury voit des dizaines de candidats par jour.</p>
+          <p style="margin-bottom:8px;"><strong>Débit :</strong> lent et posé. Faites des pauses. Elles ne vous donnent pas l'air d'hésiter — elles montrent que vous réfléchissez.</p>
+          <p style="color:var(--muted);font-size:12px;"><strong>Timbre :</strong> travaillez à poser votre voix avant l'épreuve — parlez avec le ventre, pas avec la gorge.</p>
+        </div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--navy);padding:14px 18px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;">🧍 Posture et gestuelle</div>
+        <div style="padding:16px 18px;font-size:13px;color:var(--ink2);line-height:1.8;">
+          <p style="margin-bottom:10px;">La position de votre corps, l'inclinaison de votre tête, la façon dont vous vous positionnez envoient des messages inconscients.</p>
+          <p style="margin-bottom:8px;"><strong>Bonne posture :</strong> dos droit, pieds bien ancrés dans le sol, mains contrôlées au-dessus de la table (ni croisées ni cachées sous la table), regard non fuyant. Ces éléments projettent confiance, solidité, charisme.</p>
+          <p style="margin-bottom:8px;"><strong>Mauvaise posture :</strong> dos courbé, regard fuyant, mains constamment agitées ou "torturées", bras ou jambes croisés (attitude fermée). Ces éléments signalent timidité et malaise.</p>
+          <p style="color:var(--muted);font-size:12px;"><strong>À l'entrée en salle :</strong> souriez et saluez chaque membre du jury en les regardant. Ce premier contact donne le ton.</p>
+        </div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--navy);padding:14px 18px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;">👁️ Le regard</div>
+        <div style="padding:16px 18px;font-size:13px;color:var(--ink2);line-height:1.8;">
+          <p style="margin-bottom:10px;">Un contact visuel suffit parfois à donner la réponse à une question. Son intensité peut mettre à l'aise ou déstabiliser votre interlocuteur.</p>
+          <p style="margin-bottom:8px;"><strong>Regardez chaque membre du jury dans les yeux</strong> — pas seulement celui qui parle. Balayez l'ensemble du jury pendant votre présentation et vos réponses.</p>
+          <p style="margin-bottom:8px;">Ne fixez pas un seul examinateur — cela met mal à l'aise. Ne fuyez pas le regard — cela trahit le manque de confiance.</p>
+          <p style="color:var(--muted);font-size:12px;">Si vous ne savez pas où regarder pendant votre présentation, regardez alternativement chacun des jurés de gauche à droite, en vous attardant 2 à 3 secondes sur chacun.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04. LA PRÉSENTATION DE 5 MINUTES -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">04</span><div><div class="sec-title">La présentation de 5 minutes</div><div class="sec-sub">Structure · Contenu · Exemples concrets</div></div></div>
+    <p class="body-text">La présentation est la première impression — elle donne le ton de tout l'entretien. Elle doit être <strong>vivante, structurée, précise et naturelle</strong>. Pas récitée mécaniquement. Chronométrez-vous jusqu'à ce que votre présentation tienne exactement dans les 5 minutes sans vous dépêcher.</p>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;">Structure recommandée — 3 questions clés : Qui ? Pourquoi ? Comment ?</div>
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:20px;">
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);">
+          <div style="background:var(--ps);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:5px;flex-shrink:0;margin-top:2px;">0:00–0:45</div>
+          <div><strong style="color:var(--navy3);">L'accroche</strong> — Trouvez un élément fort qui capte l'attention. Plutôt que de commencer par "Je m'appelle X et j'ai Y ans", trouvez ce qui vous semble le plus convaincant dans votre parcours ou dans votre démarche vers la PTS. <em>Soyez imaginatif — mais toujours vrai.</em></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);">
+          <div style="background:var(--navy2);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:5px;flex-shrink:0;margin-top:2px;">0:45–1:15</div>
+          <div><strong style="color:var(--navy3);">Présentation personnelle</strong> — Nom, âge, lieu de résidence, situation personnelle (célibataire, en couple, enfants — le jury posera des questions sur les astreintes si vous avez des enfants).</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);">
+          <div style="background:var(--navy);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:5px;flex-shrink:0;margin-top:2px;">1:15–3:00</div>
+          <div><strong style="color:var(--navy3);">Parcours et compétences</strong> — Ne récitez pas votre CV. Expliquez votre <em>parcours</em> : pourquoi vous avez fait ces choix, ce que vous en avez retiré, en quoi les compétences acquises seront utiles pour le poste. Mettez en avant les objectifs atteints, les obstacles surmontés. Regroupez les petits emplois sans intérêt forensique.</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);">
+          <div style="background:var(--green);color:#fff;font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:5px;flex-shrink:0;margin-top:2px;">3:00–4:30</div>
+          <div><strong style="color:var(--navy3);">Motivations</strong> — Pourquoi la PTS ? Pourquoi maintenant ? Structurez vos motivations en 2 ou 3 axes clairs (passion, sens, personnalité). Mentionnez les démarches que vous avez faites pour vous renseigner : rencontres avec des agents, livres, reportages, visites de services. Le jury repère immédiatement les candidats qui ne se sont renseignés que via les séries TV.</div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px 0;">
+          <div style="background:var(--gold);color:var(--navy3);font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:5px;flex-shrink:0;margin-top:2px;">4:30–5:00</div>
+          <div><strong style="color:var(--navy3);">Projection et clôture</strong> — Ce que vous souhaitez apporter au service, votre vision à moyen terme, votre organisation face aux contraintes (astreintes, mobilité). Remerciez le jury de son attention.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;">Exemple de présentation réelle — Justine, 18/20 à l'oral</div>
+    <div style="background:var(--gold-pale);border:1px solid rgba(200,164,90,.3);border-radius:9px;padding:10px 16px;font-size:12px;color:#92630A;margin-bottom:12px;">
+      <strong>Contexte :</strong> Justine a 30 ans, 13 ans dans la communication (L'Oréal, La Tribune, agences digitales), BTS + Master. Profil atypique — aucune expérience scientifique. Elle a rencontré des agents de la PTS avant son oral et a structuré ses motivations en 3 axes. Elle a obtenu 18/20.
+    </div>
+    <div class="present-ex">
+      <p>Je m'appelle Justine Blanc et j'ai 30 ans. Il y a quelques mois, après 13 années dans les milieux de la communication, j'ai décidé de débuter une reconversion professionnelle.</p>
+      <p>J'ai pris conscience de plusieurs choses. La première, c'est que j'avais l'intime conviction d'avoir besoin de quelque chose de plus concret, davantage ancré dans la réalité — et surtout de m'épanouir en trouvant mon utilité au sein de la société. La seconde, c'est que je ne trouvais plus ma place dans mon parcours initial. Malgré la diversité de mes missions, j'éprouvais de la frustration à gérer des problématiques que je considérais éphémères, voire superficielles.</p>
+      <p>Mon premier réflexe a été de trouver la bonne personne pour m'aider à structurer mon projet. J'ai fait appel à une coach spécialisée en reconversion, qui m'a aidée à comprendre mes véritables attentes. Je n'ai donc pas choisi la Police Technique et Scientifique par hasard — c'est le fruit d'une véritable introspection.</p>
+      <p>Forte de cette ambition, je me suis préparée sérieusement pendant plusieurs mois. Je me suis documentée — articles, reportages, ouvrages — et je me suis rendue à l'événement <em>#LaBoite</em> à Avignon, où j'ai pu m'entretenir avec un Brigadier-Chef, un Commandant de Police et une ASPTS en poste depuis 5 ans.</p>
+      <p>Mes motivations s'articulent en 3 axes. D'abord la passion : je suis fascinée par les enquêtes, la recherche de la vérité, les méthodes d'investigation. Ensuite mon besoin de sens : créer des sites internet c'est bien, mais j'ai foncièrement besoin de servir une cause, d'être utile à la société. Enfin ma personnalité : je suis quelqu'un d'engagé, avec un tempérament combatif, besoin de missions stimulantes. La justice et l'authenticité ont toujours eu une grande importance pour moi.</p>
+      <p>J'ai conscience d'avoir un profil atypique — mon expérience n'est pas scientifique. Mais elle m'a permis d'acquérir des compétences utiles : travail en équipe, capacité à travailler dans l'urgence, gestion du stress, sens de l'organisation, rigueur. Et j'ai la chance d'avoir une situation personnelle stable — un socle solide qui a son importance pour les métiers engagés.</p>
+      <p>Je vous remercie de votre attention et me tiens à votre disposition pour toutes questions.</p>
+    </div>
+    <div class="encart green"><strong>Pourquoi cette présentation a fonctionné :</strong> Justine n'a pas récité son CV. Elle a raconté une histoire cohérente avec un fil rouge clair — la reconversion décidée et documentée. Elle a mentionné des démarches concrètes (rencontres réelles avec des agents). Elle a articulé ses motivations en 3 axes clairs. Son parcours atypique est devenu un atout, pas un handicap. Et son attitude à l'oral (dynamique, vivante, non monocorde) a fait le reste.</div>
+  </div>
+
+  <!-- 05. LES QUESTIONS TYPES -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">05</span><div><div class="sec-title">Les questions types du jury</div><div class="sec-sub">Connaissance du métier · Institutions · Questions personnelles</div></div></div>
+    <p class="body-text">Les questions portent sur 3 grandes catégories. Préparez des réponses construites — pas des réponses par oui ou non. Le jury attend des <strong>phrases argumentées</strong>. Si vous répondez trop court, il relancera, et vous aurez l'impression de subir un interrogatoire.</p>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--ps);margin-bottom:12px;">🔬 Questions sur la connaissance du métier</div>
+    <div class="oral-q">
+      <div class="q">Combien y a-t-il de laboratoires de PTS ? Où se trouvent-ils ?</div>
+      <div class="r"><strong>Attendu :</strong> 5 LPS — Lyon (Écully, siège du SNPS), Paris, Toulouse, Lille, Marseille. Intégrés au SNPS depuis 2021.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Qu'est-ce que le SNPS ? Depuis quand existe-t-il ?</div>
+      <div class="r"><strong>Attendu :</strong> Service National de la Police Scientifique — né le 1er janvier 2021 de la fusion du SCPTS et de l'INPS. Rattaché fonctionnellement à la DNPJ depuis la réforme 2024. Siège à Écully. Exerce une autorité fonctionnelle sur toutes les structures PS du territoire.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Quel poste aimeriez-vous occuper ? Quelles en sont les principales missions ?</div>
+      <div class="r"><strong>Attendu :</strong> une réponse précise sur une section — terrain (identité judiciaire), plateau technique (révélation en labo), identification (FAED), numérique, ou LPS. Détaillez le travail quotidien de cette section. <strong>Ne dénigrez aucun poste</strong> — vous ne savez pas quels postes seront disponibles à votre affectation.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Que signifie FAED ? Comment fonctionne-t-il ? Combien d'individus contient-il ?</div>
+      <div class="r"><strong>Attendu :</strong> Fichier Automatisé des Empreintes Digitales, créé en 1987. Contient les empreintes des mis en cause + décédés non identifiés + TNR. Comparaisons empreintes/empreintes, traces/empreintes, traces/traces. En 2022 : 6,5 millions d'individus. Un opérateur humain valide toujours l'identification.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Savez-vous ce qu'est un plateau technique ? Quelle différence avec un LPS ?</div>
+      <div class="r"><strong>Attendu :</strong> un plateau technique réalise <em>uniquement</em> de la révélation de traces papillaires sur scellés. Les LPS sont des laboratoires pluridisciplinaires (ADN, balistique, toxicologie, documents, physico-chimie…). Il existe environ 56 plateaux techniques accrédités COFRAC / ISO 17025. Ne pas les confondre.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Connaissez-vous une technique de révélation de traces papillaires ?</div>
+      <div class="r"><strong>Attendu :</strong> citez-en une avec son principe — ex. cyanoacrylate : les vapeurs de Super Glue réagissent avec les résidus de sueur de la trace et forment un dépôt blanc visible. Ou ninhydrine : réagit avec les acides aminés de la transpiration sur les supports poreux. Montrez que vous savez qu'il faut choisir la technique selon la nature du support.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Pouvez-vous nous parler de la norme ISO 17025 et du COFRAC ?</div>
+      <div class="r"><strong>Attendu :</strong> l'ISO 17025 est la norme internationale de compétence des laboratoires d'étalonnage et d'essais. Le COFRAC (Comité Français d'Accréditation) accrédite les plateaux techniques et LPS selon cette norme. Elle garantit la fiabilité et la reproductibilité des méthodes — condition de recevabilité des preuves devant les tribunaux.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Qu'est-ce que l'odorologie ?</div>
+      <div class="r"><strong>Attendu :</strong> technique permettant de déterminer si un individu était présent sur une scène grâce à la comparaison d'odeurs humaines par des chiens spécialisés. Prélèvement sur des tissus spécifiques → conditionnement en bocaux → envoi au Plateau National d'Odorologie d'Écully → comparaison par deux chiens. L'odorothèque permet de conserver des odeurs pendant des années.</div>
+    </div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:12px;margin-top:20px;">🏛️ Questions sur les institutions</div>
+    <div class="oral-q">
+      <div class="q">De quel ministère dépend la police technique et scientifique ? De quelle direction ?</div>
+      <div class="r"><strong>Attendu :</strong> Ministère de l'Intérieur → DGPN → DNPJ (rattachement fonctionnel) → SNPS. Le SNPS est placé sous l'autorité directe du DGPN, avec un rattachement fonctionnel à la DNPJ.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Qu'est-ce que la déontologie ? Citez une obligation du fonctionnaire.</div>
+      <div class="r"><strong>Attendu :</strong> ensemble des règles morales et éthiques régissant l'exercice d'une profession. Pour un fonctionnaire de police : neutralité, impartialité, secret professionnel, obéissance hiérarchique (sauf ordre manifestement illégal compromettant gravement l'intérêt public), obligation de réserve dans l'expression publique.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Connaissez-vous le traité de Prüm ?</div>
+      <div class="r"><strong>Attendu :</strong> accord européen permettant l'échange automatisé de données dactyloscopiques (empreintes) et génétiques (ADN) entre pays membres de l'UE. Signé initialement par 7 pays, élargi à 18 pour les empreintes et 24 pour l'ADN. Permet d'interroger les bases de données étrangères lorsque l'auteur est inconnu en France.</div>
+    </div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--orange);margin-bottom:12px;margin-top:20px;">👤 Questions personnelles</div>
+    <div class="oral-q">
+      <div class="q">Comment appréhendez-vous la confrontation à la mort ? (question quasi-systématique du psychologue)</div>
+      <div class="r"><strong>Attendu :</strong> une réponse honnête et réfléchie — pas "ça ne me dérange pas" (peu crédible), ni une réponse catastrophiste. Parlez de la manière dont vous pensez vous y préparer (décompression, séparation vie pro/perso, réseau de soutien), éventuellement d'une expérience personnelle qui vous a confronté à une situation difficile. Le jury cherche de la maturité, pas de l'invulnérabilité.</div>
+      <div class="tip">Question préférée des psychologues — presque personne n'y échappe. Préparez-la soigneusement.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Êtes-vous mobile ? (surtout si vous êtes en couple ou avec des enfants)</div>
+      <div class="r"><strong>Attendu :</strong> réponse concrète sur votre situation réelle. Si vous avez des contraintes, expliquez comment vous les gérez. N'inventez pas une disponibilité totale si elle n'existe pas — le jury le verra, et une fois en poste ce sera un problème. Soyez honnête tout en montrant que vous avez <em>anticipé</em> ces contraintes.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Pour les Bac+2 ou plus : pourquoi ne pas avoir passé le concours de technicien principal ou d'ingénieur ?</div>
+      <div class="r"><strong>Attendu :</strong> une réponse sincère et réfléchie. Exemples valables : "Je souhaitais commencer par acquérir une expérience terrain avant de postuler à des postes d'encadrement", "Je veux d'abord maîtriser les fondamentaux du métier", "Les conditions du concours interne m'offriront cette possibilité après quelques années". Évitez de dire que vous n'étiez pas au courant.</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Pouvez-vous citer une affaire récente dans laquelle la police scientifique a joué un rôle ?</div>
+      <div class="r"><strong>Attendu :</strong> une affaire récente (dernières années) où la PS a été déterminante — ADN, empreintes, balistique, numérique. Préparez-en 2 ou 3 dont une très récente. Montrez que vous suivez l'actualité forensique. Affaires classiques : Guy Georges (FNAEG), Thierry Paulin (FAED), affaire Kulik (parentèle ADN), attentats et identification de victimes…</div>
+    </div>
+    <div class="oral-q">
+      <div class="q">Pourquoi ne pas avoir intégré l'IRCGN ?</div>
+      <div class="r"><strong>Attendu :</strong> montrez que vous connaissez la différence Police/Gendarmerie et que votre choix est délibéré. Exemples : "Je souhaitais intégrer la Police Nationale pour ses missions en milieu urbain", "L'organisation de la PTS au sein de la PN correspond mieux à mes aspirations professionnelles", etc.</div>
+    </div>
+  </div>
+
+  <!-- 06. COMMENT DIRE JE NE SAIS PAS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">06</span><div><div class="sec-title">Comment dire "je ne sais pas"</div><div class="sec-sub">Rebondir sans se dévaloriser</div></div></div>
+    <p class="body-text">Tout le monde finit par atteindre ses limites — le jury est là pour les trouver. Ne pas savoir quelque chose n'est pas éliminatoire. La façon dont vous gérez l'absence de réponse, en revanche, peut faire la différence.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div style="background:var(--ps-pale);border:1px solid rgba(192,57,43,.2);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:12px;font-weight:700;color:var(--ps);margin-bottom:6px;">❌ À ne pas faire</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:6px;"><span style="color:var(--ps);font-weight:700;">→</span>"Je ne sais pas" — trop brutal, coupe la conversation</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:6px;"><span style="color:var(--ps);font-weight:700;">→</span>Inventer une réponse — le jury s'en apercevra</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:6px;"><span style="color:var(--ps);font-weight:700;">→</span>Se laisser démonter et perdre le fil du reste de l'entretien</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:6px;"><span style="color:var(--ps);font-weight:700;">→</span>S'excuser en boucle ("Je suis vraiment désolé…")</li>
+        </ul>
+      </div>
+      <div style="background:var(--green-pale);border:1px solid rgba(26,122,94,.2);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:6px;">✓ Formules qui fonctionnent</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:6px;"><span style="color:var(--green);font-weight:700;">→</span>"Je ne maîtrise pas ce point précis, mais je sais que…"</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:6px;"><span style="color:var(--green);font-weight:700;">→</span>"Je n'ai pas cette information en mémoire, cependant je peux vous expliquer comment j'aborderais la question…"</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:6px;"><span style="color:var(--green);font-weight:700;">→</span>"Je ne connais pas ce chiffre précis, mais ce que je sais c'est que…"</li>
+          <li style="font-size:12px;color:var(--ink2);display:flex;gap:6px;"><span style="color:var(--green);font-weight:700;">→</span>"C'est une question sur laquelle je dois approfondir mes connaissances — ce que je peux dire en revanche c'est…"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="encart navy"><strong>Le conseil le plus précieux pour l'oral :</strong> soyez honnête, ne mentez pas, n'inventez pas des expériences ou des connaissances. Si le jury s'en aperçoit, c'est une image très négative — et il s'en apercevra. Votre attitude compte autant que vos connaissances. Le jury cherche un collaborateur, une personne avec qui les membres aimeraient travailler. Gardez ça en tête tout au long de l'épreuve.</div>
+  </div>
+
+  <!-- 07. L'ÉPREUVE FACULTATIVE DE LANGUE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">07</span><div><div class="sec-title">L'épreuve facultative de langue</div><div class="sec-sub">Anglais · Allemand · Espagnol · Italien · 15 min · Coeff. 1</div></div></div>
+    <p class="body-text">Cette épreuve ne peut que vous aider — les points au-dessus de la moyenne (10/20) sont ajoutés à votre total. En dessous, aucun point n'est retiré. <strong>Il n'y a rien à perdre à s'y inscrire</strong> — mais la langue doit être choisie dès l'inscription et ne peut pas être changée après la clôture.</p>
+    <div class="info-2" style="margin-bottom:16px;">
+      <div class="info-card">
+        <h4>📊 Calcul du score — un exemple concret</h4>
+        <div class="table-wrap" style="margin-top:8px;">
+          <table class="t">
+            <thead><tr><th>Épreuve</th><th>Note C1</th><th>Note C2</th><th>Coeff.</th><th>Points C1</th><th>Points C2</th></tr></thead>
+            <tbody>
+              <tr><td>Étude de texte</td><td>12</td><td>13</td><td>2</td><td>24</td><td>26</td></tr>
+              <tr><td>Sciences</td><td>14</td><td>16</td><td>3</td><td>42</td><td>48</td></tr>
+              <tr><td>Oral jury</td><td>12</td><td>11</td><td>5</td><td>60</td><td>55</td></tr>
+              <tr><td>Langue (si >10)</td><td>15 → +5</td><td>9 → 0</td><td>1</td><td>5</td><td>0</td></tr>
+              <tr style="background:var(--sky);font-weight:700;"><td colspan="4">TOTAL</td><td>131</td><td>129</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:8px;">Avec des notes très proches, la langue peut faire la différence sur le classement final — parfois une seule place sépare liste principale et liste complémentaire.</p>
+      </div>
+      <div class="info-card">
+        <h4>💬 Déroulé de l'épreuve</h4>
+        <p style="margin-bottom:10px;">15 minutes de conversation libre. Commence généralement par une présentation de votre parcours et de vos motivations dans la langue choisie. Le jury adapte ensuite ses questions à votre niveau.</p>
+        <p style="margin-bottom:10px;"><strong>Ce que le jury évalue :</strong> la construction des phrases, le respect des règles grammaticales, le vocabulaire utilisé. Pas le contenu en lui-même. Parlez lentement, faites des phrases courtes, utilisez un vocabulaire accessible.</p>
+        <p style="font-size:12px;color:var(--muted);"><strong>Conseil :</strong> préparez une présentation courte de votre parcours et de vos motivations dans la langue choisie. Quelques formules de politesse et phrases passe-partout facilitent la fluidité.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

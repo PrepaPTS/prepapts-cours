@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prépa PTS — Module 6 · Le métier de Technicien PTS</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --navy:#1B3A6B;--navy2:#142D54;--navy3:#0E2040;
+  --gold:#C8A45A;--gold-pale:#FDF6E8;
+  --sky:#EEF3FA;--sky2:#D6E4F7;--sky3:#F4F7FB;
+  --white:#fff;--ink:#111827;--ink2:#374151;
+  --muted:#6B7280;--line:#E5E9F2;--bg:#F4F6FB;
+  --green:#1A7A5E;--green-pale:#E6F7F2;
+  --red:#C0392B;--red-pale:#FDECEA;
+  --purple:#7C3AED;--purple-pale:#EDE9FE;
+  --orange:#D97706;--orange-pale:#FEF3C7;
+  --ps:#C0392B;--ps-pale:#FDECEA;
+  --gray-old:#8A9BB0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;}
+
+/* ── HEADER ── */
+.page-header{background:var(--navy3);padding:48px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(200,164,90,.06);}
+.header-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;display:block;position:relative;z-index:1;}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px;letter-spacing:-1px;position:relative;z-index:1;}
+.header-title em{color:var(--gold);font-style:normal;}
+.header-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:620px;line-height:1.7;position:relative;z-index:1;}
+.header-sub strong{color:rgba(255,255,255,.85);}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,164,90,.15);border:1px solid rgba(200,164,90,.3);border-radius:100px;padding:5px 14px;font-size:12px;color:var(--gold);font-weight:600;margin-bottom:14px;position:relative;z-index:1;}
+
+/* ── BODY ── */
+.page-body{max-width:920px;margin:0 auto;padding:48px 24px 80px;}
+
+/* ── INTRO ── */
+.intro-box{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:20px 24px;margin-bottom:40px;font-size:14px;color:var(--ink2);line-height:1.85;}
+.intro-box strong{color:var(--navy);}
+
+/* ── SECTION ── */
+.sec{margin-bottom:56px;}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:26px;padding-bottom:16px;border-bottom:2px solid var(--line);}
+.sec-num{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--gold);background:var(--navy);padding:5px 11px;border-radius:6px;letter-spacing:1px;flex-shrink:0;}
+.sec-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--navy3);letter-spacing:-.3px;}
+.sec-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.body-text{font-size:14px;color:var(--ink2);line-height:1.85;margin-bottom:18px;}
+.body-text strong{color:var(--navy3);}
+
+/* ── ANCIEN / NOUVEAU COMPARATIF ── */
+.avant-apres{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:start;margin-bottom:24px;}
+.avant-box,.apres-box{border-radius:12px;overflow:hidden;}
+.avant-box{border:2px dashed var(--gray-old);opacity:.8;}
+.apres-box{border:2px solid var(--navy);}
+.box-header{padding:12px 18px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.avant-box .box-header{background:#f0f2f5;color:var(--gray-old);}
+.apres-box .box-header{background:var(--navy);color:#fff;}
+.box-content{padding:14px 18px;background:var(--white);font-size:13px;color:var(--ink2);line-height:1.7;}
+.avant-apres-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;font-size:24px;color:var(--navy);padding-top:40px;}
+
+/* ── ORGANIGRAMME FLÈCHES ── */
+.orgchart{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:24px;}
+.org-node{border-radius:10px;padding:14px 22px;text-align:center;min-width:280px;max-width:560px;width:100%;position:relative;}
+.org-node-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;line-height:1.3;margin-bottom:4px;}
+.org-node-sub{font-size:11px;line-height:1.5;opacity:.8;}
+.org-node-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-top:6px;}
+
+/* niveaux couleurs */
+.node-l0{background:var(--navy3);color:#fff;}
+.node-l0 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l1{background:var(--navy2);color:#fff;}
+.node-l1 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l2{background:var(--navy);color:#fff;}
+.node-l2 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l3{background:#2A5298;color:#fff;}
+.node-l3 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l4{background:var(--sky);color:var(--navy);border:1px solid var(--sky2);}
+.node-l4 .org-node-badge{background:var(--sky2);color:var(--navy);}
+.node-ps{background:var(--ps);color:#fff;}
+.node-ps .org-node-badge{background:rgba(255,255,255,.2);color:#fff;}
+.node-ps-light{background:var(--ps-pale);color:var(--ps);border:1px solid rgba(192,57,43,.25);}
+.node-ps-light .org-node-badge{background:var(--ps);color:#fff;}
+.node-gray{background:#e8ecf2;color:var(--gray-old);border:2px dashed var(--gray-old);}
+.node-gray .org-node-badge{background:var(--gray-old);color:#fff;}
+
+/* flèches */
+.org-arrow-down{display:flex;justify-content:center;align-items:center;height:32px;}
+.org-arrow-down::before{content:'';width:2px;height:20px;background:var(--line);display:block;}
+.org-arrow-down.has-arrow::after{content:'▼';color:var(--muted);font-size:10px;position:absolute;margin-top:20px;}
+.org-arrow-wrap{position:relative;display:flex;flex-direction:column;align-items:center;}
+
+/* branchement horizontal */
+.org-split{display:flex;justify-content:center;gap:12px;margin-bottom:0;width:100%;}
+.org-split-col{display:flex;flex-direction:column;align-items:center;flex:1;max-width:220px;}
+.org-branch-line{width:100%;height:2px;background:var(--line);position:relative;}
+.org-branch-line::before,.org-branch-line::after{content:'';position:absolute;top:0;width:2px;height:20px;background:var(--line);}
+.org-branch-line::before{left:calc(25% - 1px);}
+.org-branch-line::after{right:calc(25% - 1px);}
+.org-top-line{height:20px;width:2px;background:var(--line);}
+.org-split-wrap{display:flex;flex-direction:column;align-items:center;width:100%;}
+
+/* légende */
+.org-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+
+/* ── TIMELINE RÉFORME ── */
+.timeline-reform{display:grid;grid-template-columns:80px 1fr;gap:0;margin-bottom:28px;}
+.tl-year{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--gold);padding:14px 0 14px 0;border-right:2px solid var(--line);text-align:right;padding-right:20px;line-height:1.6;}
+.tl-content{padding:14px 0 14px 24px;border-bottom:1px solid var(--line);}
+.tl-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:4px;}
+.tl-content p{font-size:13px;color:var(--ink2);line-height:1.7;}
+.tl-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--navy);color:#fff;margin-left:8px;vertical-align:middle;}
+.tl-tag.old{background:var(--gray-old);}
+
+/* ── ALERTE ── */
+.alert{border-radius:10px;padding:16px 20px;font-size:13px;line-height:1.8;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;}
+.alert-ico{font-size:18px;flex-shrink:0;margin-top:2px;}
+.alert p,.alert div{margin:0;}
+.alert.gold{background:var(--gold-pale);border:1px solid rgba(200,164,90,.3);border-left:4px solid var(--gold);}
+.alert.navy{background:var(--sky);border:1px solid var(--sky2);border-left:4px solid var(--navy);}
+.alert.red{background:var(--ps-pale);border:1px solid rgba(192,57,43,.2);border-left:4px solid var(--ps);}
+.alert.green{background:var(--green-pale);border:1px solid rgba(26,122,94,.2);border-left:4px solid var(--green);}
+.alert strong{color:var(--navy);}
+.alert.red strong{color:var(--ps);}
+.alert.gold strong{color:#92630A;}
+
+/* ── CORPS GRADES ── */
+.corps-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.corps-card{border-radius:12px;overflow:hidden;}
+.corps-head{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.corps-head-left{}
+.corps-cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:.6;margin-bottom:2px;}
+.corps-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.corps-cat-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;flex-shrink:0;}
+.corps-body{padding:14px 20px;display:flex;flex-direction:column;gap:8px;}
+.grade-row{display:flex;align-items:flex-start;gap:12px;}
+.grade-num{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);width:20px;flex-shrink:0;margin-top:2px;}
+.grade-name{font-size:13px;font-weight:600;}
+.grade-desc{font-size:12px;opacity:.7;line-height:1.5;}
+/* CCD */
+.corps-ccd .corps-head{background:#0a1628;}.corps-ccd .corps-name,.corps-ccd .corps-cat-label{color:#fff;}.corps-ccd .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-ccd .corps-body{background:#142D54;}.corps-ccd .grade-name{color:#fff;}.corps-ccd .grade-desc{color:rgba(255,255,255,.55);}
+/* CC */
+.corps-cc .corps-head{background:#1B3A6B;}.corps-cc .corps-name,.corps-cc .corps-cat-label{color:#fff;}.corps-cc .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cc .corps-body{background:#2A5298;}.corps-cc .grade-name{color:#fff;}.corps-cc .grade-desc{color:rgba(255,255,255,.55);}
+/* CEA */
+.corps-cea .corps-head{background:#2A5298;}.corps-cea .corps-name,.corps-cea .corps-cat-label{color:#fff;}.corps-cea .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cea .corps-body{background:#3A6BC8;}.corps-cea .grade-name{color:#fff;}.corps-cea .grade-desc{color:rgba(255,255,255,.6);}
+/* Scientifiques */
+.corps-sci .corps-head{background:var(--ps);}.corps-sci .corps-name,.corps-sci .corps-cat-label{color:#fff;}.corps-sci .corps-cat-badge{background:rgba(255,255,255,.15);color:#fff;}
+.corps-sci .corps-body{background:var(--ps-pale);}.corps-sci .grade-name{color:var(--ps);}.corps-sci .grade-desc{color:var(--muted);}
+.corps-sci-ing .corps-head{background:#1a4a7a;}.corps-sci-ing .corps-name,.corps-sci-ing .corps-cat-label{color:#fff;}.corps-sci-ing .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-sci-ing .corps-body{background:var(--sky);}.corps-sci-ing .grade-name{color:var(--navy);}.corps-sci-ing .grade-desc{color:var(--muted);}
+.corps-sep{text-align:center;font-size:13px;font-weight:600;color:var(--muted);padding:8px 0;display:flex;align-items:center;gap:10px;}
+.corps-sep::before,.corps-sep::after{content:'';flex:1;height:1px;background:var(--line);}
+
+/* ── INFOS GRID ── */
+.info-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.info-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.info-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.info-card p{font-size:13px;color:var(--ink2);line-height:1.75;}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.info-card ul li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:8px;line-height:1.55;}
+.info-card ul li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0;margin-top:1px;}
+
+/* ── CADRES ENQUÊTE ── */
+.cadres-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.cadre{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.cadre-head{padding:14px 18px;border-bottom:1px solid var(--line);}
+.cadre-head h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:3px;}
+.cadre-head .art{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.5px;}
+.cadre-body{padding:16px 18px;}
+.cadre-body p{font-size:13px;color:var(--ink2);line-height:1.75;margin-bottom:10px;}
+.cadre-body p:last-child{margin-bottom:0;}
+.cadre-scenario{background:var(--bg);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.65;font-style:italic;border-left:3px solid var(--line);}
+.cadre.fl .cadre-head{background:#EEF3FA;}.cadre.fl .cadre-head h4{color:var(--navy);}.cadre.fl .cadre-head .art{color:var(--navy);}
+.cadre.prel .cadre-head{background:var(--purple-pale);}.cadre.prel .cadre-head h4{color:var(--purple);}.cadre.prel .cadre-head .art{color:var(--purple);}
+.cadre.fc .cadre-head{background:var(--green-pale);}.cadre.fc .cadre-head h4{color:var(--green);}.cadre.fc .cadre-head .art{color:var(--green);}
+.cadre.cr .cadre-head{background:var(--orange-pale);}.cadre.cr .cadre-head h4{color:var(--orange);}.cadre.cr .cadre-head .art{color:var(--orange);}
+
+/* ── INFRACTIONS ── */
+.inf-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.inf-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;position:relative;overflow:hidden;}
+.inf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.inf-c::before{background:#10B981;}.inf-d::before{background:var(--orange);}.inf-cr::before{background:var(--ps);}
+.inf-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.inf-c .inf-label{color:#10B981;}.inf-d .inf-label{color:var(--orange);}.inf-cr .inf-label{color:var(--ps);}
+.inf-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy3);margin-bottom:14px;}
+.inf-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px;}
+.inf-row:last-of-type{border-bottom:none;}
+.inf-row-label{color:var(--muted);}
+.inf-row-val{font-weight:600;color:var(--ink);}
+.inf-exemples{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic;line-height:1.55;}
+
+/* ── DÉONTOLOGIE ── */
+.deon-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.deon-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.deon-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.deon-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.deon-list li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:9px;line-height:1.55;}
+.deon-list li .deon-ico{flex-shrink:0;font-size:14px;margin-top:1px;}
+.deon-item-title{font-weight:600;color:var(--navy3);display:block;margin-bottom:2px;}
+.deon-item-desc{font-size:12px;color:var(--muted);display:block;line-height:1.55;}
+.police-special{background:var(--navy);border-radius:12px;padding:20px 24px;color:#fff;margin-top:16px;}
+.police-special h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;}
+.police-special p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;}
+.police-special p strong{color:#fff;}
+
+/* ── NON IMPACTÉS ── */
+.non-imp{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.ni-tag{background:var(--white);border:1px solid var(--line);border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:5px;}
+.ni-tag::before{content:'✓';color:var(--green);font-weight:700;}
+
+/* ── TABLE ── */
+.table-wrap{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+table.t{width:100%;border-collapse:collapse;}
+table.t thead th{padding:11px 16px;font-size:12px;font-weight:700;color:var(--navy);background:var(--sky);text-align:left;border-bottom:2px solid var(--line);}
+table.t tbody tr{border-bottom:1px solid var(--line);}
+table.t tbody tr:last-child{border-bottom:none;}
+table.t tbody tr:hover{background:var(--sky3);}
+table.t td{padding:11px 16px;font-size:13px;color:var(--ink2);vertical-align:top;}
+table.t td:first-child{font-weight:600;color:var(--navy3);}
+.td-b{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;}
+
+@media(max-width:720px){
+  .avant-apres{grid-template-columns:1fr;}.avant-apres-arrow{transform:rotate(90deg);padding:10px 0;}
+  .info-2,.cadres-grid,.inf-3,.deon-2{grid-template-columns:1fr;}
+  .org-split{flex-direction:column;align-items:center;}
+  .page-header{padding:28px 20px;}.page-body{padding:24px 16px;}
+  table.t td,table.t th{padding:8px 10px;font-size:12px;}
+}
+
+.spec-card{background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px;}
+.spec-head{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+.spec-head h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.spec-body{padding:18px 20px;}
+.spec-body p{font-size:13px;color:var(--ink2);line-height:1.85;margin-bottom:10px;}
+.spec-body p:last-child{margin-bottom:0;}
+.spec-body ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:10px;}
+.spec-body ul li{font-size:13px;color:var(--ink2);display:flex;gap:9px;align-items:flex-start;line-height:1.6;}
+.spec-body ul li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0;margin-top:2px;}
+.encart{border-radius:9px;padding:13px 16px;font-size:13px;line-height:1.75;margin:12px 0;}
+.encart.gold{background:var(--gold-pale);border-left:3px solid var(--gold);color:var(--ink2);}
+.encart.gold strong{color:#92630A;}
+.encart.navy{background:var(--sky);border-left:3px solid var(--navy);color:var(--ink2);}
+.encart.navy strong{color:var(--navy);}
+.encart.red{background:var(--ps-pale);border-left:3px solid var(--ps);color:var(--ink2);}
+.encart.red strong{color:var(--ps);}
+.encart.green{background:var(--green-pale);border-left:3px solid var(--green);color:var(--ink2);}
+.encart.green strong{color:var(--green);}
+.step-list{display:flex;flex-direction:column;gap:14px;margin-bottom:20px;}
+.step-item{display:flex;gap:16px;align-items:flex-start;}
+.step-num{background:var(--navy);color:#fff;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-content{flex:1;}
+.step-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:5px;}
+.step-content p{font-size:13px;color:var(--ink2);line-height:1.8;}
+.oral-q{background:var(--white);border-left:4px solid var(--gold);border:1px solid var(--line);border-left-width:4px;border-radius:9px;padding:15px 18px;margin-bottom:10px;}
+.oral-q .q{font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:8px;}
+.oral-q .r{font-size:13px;color:var(--ink2);line-height:1.8;}
+.oral-q .r strong{color:var(--navy);}
+.oral-q .tip{font-size:12px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--line);}
+.present-ex{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px 24px;font-size:13px;color:var(--ink2);line-height:1.9;font-style:italic;position:relative;margin-bottom:16px;}
+.present-ex::before{content:'"';font-size:60px;color:var(--sky2);position:absolute;top:-10px;left:16px;font-family:'Syne',sans-serif;line-height:1;}
+.present-ex p{margin-bottom:12px;}
+.present-ex p:last-child{margin-bottom:0;}
+.timing-row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);}
+.timing-row:last-child{border-bottom:none;}
+.timing-badge{font-family:'DM Mono',monospace;font-size:10px;padding:3px 9px;border-radius:5px;flex-shrink:0;margin-top:2px;}
+.formation-row{display:grid;grid-template-columns:140px 1fr 120px;gap:12px;padding:11px 16px;border-bottom:1px solid var(--line);align-items:start;font-size:13px;}
+.formation-row:last-child{border-bottom:none;}
+.formation-row:hover{background:var(--sky3);}
+
+</style>
+</head>
+<body>
+<div class="page-header">
+  <div class="header-badge">Module 6 · Préparation à l'oral</div>
+  <span class="header-tag">Leçon 3</span>
+  <h1 class="header-title">Le métier de Technicien PTS</h1>
+</div>
+
+<div class="page-body">
+
+  <div class="intro-box">
+    <p>Cette leçon vous prépare à parler du métier tel qu'il est réellement — et pas tel qu'il est présenté dans les séries américaines. Le jury attendra que vous démontriez une <strong>vision concrète et réaliste</strong> de ce que vous allez faire au quotidien : les horaires, les astreintes, les formations, les congés, les perspectives de carrière.</p>
+  </div>
+
+  <!-- 01. LES TROIS AXES DU MÉTIER -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">01</span><div><div class="sec-title">Les trois axes du métier</div><div class="sec-sub">Identité judiciaire · Analyse en laboratoire · Criminalistique numérique</div></div></div>
+    <p class="body-text">La police scientifique s'est développée pour devenir un <strong>maillon indispensable de la chaîne judiciaire</strong>. Le technicien PTS apporte des indices objectifs, reproductibles et robustes. Son travail est un travail de <strong>constatation</strong>, à ne pas confondre avec le travail d'enquêteur. L'enquêteur — l'OPJ — dirige l'enquête et donne une orientation aux résultats que lui fournit le technicien.</p>
+    <p class="body-text">Afin de fournir les indices les plus pertinents, le technicien doit devenir un <strong>spécialiste dans son domaine</strong>. Il ne fait pas tout — l'image véhiculée par les séries d'un technicien qui prélève sur le terrain, analyse en labo et suit l'enquête est erronée. Les spécialités sont cloisonnées.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;border-top:3px solid var(--ps);">
+        <div style="font-size:22px;margin-bottom:10px;">🔍</div>
+        <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:8px;">Identité judiciaire</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:0;">Traitement de la scène d'infraction. Après une analyse exhaustive de la scène, le technicien recherche et matérialise les traces et indices. Il fixe les lieux par photographies et plan, réalise les prélèvements et révèle les traces latentes. Travail de terrain, souvent la nuit et le week-end.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;border-top:3px solid var(--navy);">
+        <div style="font-size:22px;margin-bottom:10px;">🧪</div>
+        <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:8px;">Analyse en laboratoire</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:0;">Travail essentiellement sédentaire. Le technicien choisit une spécialité définie — biologie/ADN, balistique, toxicologie, documents, physico-chimie, traces papillaires — et y évolue. Il analyse les objets et prélèvements envoyés par les services de terrain. Rigueur et traçabilité ISO 17025 indispensables.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;border-top:3px solid var(--purple);">
+        <div style="font-size:22px;margin-bottom:10px;">💻</div>
+        <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:8px;">Criminalistique numérique</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:0;">Exploite et analyse les données issues de supports numériques (téléphones, ordinateurs, GPS, cloud, vidéosurveillance…) avant de rendre les conclusions aux services d'enquête. Secteur en forte croissance. Transition en cours vers l'OFAC.</p>
+      </div>
+    </div>
+    <div class="encart navy"><strong>Ce que le jury veut entendre :</strong> que vous savez que vous n'allez pas tout faire. Expliquer les trois axes en montrant que vous avez réfléchi à celui qui vous attire et pourquoi — c'est bien plus convaincant que "j'aime les sciences forensiques" sans préciser.</div>
+  </div>
+
+  <!-- 02. LE RYTHME DE TRAVAIL -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">02</span><div><div class="sec-title">Le rythme de travail</div><div class="sec-sub">40h30 / semaine · Astreintes · Permanences · Travail de nuit</div></div></div>
+    <p class="body-text">Le régime horaire est de <strong>40h30 hebdomadaires</strong> — mais soyons honnêtes, les heures supplémentaires sont fréquentes, surtout dans les services de terrain. L'organisation du temps de travail dépend entièrement du service d'affectation. On observe 4 tendances.</p>
+    <div class="info-2" style="margin-bottom:20px;">
+      <div class="info-card">
+        <h4>🏢 Horaires de bureau</h4>
+        <p>Plages horaires fixes toute la semaine. En pratique plutôt 8h30–18h30 avec 2h de pause. Le plus courant dans les LPS et certains services administratifs.</p>
+      </div>
+      <div class="info-card">
+        <h4>🔄 Roulement matin/jour/soir</h4>
+        <p>Plusieurs équipes se relaient sur des plages différentes. Exemple : Équipe A 6h–15h, Équipe B 9h–18h, Équipe C 12h–21h. Principalement mis en place à Paris à ce jour.</p>
+      </div>
+      <div class="info-card">
+        <h4>🌙 Travail de nuit</h4>
+        <p>Actuellement en place uniquement à Paris et petite couronne. Cycles définis : 3 nuits de 12 heures suivies de 3 jours de repos. Prime de travail de nuit en compensation.</p>
+      </div>
+      <div class="info-card">
+        <h4>⏱️ Horaires variables</h4>
+        <p>Le fonctionnaire est libre d'organiser son temps dans le respect des plages obligatoires et du volume mensuel de 40h30. Tendance croissante dans les LPS et certains services terrain.</p>
+      </div>
+    </div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--navy3);margin-bottom:14px;">Les astreintes et permanences</div>
+    <p class="body-text">La criminalité ne s'arrête pas la nuit ni les jours fériés. Les techniciens PTS peuvent donc être sollicités à tout moment via trois dispositifs :</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:11px;padding:16px 18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:6px;">📟 Astreinte</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.75;">Le technicien est joignable depuis son domicile via un téléphone de service. Il doit se déplacer sur toutes les missions urgentes. Organisation majoritairement à la semaine (lundi à lundi). En province : 1 à 2 agents d'astreinte selon le service.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:11px;padding:16px 18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:6px;">🔁 Permanence week-end</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.75;">Une équipe restreinte est présente au service pour répondre aux demandes d'intervention. À Paris : un week-end de permanence toutes les 6 à 8 semaines. En province : une semaine d'astreinte toutes les 4 à 8 semaines.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:11px;padding:16px 18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:6px;">🌙 Équipe de nuit</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.75;">Couvre la plage 20h–8h. En place à Paris et petite couronne. Les agents de nuit traitent l'ensemble des interventions qui se déroulent pendant cette période, qu'il s'agisse de constatations simples ou de scènes criminelles.</p>
+      </div>
+    </div>
+    <div class="encart red"><strong>Question inévitable du jury :</strong> "Êtes-vous prêt à monter des astreintes ? Comment vous organisez-vous ?" Préparez une réponse concrète sur votre situation personnelle (famille, logement, mobilité). Le jury cherche à vérifier que vous n'avez pas une vision idéalisée du métier. Montrer que vous avez anticipé cette contrainte est très apprécié.</div>
+  </div>
+
+  <!-- XX. LA SÉCURITÉ DES PERSONNELS SCIENTIFIQUES -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">03</span><div><div class="sec-title">La sécurité des personnels scientifiques</div><div class="sec-sub">Doctrine PS du 16/02/2024 — des règles précises pour protéger les agents sur le terrain</div></div></div>
+    <p class="body-text">L'autorité hiérarchique est responsable de la sécurité des personnels placés sous son commandement. La doctrine fixe un ensemble de règles concrètes que tout technicien PTS terrain doit connaître — et qui sont souvent abordées à l'oral pour vérifier votre connaissance réaliste du métier.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:6px;">🚫 Pas de primo-intervention</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin:0;">La sécurisation d'une scène d'infraction relève des <strong>personnels actifs</strong> (voie publique ou investigation). Les personnels scientifiques n'ont <strong>pas vocation à être primo-intervenants</strong> — ils arrivent sur une scène déjà sécurisée.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:6px;">📡 Information systématique du CIC</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin:0;">Tout déplacement de personnel scientifique sur le terrain, y compris pour les services spécialisés, fait l'objet d'une <strong>information préalable et systématique des centres d'information et de commandement (CIC)</strong>.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:6px;">🦺 Gilet pare-balles et moyen de communication</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin:0;">Lors des transports sur scène, les personnels scientifiques sont tenus de <strong>porter leur gilet pare-balles</strong> et d'être dotés d'un <strong>moyen de communication opérationnel et sécurisé</strong>, dont l'usage est enseigné en formation.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:6px;">🌶️ Produit incapacitant</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin:0;">Les personnels se déplaçant sur le terrain doivent être dotés de <strong>containers de produit incapacitant</strong>, après avoir reçu la formation requise — c'est d'ailleurs l'un des contenus du socle initial à l'ENPS.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:6px;">🚗 Conduite et avertisseurs</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin:0;">La conduite s'effectue dans le strict respect du code de la route. L'usage des avertisseurs (gyrophare, sirène) n'est permis que <strong>dans les cas justifiés par l'urgence de la mission</strong> et sans mettre en danger les autres usagers — quel que soit le statut du conducteur.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;">
+        <div style="font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:6px;">🎭 Port de la cagoule</div>
+        <p style="font-size:12px;color:var(--ink2);line-height:1.65;margin:0;">Le port de la cagoule est soumis à l'<strong>autorisation de l'autorité hiérarchique</strong>, dans les conditions réglementaires — pas une simple décision individuelle.</p>
+      </div>
+    </div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;">Signalisation et recours à la contrainte</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content"><h4>Déplacement avec une personne mise en cause</h4><p>Si la configuration des locaux et le comportement de la personne le permettent, le personnel scientifique peut se déplacer <strong>seul</strong> avec elle pour la signalisation. En cas de nécessité (dangerosité, configuration des locaux), il est <strong>obligatoirement accompagné par un policier actif</strong>, présent durant toute l'opération. Cette appréciation est faite localement, au cas par cas.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content"><h4>La contrainte n'est pas pour les personnels scientifiques</h4><p>La signalisation sous contrainte ne peut être employée que par un <strong>OPJ ou un APJ agissant sous son contrôle</strong>. Les personnels scientifiques <strong>ne sont pas autorisés à recourir à la contrainte</strong>. Ils peuvent être présents en cas de recours à la force, uniquement pour vérifier la qualité des opérations de signalisation.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content"><h4>L'anonymisation des rapports</h4><p>Dans certains cas spécifiques prévus par la loi (art. 15-4 et R.2-18 à R.2-24 du CPP), l'anonymisation des rapports des personnels scientifiques est possible — une protection notamment pour les affaires sensibles.</p></div>
+      </div>
+    </div>
+
+    <div class="encart navy"><strong>AMARIS :</strong> dans le cadre de cette démarche, le SNPS est <strong>systématiquement informé de tout incident de sécurité</strong> impliquant un personnel scientifique. Il établit la cartographie des risques pour l'ensemble de la PS et les plans d'actions annuels associés.</div>
+  </div>
+
+  <!-- 03. LES CONGÉS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">04</span><div><div class="sec-title">Les congés et le temps libre</div><div class="sec-sub">25 CA + 29 RTT + CET + ASA</div></div></div>
+    <p class="body-text">Le technicien PTS dispose d'un volume de congés conséquent en raison du régime de 40h30.</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:11px;padding:16px 18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:6px;">🌴 25 jours de congés annuels (CA)</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.75;">Comme tout salarié à temps plein. Les heures supplémentaires non rémunérées sont également récupérées sous forme de repos.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:11px;padding:16px 18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:6px;">⏰ 29 jours de RTT</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.75;">Générés par le régime de 40h30 hebdomadaires. S'ajoutent aux congés annuels pour un total de <strong>54 jours de repos</strong> par an hors heures supplémentaires récupérées.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:11px;padding:16px 18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:6px;">💰 Compte Épargne Temps (CET)</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.75;">Les jours non pris en fin d'année peuvent être versés sur un CET. Ils peuvent ensuite être utilisés en jours de repos, partiellement payés, ou épargnés pour la retraite.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:11px;padding:16px 18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:6px;">📋 Autorisations Spéciales d'Absence (ASA)</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.75;">Permettent de s'absenter sans décompter les jours de congés dans certains cas : passage de concours, mariage, décès d'un proche, etc.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04. LA RÉMUNÉRATION -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">05</span><div><div class="sec-title">La rémunération</div><div class="sec-sub">Traitement net au 1er janvier 2026 · IPTS · Indemnités spécifiques</div></div></div>
+    <p class="body-text">La rémunération dépend du <strong>grade, de l'échelon, de la zone géographique</strong> (IDF ou province) et du niveau d'IPTS (1, 2 ou 3). L'IPTS est une indemnité propre aux PTS dont le niveau dépend du poste occupé et du degré de responsabilité — il est fixé par l'administration et visible sur la fiche de poste. La variation peut atteindre une centaine d'euros.</p>
+    <div class="encart gold"><strong>Important :</strong> les traitements incluent les primes PTS qui constituent environ <strong>1/3 du salaire</strong> — mais ces primes n'entrent pas dans le calcul de la retraite.</div>
+    <div class="table-wrap" style="margin-bottom:16px;">
+      <table class="t">
+        <thead><tr><th>Grade</th><th>Échelon</th><th>Province (net)</th><th>IDF (net)</th><th>Durée approximative</th></tr></thead>
+        <tbody>
+          <tr><td>Technicien PTS</td><td>1 — début de carrière</td><td>~2 190 €</td><td>~2 350 €</td><td>Entrée en poste</td></tr>
+          <tr><td>Technicien PTS</td><td>5 — après ~8 ans</td><td>~2 200–2 300 €</td><td>~2 350–2 450 €</td><td>≈ 8 ans de carrière</td></tr>
+          <tr><td>Technicien principal PTS</td><td>Milieu de carrière</td><td>~2 400–2 700 €</td><td>~2 550–2 850 €</td><td>Après examen pro.</td></tr>
+          <tr><td>Technicien en chef PTS</td><td>Fin de carrière</td><td>~3 200 €</td><td>~3 450 €</td><td>Après ~28 ans</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;">Indemnités complémentaires possibles</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--ink2);line-height:1.6;"><strong>Travail de nuit</strong> — prime spécifique (jusqu'à 300€/mois envisagés selon la LOPMI)</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--ink2);line-height:1.6;"><strong>Dimanche et jours fériés</strong> — indemnité de travail dominical</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--ink2);line-height:1.6;"><strong>Missions à l'étranger</strong> — indemnités spécifiques lors des déplacements internationaux</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--ink2);line-height:1.6;"><strong>Primes d'expertise</strong> — pour certaines missions techniques spécialisées</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--ink2);line-height:1.6;"><strong>Prime de résultats exceptionnels</strong> — au mérite selon les performances</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--ink2);line-height:1.6;"><strong>Voie publique</strong> — prime de 100€/mois prévue par la LOPMI pour les effectifs terrain</div>
+    </div>
+  </div>
+  <!-- 05. LA FORMATION -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">06</span><div><div class="sec-title">La formation du technicien PTS</div><div class="sec-sub">ENPS — École Nationale de Police Scientifique · Socle initial · Formations continues</div></div></div>
+    <p class="body-text">La formation des personnels scientifiques a connu une transformation majeure récemment avec la création de l'<strong>École Nationale de Police Scientifique (ENPS)</strong>. Cette section présente l'organisation actuelle de la formation, telle qu'elle existe depuis 2025.</p>
+
+    <!-- HISTORIQUE -->
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;">Avant l'ENPS — un système éclaté</div>
+    <div class="info-2" style="margin-bottom:20px;">
+      <div class="info-card">
+        <h4>📍 Le tronc commun — Gif-sur-Yvette puis Nîmes</h4>
+        <p>Historiquement dispensé à Gif-sur-Yvette (91) jusqu'en 2013, puis à Nîmes (30). Sa durée variait selon les promotions et le grade des agents. Il comprenait une visite des partenaires (Gendarmerie, médecine légale, pompiers, douanes, justice…) sur le site d'affectation de l'agent.</p>
+      </div>
+      <div class="info-card">
+        <h4>🔬 Les formations métier — Écully</h4>
+        <p>Dispensées par le <strong>CNFPS</strong> (Centre National de Formation de la Police Scientifique), successivement rattaché à la SDPTS, au SCPTS puis au SNPS, à Écully. Le projet de créer une véritable école de police scientifique existait depuis <strong>30 ans</strong> avant d'aboutir.</p>
+      </div>
+    </div>
+
+    <!-- CRÉATION ENPS -->
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;">La création de l'ENPS — un tournant institutionnel</div>
+    <div style="background:var(--navy);border-radius:14px;padding:24px 28px;margin-bottom:20px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;">12 SEPTEMBRE 2024</div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;">Création par arrêté du Ministre de l'Intérieur</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:0;">L'ENPS est rattachée directement à l'<strong style="color:#fff;">Académie de police</strong>. La formation ne dépend donc plus du SNPS — un changement de tutelle majeur qui place la formation au niveau de l'institution policière globale.</p>
+        </div>
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:2px;margin-bottom:6px;">14 MARS 2025</div>
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;">Inauguration officielle</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;margin-bottom:0;">Inaugurée par le Ministre de l'Intérieur en personne — signe de l'importance accordée à la filière scientifique dans la réforme globale de la Police Nationale.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-2" style="margin-bottom:20px;">
+      <div class="info-card">
+        <h4>📍 Implantation</h4>
+        <p style="margin-bottom:8px;">Implantée à <strong>Écully</strong>, sur le site de l'ancienne école de commerce (campus d'Écully, 23 Avenue Guy de Collongue). Une <strong>antenne déconcentrée à Paris</strong> complète le dispositif.</p>
+        <div style="display:flex;gap:16px;margin-top:10px;">
+          <div style="text-align:center;flex:1;background:var(--sky);border-radius:8px;padding:10px;">
+            <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy);">43</div>
+            <div style="font-size:11px;color:var(--muted);">agents</div>
+          </div>
+          <div style="text-align:center;flex:1;background:var(--sky);border-radius:8px;padding:10px;">
+            <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy);">95</div>
+            <div style="font-size:11px;color:var(--muted);">logements</div>
+          </div>
+          <div style="text-align:center;flex:1;background:var(--sky);border-radius:8px;padding:10px;">
+            <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy);">1 630</div>
+            <div style="font-size:11px;color:var(--muted);">m²</div>
+          </div>
+        </div>
+      </div>
+      <div class="info-card">
+        <h4>👤 Direction</h4>
+        <p style="margin-bottom:8px;">Le directeur appartient au <strong>Corps de Conception et de Direction (CCD)</strong> de la filière active — c'est-à-dire un commissaire de police, et non un personnel scientifique.</p>
+        <p style="margin-bottom:0;">Le <strong>directeur adjoint</strong>, en revanche, est issu de la filière scientifique : <strong>M. Julien LEVESQUE</strong>, ingénieur en chef de PTS, occupe cette fonction — une reconnaissance de l'expertise scientifique au sein de la direction.</p>
+      </div>
+    </div>
+
+    <div class="encart gold">
+      <strong>« In scientia veritas »</strong> — « La vérité dans la science ». Devise choisie par les personnels de l'école eux-mêmes. Elle fait écho à la devise de la police scientifique française <em>« sur les traces de la vérité »</em>, inscrite en langage binaire au sol des allées du SNPS à Écully.
+    </div>
+  </div>
+
+  <!-- 06. LE NOUVEAU TRONC COMMUN -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">07</span><div><div class="sec-title">Le nouveau socle initial — tronc commun ENPS</div><div class="sec-sub">10 semaines · Ingénieurs, techniciens principaux et techniciens de PTS</div></div></div>
+    <p class="body-text">Le nouveau tronc commun, désormais appelé <strong>socle initial</strong>, est assuré entièrement par l'ENPS. Objectif affiché : <strong>éviter les redondances</strong> entre les différentes formations que recevaient autrefois les agents.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px;">
+      <div style="padding:20px;border-right:1px solid var(--line);text-align:center;">
+        <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--navy);margin-bottom:6px;">10</div>
+        <div style="font-size:12px;color:var(--muted);">semaines au total<br>réparties en 2 séries de 5</div>
+      </div>
+      <div style="padding:20px;border-right:1px solid var(--line);text-align:center;">
+        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--navy);margin-bottom:6px;">3 publics</div>
+        <div style="font-size:12px;color:var(--muted);">Ingénieurs · Techniciens principaux · Techniciens de PTS</div>
+      </div>
+      <div style="padding:20px;text-align:center;">
+        <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--ps);margin-bottom:6px;">Évaluation</div>
+        <div style="font-size:12px;color:var(--muted);">À l'issue du socle initial</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:11px;padding:16px 18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:8px;">🔁 Agent ayant déjà suivi un tronc commun</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.75;margin-bottom:0;">N'assiste pas aux 10 semaines complètes. Il suit des cours spécifiques orientés sur le <strong>management</strong> — appelés <strong>« B2 session aménagée »</strong> dans le calendrier ENPS.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:11px;padding:16px 18px;">
+        <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:8px;">👥 Contractuels et détachés</div>
+        <p style="font-size:13px;color:var(--ink2);line-height:1.75;margin-bottom:0;">Une formation de <strong>15 jours</strong> est proposée aux contractuels et agents en détachement — appelée <strong>FIFS</strong> (Formation Initiale Filière Scientifique).</p>
+      </div>
+    </div>
+
+    <div class="encart red">
+      <strong>⚠️ Point crucial — la sensibilisation n'est pas une habilitation :</strong> pendant le socle initial, une sensibilisation est enseignée aux agents sur la <strong>signalisation</strong> et l'<strong>exploitation d'une trace papillaire</strong>. Mais cette sensibilisation <strong>ne confère aucune habilitation ni compétence</strong>. Les agents ne peuvent donc pas, à l'issue du seul socle initial, assurer des missions d'identité judiciaire sur le terrain — des formations complémentaires (MAE) sont indispensables.
+    </div>
+  </div>
+
+  <!-- 07. LES MAE — SCHÉMA ET TABLEAUX -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">08</span><div><div class="sec-title">Les Modules d'Adaptation à l'Emploi (MAE)</div><div class="sec-sub">3 parcours de spécialisation · Schéma d'acquisition des compétences · Conditions d'intégration</div></div></div>
+    <p class="body-text">Une fois le socle initial achevé, les agents affectés en identité judiciaire suivent un <strong>Module d'Adaptation à l'Emploi (MAE)</strong> spécifique selon le parcours visé. Le schéma ci-dessous présente l'acquisition des compétences pour chacun des 3 parcours transitoires.</p>
+
+    <!-- DIAGRAMME MAE -->
+    <div style="background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:20px;overflow-x:auto;">
+      <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);text-align:center;margin-bottom:18px;text-transform:uppercase;letter-spacing:1px;">Schéma général d'acquisition des compétences — parcours MAE transitoires (spécialité IJ)</div>
+
+      <!-- Header MODULES D'ADAPTATION -->
+      <div style="background:var(--navy);border-radius:8px;padding:10px;text-align:center;margin-bottom:12px;margin-left:140px;">
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;">MODULES D'ADAPTATION À L'EMPLOI</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:130px 1fr;gap:10px;">
+        <!-- Colonne DACTY EXPLOI -->
+        <div style="background:var(--ps-pale);border:1px solid rgba(192,57,43,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px 8px;">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--ps);">DACTY EXPLOI</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:6px;line-height:1.4;">Lors du socle initial</div>
+          </div>
+        </div>
+
+        <!-- Colonne droite : 3 parcours -->
+        <div style="display:flex;flex-direction:column;gap:14px;">
+
+          <!-- INTERVENTION -->
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;">
+            <div style="background:var(--sky);border:1px solid var(--sky2);border-radius:50px;padding:14px 10px;text-align:center;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy);">INTERVENTION</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:4px;">← 6 semaines →&nbsp;&nbsp;&nbsp;+1 sem.</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1.6fr 1fr;gap:4px;">
+                <div style="background:var(--ps-pale);border:1px dashed var(--ps);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--ps);">DACTY COMPA</div>
+                <div style="background:var(--ps-pale);border:1px dashed var(--ps);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--ps);">GSI PMD</div>
+                <div style="background:var(--ps-pale);border:1px dashed var(--ps);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--ps);">GSI DC</div>
+                <div style="background:var(--white);border:1px solid var(--line);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--navy3);">GSI Niveau 3</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CRIMINALISTIQUE CONVENTIONNELLE -->
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;">
+            <div style="background:var(--sky);border:1px solid var(--sky2);border-radius:50px;padding:14px 10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:var(--navy);line-height:1.3;">CRIMINALISTIQUE<br>CONVENTIONNELLE</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:4px;">← 5 semaines →</div>
+              <div style="display:grid;grid-template-columns:1fr 2fr 0.8fr;gap:4px;">
+                <div style="background:var(--ps-pale);border:1px dashed var(--ps);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--ps);">DACTY COMPA</div>
+                <div style="background:var(--ps-pale);border:1px dashed var(--ps);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--ps);">RPC-MO</div>
+                <div style="background:var(--white);border:1px solid var(--line);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--navy3);">RPC-SM</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- IDENTIFICATION DACTYLOTECHNIE -->
+          <div style="display:grid;grid-template-columns:140px 1fr;gap:10px;align-items:center;">
+            <div style="background:var(--sky);border:1px solid var(--sky2);border-radius:50px;padding:14px 10px;text-align:center;">
+              <div style="font-size:11px;font-weight:700;color:var(--navy);line-height:1.3;">IDENTIFICATION<br>DACTYLOTECHNIE</div>
+            </div>
+            <div>
+              <div style="font-size:10px;color:var(--muted);text-align:center;margin-bottom:4px;">← 4 semaines →</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;">
+                <div style="background:var(--ps-pale);border:1px dashed var(--ps);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--ps);">DACTY COMPA</div>
+                <div style="background:var(--ps-pale);border:1px dashed var(--ps);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--ps);">DACTY DEMO</div>
+                <div style="background:var(--white);border:1px solid var(--line);border-radius:5px;padding:8px 6px;text-align:center;font-size:11px;font-weight:700;color:var(--navy3);">T41 METAMORPHO</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:14px;padding-top:10px;border-top:1px solid var(--line);">Légende : <span style="color:var(--ps);font-weight:700;">modules en pointillés rouges</span> = communs ou spécifiques au parcours · modules blancs = compétences complémentaires de niveau supérieur</div>
+    </div>
+
+    <div class="encart navy"><strong>Lecture du schéma :</strong> tous les parcours partent du <strong>DACTY EXPLOI</strong> acquis lors du socle initial. Chaque parcours (Intervention / Criminalistique conventionnelle / Identification dactylotechnie) ajoute ensuite des modules spécifiques sur 4 à 7 semaines pour aboutir à une habilitation opérationnelle dans la spécialité choisie.</div>
+
+    <!-- TABLEAUX D'INTÉGRATION -->
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;margin-top:24px;">Conditions d'intégration aux parcours MAE</div>
+    <p class="body-text">Selon les habilitations déjà détenues par l'agent (notamment les anciens stages GSPMD, DACTY ou SIT), le parcours de formation requis pour intégrer un MAE diffère. Ces tableaux servent de référence pour savoir quel module suivre.</p>
+
+    <!-- TABLEAU MAE INTERVENTION -->
+    <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;">MAE Intervention</div>
+    <div class="table-wrap" style="margin-bottom:20px;">
+      <table class="t">
+        <thead><tr><th>Profil de l'agent</th><th>Parcours de formation requis</th><th>Dates d'intégration</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Habilité GSPMD + DACTY (exploi, compa)</td>
+            <td>Module GSI complet</td>
+            <td>Cf. calendrier formations ENPS</td>
+          </tr>
+          <tr>
+            <td>Habilité GSPMD + DACTY EXPLOI* ou SIT</td>
+            <td>Module COMPA + GSI</td>
+            <td>Cf. calendrier formations ENPS</td>
+          </tr>
+          <tr style="background:var(--bg);">
+            <td>Habilité DACTY uniquement</td>
+            <td>Non éligible en l'état.<br>Doit obtenir le GSPMD**</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:11px;color:var(--muted);line-height:1.7;margin-bottom:24px;padding:0 4px;">
+      * Agents ayant validé la partie EXPLOI du stage DACTY et ayant échoué à la partie COMPA après rattrapage, OU agents ayant suivi le socle initial technique à l'ENPS.<br>
+      ** En suivant un GSPMD organisé par l'antenne parisienne (à privilégier) ou en intégrant, en 2026, une partie du socle initial technique (SIT) de l'ENPS (places très limitées en formation continue).
+    </div>
+
+    <!-- TABLEAU MAE CRIMINALISTIQUE CONVENTIONNELLE -->
+    <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;">MAE Criminalistique conventionnelle</div>
+    <div class="table-wrap" style="margin-bottom:20px;">
+      <table class="t">
+        <thead><tr><th>Profil de l'agent</th><th>Parcours de formation requis</th><th>Dates d'intégration</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Habilité DACTY (exploi, compa)</td>
+            <td>Module RPC complet</td>
+            <td>Cf. calendrier formations ENPS</td>
+          </tr>
+          <tr>
+            <td>Ayant suivi le socle initial technique (SIT) à l'ENPS</td>
+            <td>Module COMPA + RPC</td>
+            <td>Cf. calendrier formations ENPS</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- MAE IDENTIFICATION DACTYLOTECHNIE -->
+    <div style="font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;">MAE Identification dactylotechnie</div>
+    <div class="encart gold" style="margin-bottom:20px;">
+      Module composé de <strong>DACTY COMPA</strong>, <strong>DACTY DEMO</strong> et <strong>T41 METAMORPHO</strong> sur environ 4 semaines (cf. schéma ci-dessus). Ce parcours forme aux missions de comparaison de traces papillaires avec le FAED — le cœur de la section identification présentée en leçon 5.
+    </div>
+
+    <div class="encart navy"><strong>Glossaire des sigles ENPS :</strong> <strong>GSI</strong> = Gestion de Scène d'Infraction · <strong>GSPMD</strong> = Gestion de Scène de Petite et Moyenne Délinquance · <strong>DACTY EXPLOI/COMPA/DEMO</strong> = modules Dactyloscopie (Exploitation, Comparaison, Démonstration) · <strong>RPC</strong> = Révélation de traces Papillaires en Criminalistique (MO = mode opératoire, SM = supports multiples) · <strong>SIT</strong> = Socle Initial Technique · <strong>MAE</strong> = Module d'Adaptation à l'Emploi.</div>
+  </div>
+
+  <!-- 08. LPS ET NUMÉRIQUE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">09</span><div><div class="sec-title">Formations LPS et criminalistique numérique</div><div class="sec-sub">Tronc commun spécifique + formation interne spécialisée</div></div></div>
+
+    <div class="spec-card">
+      <div class="spec-head" style="background:var(--sky);"><div style="font-size:18px;">🧪</div><div><h3 style="color:var(--navy);">Affectation en LPS</h3></div></div>
+      <div class="spec-body">
+        <p>La formation débute par un <strong>tronc commun d'une semaine</strong> : 3 jours à Écully avec l'ensemble des nouveaux affectés de tous les LPS, puis 2 jours dans un autre LPS pour découvrir l'organisation des différents laboratoires.</p>
+        <p>La formation technique est ensuite <strong>réalisée en interne</strong> sur le lieu d'affectation, propre à chaque spécialité. Elle permet d'obtenir des <strong>habilitations spécifiques</strong> (parfois appelées "habi-lab") indispensables pour travailler de manière autonome sur les analyses accréditées.</p>
+      </div>
+    </div>
+
+    <div class="spec-card">
+      <div class="spec-head" style="background:var(--purple-pale);"><div style="font-size:18px;">💻</div><div><h3 style="color:var(--purple);">Affectation en criminalistique numérique</h3></div></div>
+      <div class="spec-body">
+        <p>La formation de base est le <strong>stage ATN (Analyse de Traces Numériques)</strong> — environ 5 semaines en présentiel à Écully, composé de plusieurs modules :</p>
+        <ul>
+          <li><strong>Analyse d'ordinateurs et supports numériques</strong> : extraction des données contenues</li>
+          <li><strong>Téléphones portables et tablettes</strong> : logiciels XRY et UFED — analyse des données de mémoire, cartes SIM</li>
+          <li><strong>GPS</strong> : récupération des informations contenues dans les navigateurs</li>
+        </ul>
+        <p>La <strong>formation vidéo (modules 1 et 2)</strong> accompagne l'ATN — 10 jours à Écully pour maîtriser le traitement et l'analyse de l'image, la vidéo, et le prélèvement sur enregistreurs de vidéosurveillance.</p>
+        <p>Le <strong>stage TTSA</strong> (8 jours à Écully) est le stage de référence pour le traitement et l'analyse du son — transcription, amélioration et authentification audio.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09. FORMATIONS CONTINUES ET PERSPECTIVES -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">10</span><div><div class="sec-title">Formations continues et perspectives</div><div class="sec-sub">Se spécialiser tout au long de la carrière · L'avenir de la formation PTS</div></div></div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;">Formations continues tout au long de la carrière</div>
+    <p class="body-text">La formation ne s'arrête pas à l'entrée en poste. Tout au long de la carrière, des stages sont ouverts par <strong>télégrammes (T.G.)</strong> diffusés aux différents services. Le fonctionnaire intéressé postule par rapport administratif. Pour les stages nécessitant un déplacement, transport, logement et repas sont pris en charge.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 14px;font-size:12px;color:var(--ink2);line-height:1.65;"><strong>Spécialisations métier :</strong> portrait-robot, identification des victimes de catastrophe (IVC), morphoanalyse des traces de sang, recherche des causes d'incendies, méthodologie attentat…</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 14px;font-size:12px;color:var(--ink2);line-height:1.65;"><strong>Compétences transversales :</strong> pack LibreOffice, langues étrangères, permis moto 125cc, management, préparation aux concours et examens professionnels…</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 14px;font-size:12px;color:var(--ink2);line-height:1.65;"><strong>Missions à l'étranger :</strong> formation dans des techniques particulières, ou dispense de connaissances (gestion de scènes de crime, traces technologiques, méthodologie attentats)…</div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:9px;padding:12px 14px;font-size:12px;color:var(--ink2);line-height:1.65;"><strong>Préparation aux concours :</strong> stages préparatoires aux examens professionnels (technicien principal, technicien en chef) et aux concours internes (ingénieur).</div>
+    </div>
+
+    <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--navy3);margin-bottom:12px;">Les perspectives à venir</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num" style="background:var(--gold);color:var(--navy3);">1</div>
+        <div class="step-content"><h4>« Recruter / former / affecter »</h4><p>À l'horizon 2027–2028 : tous les agents ayant réussi le concours seront convoqués à l'ENPS et choisiront leur affectation en fonction de leur <strong>classement à l'issue de la scolarité</strong> — et non plus uniquement au classement du concours. Le projet reste freiné par le statut des personnels scientifiques, dont le dossier statutaire (décret-cadre + décrets particuliers) est bloqué à Bercy pour des raisons budgétaires.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--ps);color:#fff;">2</div>
+        <div class="step-content"><h4>Une possible refonte des concours</h4><p>L'ENPS, le SNPS et la DRHFS réfléchissent à modifier l'organisation des concours. Le concours <strong>B1 pourrait devenir national</strong>. Une épreuve de sport pourrait également être intégrée.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--navy);">3</div>
+        <div class="step-content"><h4>Un seul site de formation ?</h4><p>Les formations RPC se déroulent actuellement sur le site du SNPS. Un regroupement de l'ensemble des formations sur le site de l'ENPS est envisagé, mais représente un coût important. Des formations adaptées à chaque changement de grade sont également prévues (B2→B3, B3→A1, A1→A2, A2→A3).</p></div>
+      </div>
+    </div>
+  </div>
+  <!-- 10. ÉVOLUTION DE CARRIÈRE -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">11</span><div><div class="sec-title">L'évolution de carrière</div><div class="sec-sub">3 voies d'avancement · Concours internes · Examen professionnel</div></div></div>
+    <p class="body-text">Après la réussite du concours, vous intégrez le grade de <strong>Technicien de Police Scientifique</strong>. Trois voies permettent d'évoluer dans la carrière.</p>
+    <div class="step-list" style="margin-bottom:20px;">
+      <div class="step-item">
+        <div class="step-num" style="background:var(--gold);color:var(--navy3);">1</div>
+        <div class="step-content">
+          <h4>Avancement au choix</h4>
+          <p>Inscription sur un tableau d'avancement + justifier d'<strong>1 an d'ancienneté dans le 6e échelon</strong> + comptabiliser au moins <strong>5 années de services effectifs</strong> dans le corps. Permet d'atteindre le grade supérieur sans passer d'examen.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--ps);color:#fff;">2</div>
+        <div class="step-content">
+          <h4>Examen professionnel</h4>
+          <p>Accès au grade supérieur si vous avez atteint le <strong>4e échelon</strong> du grade et comptabilisé au moins <strong>3 années de services effectifs</strong> dans le corps. Voie la plus courante pour passer de technicien à technicien principal, puis à technicien en chef.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--navy);">3</div>
+        <div class="step-content">
+          <h4>Concours internes et externes</h4>
+          <p>Après <strong>4 années de services publics effectifs</strong>, il est possible de postuler aux concours internes des autres grades et corps (ingénieur, technicien principal par concours interne). Les concours externes restent accessibles si vous remplissez les conditions de diplôme.</p>
+        </div>
+      </div>
+    </div>
+    <div class="encart navy"><strong>Note sur les ASPTS :</strong> le corps des Agents Spécialisés de Police Technique et Scientifique (catégorie C) n'est plus ouvert au recrutement depuis 2021. Les ASPTS en activité basculent progressivement dans le corps des Techniciens de PTS par voie d'avancement ou d'examen professionnel.</div>
+  </div>
+
+  <!-- 11. LES QUALITÉS -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">12</span><div><div class="sec-title">Les qualités attendues</div><div class="sec-sub">Ce que cherche le jury — au-delà des connaissances techniques</div></div></div>
+    <p class="body-text">Quelle que soit l'affectation — terrain, laboratoire ou numérique — les qualités attendues sont identiques. Le jury cherchera à évaluer ces dimensions tout au long de l'entretien.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:7px;">🔎</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">Curiosité</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">Les techniques forensiques évoluent en permanence. Le technicien doit être en veille constante sur les nouvelles méthodes et les avancées scientifiques.</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:7px;">📐</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">Rigueur</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">Chaque acte technique peut être contesté devant un tribunal. Une erreur de procédure peut annuler une preuve. La rigueur n'est pas optionnelle — c'est le fondement du métier.</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:7px;">⭐</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">Professionnalisme</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">Représenter l'institution dans des situations difficiles, maintenir un comportement irréprochable même dans les contextes les plus éprouvants.</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:7px;">💡</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">Esprit d'initiative</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">Sur une scène d'infraction, il faut savoir adapter les techniques au contexte — pas de manuel qui couvre tous les cas. L'initiative encadrée fait partie du métier.</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:7px;">🤝</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">Travail en équipe</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">Avec les enquêteurs, le parquet, les médecins légistes, les autres spécialistes forensiques. La PS ne travaille jamais seule — l'insertion dans un réseau d'acteurs est permanente.</div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:16px;text-align:center;">
+        <div style="font-size:22px;margin-bottom:7px;">🕐</div>
+        <div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:5px;">Disponibilité</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6;">Astreintes, interventions de nuit, week-ends, jours fériés font partie du contrat. Une indisponibilité récurrente fragilise le service — et la carrière.</div>
+      </div>
+    </div>
+    <div class="encart red"><strong>L'aspect psychologique — à aborder spontanément à l'oral :</strong> le travail de terrain confronte régulièrement aux homicides, violences, viols, infanticides, suicides, accidents graves. Ce n'est pas un tabou — c'est une réalité que le jury cherche à vérifier que vous avez intégrée. Mentionner que vous en êtes conscient, et expliquer comment vous pensez le gérer (sports, réseau de soutien, décompression), est toujours très apprécié. Ce n'est pas une faiblesse d'en parler — c'est un signe de maturité.</div>
+  </div>
+
+</div>
+</body>
+</html>

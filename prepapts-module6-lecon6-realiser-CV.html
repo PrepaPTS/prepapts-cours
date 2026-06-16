@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prépa PTS — Module 6 · Réaliser son CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --navy:#1B3A6B;--navy2:#142D54;--navy3:#0E2040;
+  --gold:#C8A45A;--gold-pale:#FDF6E8;
+  --sky:#EEF3FA;--sky2:#D6E4F7;--sky3:#F4F7FB;
+  --white:#fff;--ink:#111827;--ink2:#374151;
+  --muted:#6B7280;--line:#E5E9F2;--bg:#F4F6FB;
+  --green:#1A7A5E;--green-pale:#E6F7F2;
+  --red:#C0392B;--red-pale:#FDECEA;
+  --purple:#7C3AED;--purple-pale:#EDE9FE;
+  --orange:#D97706;--orange-pale:#FEF3C7;
+  --ps:#C0392B;--ps-pale:#FDECEA;
+  --gray-old:#8A9BB0;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.75;font-size:15px;}
+
+/* ── HEADER ── */
+.page-header{background:var(--navy3);padding:48px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(200,164,90,.06);}
+.header-tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:10px;display:block;position:relative;z-index:1;}
+.header-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:10px;letter-spacing:-1px;position:relative;z-index:1;}
+.header-title em{color:var(--gold);font-style:normal;}
+.header-sub{font-size:15px;color:rgba(255,255,255,.55);max-width:620px;line-height:1.7;position:relative;z-index:1;}
+.header-sub strong{color:rgba(255,255,255,.85);}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,164,90,.15);border:1px solid rgba(200,164,90,.3);border-radius:100px;padding:5px 14px;font-size:12px;color:var(--gold);font-weight:600;margin-bottom:14px;position:relative;z-index:1;}
+
+/* ── BODY ── */
+.page-body{max-width:920px;margin:0 auto;padding:48px 24px 80px;}
+
+/* ── INTRO ── */
+.intro-box{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:20px 24px;margin-bottom:40px;font-size:14px;color:var(--ink2);line-height:1.85;}
+.intro-box strong{color:var(--navy);}
+
+/* ── SECTION ── */
+.sec{margin-bottom:56px;}
+.sec-hd{display:flex;align-items:center;gap:14px;margin-bottom:26px;padding-bottom:16px;border-bottom:2px solid var(--line);}
+.sec-num{font-family:'DM Mono',monospace;font-size:11px;font-weight:500;color:var(--gold);background:var(--navy);padding:5px 11px;border-radius:6px;letter-spacing:1px;flex-shrink:0;}
+.sec-title{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--navy3);letter-spacing:-.3px;}
+.sec-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+.body-text{font-size:14px;color:var(--ink2);line-height:1.85;margin-bottom:18px;}
+.body-text strong{color:var(--navy3);}
+
+/* ── ANCIEN / NOUVEAU COMPARATIF ── */
+.avant-apres{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:start;margin-bottom:24px;}
+.avant-box,.apres-box{border-radius:12px;overflow:hidden;}
+.avant-box{border:2px dashed var(--gray-old);opacity:.8;}
+.apres-box{border:2px solid var(--navy);}
+.box-header{padding:12px 18px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;}
+.avant-box .box-header{background:#f0f2f5;color:var(--gray-old);}
+.apres-box .box-header{background:var(--navy);color:#fff;}
+.box-content{padding:14px 18px;background:var(--white);font-size:13px;color:var(--ink2);line-height:1.7;}
+.avant-apres-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;font-size:24px;color:var(--navy);padding-top:40px;}
+
+/* ── ORGANIGRAMME FLÈCHES ── */
+.orgchart{display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:24px;}
+.org-node{border-radius:10px;padding:14px 22px;text-align:center;min-width:280px;max-width:560px;width:100%;position:relative;}
+.org-node-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;line-height:1.3;margin-bottom:4px;}
+.org-node-sub{font-size:11px;line-height:1.5;opacity:.8;}
+.org-node-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-top:6px;}
+
+/* niveaux couleurs */
+.node-l0{background:var(--navy3);color:#fff;}
+.node-l0 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l1{background:var(--navy2);color:#fff;}
+.node-l1 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l2{background:var(--navy);color:#fff;}
+.node-l2 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l3{background:#2A5298;color:#fff;}
+.node-l3 .org-node-badge{background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
+.node-l4{background:var(--sky);color:var(--navy);border:1px solid var(--sky2);}
+.node-l4 .org-node-badge{background:var(--sky2);color:var(--navy);}
+.node-ps{background:var(--ps);color:#fff;}
+.node-ps .org-node-badge{background:rgba(255,255,255,.2);color:#fff;}
+.node-ps-light{background:var(--ps-pale);color:var(--ps);border:1px solid rgba(192,57,43,.25);}
+.node-ps-light .org-node-badge{background:var(--ps);color:#fff;}
+.node-gray{background:#e8ecf2;color:var(--gray-old);border:2px dashed var(--gray-old);}
+.node-gray .org-node-badge{background:var(--gray-old);color:#fff;}
+
+/* flèches */
+.org-arrow-down{display:flex;justify-content:center;align-items:center;height:32px;}
+.org-arrow-down::before{content:'';width:2px;height:20px;background:var(--line);display:block;}
+.org-arrow-down.has-arrow::after{content:'▼';color:var(--muted);font-size:10px;position:absolute;margin-top:20px;}
+.org-arrow-wrap{position:relative;display:flex;flex-direction:column;align-items:center;}
+
+/* branchement horizontal */
+.org-split{display:flex;justify-content:center;gap:12px;margin-bottom:0;width:100%;}
+.org-split-col{display:flex;flex-direction:column;align-items:center;flex:1;max-width:220px;}
+.org-branch-line{width:100%;height:2px;background:var(--line);position:relative;}
+.org-branch-line::before,.org-branch-line::after{content:'';position:absolute;top:0;width:2px;height:20px;background:var(--line);}
+.org-branch-line::before{left:calc(25% - 1px);}
+.org-branch-line::after{right:calc(25% - 1px);}
+.org-top-line{height:20px;width:2px;background:var(--line);}
+.org-split-wrap{display:flex;flex-direction:column;align-items:center;width:100%;}
+
+/* légende */
+.org-legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);}
+.leg-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0;}
+
+/* ── TIMELINE RÉFORME ── */
+.timeline-reform{display:grid;grid-template-columns:80px 1fr;gap:0;margin-bottom:28px;}
+.tl-year{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--gold);padding:14px 0 14px 0;border-right:2px solid var(--line);text-align:right;padding-right:20px;line-height:1.6;}
+.tl-content{padding:14px 0 14px 24px;border-bottom:1px solid var(--line);}
+.tl-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:4px;}
+.tl-content p{font-size:13px;color:var(--ink2);line-height:1.7;}
+.tl-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--navy);color:#fff;margin-left:8px;vertical-align:middle;}
+.tl-tag.old{background:var(--gray-old);}
+
+/* ── ALERTE ── */
+.alert{border-radius:10px;padding:16px 20px;font-size:13px;line-height:1.8;margin-bottom:20px;display:flex;gap:12px;align-items:flex-start;}
+.alert-ico{font-size:18px;flex-shrink:0;margin-top:2px;}
+.alert p,.alert div{margin:0;}
+.alert.gold{background:var(--gold-pale);border:1px solid rgba(200,164,90,.3);border-left:4px solid var(--gold);}
+.alert.navy{background:var(--sky);border:1px solid var(--sky2);border-left:4px solid var(--navy);}
+.alert.red{background:var(--ps-pale);border:1px solid rgba(192,57,43,.2);border-left:4px solid var(--ps);}
+.alert.green{background:var(--green-pale);border:1px solid rgba(26,122,94,.2);border-left:4px solid var(--green);}
+.alert strong{color:var(--navy);}
+.alert.red strong{color:var(--ps);}
+.alert.gold strong{color:#92630A;}
+
+/* ── CORPS GRADES ── */
+.corps-stack{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;}
+.corps-card{border-radius:12px;overflow:hidden;}
+.corps-head{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.corps-head-left{}
+.corps-cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;opacity:.6;margin-bottom:2px;}
+.corps-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;}
+.corps-cat-badge{font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;flex-shrink:0;}
+.corps-body{padding:14px 20px;display:flex;flex-direction:column;gap:8px;}
+.grade-row{display:flex;align-items:flex-start;gap:12px;}
+.grade-num{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);width:20px;flex-shrink:0;margin-top:2px;}
+.grade-name{font-size:13px;font-weight:600;}
+.grade-desc{font-size:12px;opacity:.7;line-height:1.5;}
+/* CCD */
+.corps-ccd .corps-head{background:#0a1628;}.corps-ccd .corps-name,.corps-ccd .corps-cat-label{color:#fff;}.corps-ccd .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-ccd .corps-body{background:#142D54;}.corps-ccd .grade-name{color:#fff;}.corps-ccd .grade-desc{color:rgba(255,255,255,.55);}
+/* CC */
+.corps-cc .corps-head{background:#1B3A6B;}.corps-cc .corps-name,.corps-cc .corps-cat-label{color:#fff;}.corps-cc .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cc .corps-body{background:#2A5298;}.corps-cc .grade-name{color:#fff;}.corps-cc .grade-desc{color:rgba(255,255,255,.55);}
+/* CEA */
+.corps-cea .corps-head{background:#2A5298;}.corps-cea .corps-name,.corps-cea .corps-cat-label{color:#fff;}.corps-cea .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-cea .corps-body{background:#3A6BC8;}.corps-cea .grade-name{color:#fff;}.corps-cea .grade-desc{color:rgba(255,255,255,.6);}
+/* Scientifiques */
+.corps-sci .corps-head{background:var(--ps);}.corps-sci .corps-name,.corps-sci .corps-cat-label{color:#fff;}.corps-sci .corps-cat-badge{background:rgba(255,255,255,.15);color:#fff;}
+.corps-sci .corps-body{background:var(--ps-pale);}.corps-sci .grade-name{color:var(--ps);}.corps-sci .grade-desc{color:var(--muted);}
+.corps-sci-ing .corps-head{background:#1a4a7a;}.corps-sci-ing .corps-name,.corps-sci-ing .corps-cat-label{color:#fff;}.corps-sci-ing .corps-cat-badge{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.corps-sci-ing .corps-body{background:var(--sky);}.corps-sci-ing .grade-name{color:var(--navy);}.corps-sci-ing .grade-desc{color:var(--muted);}
+.corps-sep{text-align:center;font-size:13px;font-weight:600;color:var(--muted);padding:8px 0;display:flex;align-items:center;gap:10px;}
+.corps-sep::before,.corps-sep::after{content:'';flex:1;height:1px;background:var(--line);}
+
+/* ── INFOS GRID ── */
+.info-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.info-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.info-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.info-card p{font-size:13px;color:var(--ink2);line-height:1.75;}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.info-card ul li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:8px;line-height:1.55;}
+.info-card ul li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0;margin-top:1px;}
+
+/* ── CADRES ENQUÊTE ── */
+.cadres-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.cadre{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.cadre-head{padding:14px 18px;border-bottom:1px solid var(--line);}
+.cadre-head h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:3px;}
+.cadre-head .art{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.5px;}
+.cadre-body{padding:16px 18px;}
+.cadre-body p{font-size:13px;color:var(--ink2);line-height:1.75;margin-bottom:10px;}
+.cadre-body p:last-child{margin-bottom:0;}
+.cadre-scenario{background:var(--bg);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.65;font-style:italic;border-left:3px solid var(--line);}
+.cadre.fl .cadre-head{background:#EEF3FA;}.cadre.fl .cadre-head h4{color:var(--navy);}.cadre.fl .cadre-head .art{color:var(--navy);}
+.cadre.prel .cadre-head{background:var(--purple-pale);}.cadre.prel .cadre-head h4{color:var(--purple);}.cadre.prel .cadre-head .art{color:var(--purple);}
+.cadre.fc .cadre-head{background:var(--green-pale);}.cadre.fc .cadre-head h4{color:var(--green);}.cadre.fc .cadre-head .art{color:var(--green);}
+.cadre.cr .cadre-head{background:var(--orange-pale);}.cadre.cr .cadre-head h4{color:var(--orange);}.cadre.cr .cadre-head .art{color:var(--orange);}
+
+/* ── INFRACTIONS ── */
+.inf-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+.inf-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:20px;position:relative;overflow:hidden;}
+.inf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+.inf-c::before{background:#10B981;}.inf-d::before{background:var(--orange);}.inf-cr::before{background:var(--ps);}
+.inf-label{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.inf-c .inf-label{color:#10B981;}.inf-d .inf-label{color:var(--orange);}.inf-cr .inf-label{color:var(--ps);}
+.inf-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--navy3);margin-bottom:14px;}
+.inf-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px;}
+.inf-row:last-of-type{border-bottom:none;}
+.inf-row-label{color:var(--muted);}
+.inf-row-val{font-weight:600;color:var(--ink);}
+.inf-exemples{font-size:11px;color:var(--muted);margin-top:10px;font-style:italic;line-height:1.55;}
+
+/* ── DÉONTOLOGIE ── */
+.deon-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+.deon-card{background:var(--white);border:1px solid var(--line);border-radius:11px;padding:18px 20px;}
+.deon-card h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.deon-list{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.deon-list li{font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:9px;line-height:1.55;}
+.deon-list li .deon-ico{flex-shrink:0;font-size:14px;margin-top:1px;}
+.deon-item-title{font-weight:600;color:var(--navy3);display:block;margin-bottom:2px;}
+.deon-item-desc{font-size:12px;color:var(--muted);display:block;line-height:1.55;}
+.police-special{background:var(--navy);border-radius:12px;padding:20px 24px;color:#fff;margin-top:16px;}
+.police-special h4{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:8px;}
+.police-special p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.75;}
+.police-special p strong{color:#fff;}
+
+/* ── NON IMPACTÉS ── */
+.non-imp{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.ni-tag{background:var(--white);border:1px solid var(--line);border-radius:7px;padding:7px 13px;font-size:12px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:5px;}
+.ni-tag::before{content:'✓';color:var(--green);font-weight:700;}
+
+/* ── TABLE ── */
+.table-wrap{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+table.t{width:100%;border-collapse:collapse;}
+table.t thead th{padding:11px 16px;font-size:12px;font-weight:700;color:var(--navy);background:var(--sky);text-align:left;border-bottom:2px solid var(--line);}
+table.t tbody tr{border-bottom:1px solid var(--line);}
+table.t tbody tr:last-child{border-bottom:none;}
+table.t tbody tr:hover{background:var(--sky3);}
+table.t td{padding:11px 16px;font-size:13px;color:var(--ink2);vertical-align:top;}
+table.t td:first-child{font-weight:600;color:var(--navy3);}
+.td-b{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:100px;}
+
+@media(max-width:720px){
+  .avant-apres{grid-template-columns:1fr;}.avant-apres-arrow{transform:rotate(90deg);padding:10px 0;}
+  .info-2,.cadres-grid,.inf-3,.deon-2{grid-template-columns:1fr;}
+  .org-split{flex-direction:column;align-items:center;}
+  .page-header{padding:28px 20px;}.page-body{padding:24px 16px;}
+  table.t td,table.t th{padding:8px 10px;font-size:12px;}
+}
+
+/* ── LECON EXTRAS ── */
+.tip-box{background:var(--gold-pale);border:1px solid rgba(200,164,90,.3);border-left:4px solid var(--gold);border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:13px;color:var(--ink2);line-height:1.8;}
+.tip-box strong{color:#92630A;}
+.question-card{background:var(--white);border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:10px;}
+.q-header{background:var(--navy);padding:12px 18px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;}
+.q-body{padding:14px 18px;font-size:13px;color:var(--ink2);line-height:1.8;}
+.q-body strong{color:var(--navy3);}
+.step-list{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+.step-item{display:flex;gap:14px;align-items:flex-start;}
+.step-num{background:var(--navy);color:#fff;font-family:'DM Mono',monospace;font-size:12px;font-weight:700;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-content{flex:1;}
+.step-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);margin-bottom:4px;}
+.step-content p{font-size:13px;color:var(--ink2);line-height:1.75;}
+.cv-section{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.cv-sec-header{background:var(--sky);padding:12px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+.cv-sec-header h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--navy3);}
+.cv-sec-body{padding:14px 20px;font-size:13px;color:var(--ink2);line-height:1.8;}
+.cv-sec-body ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.cv-sec-body ul li{display:flex;gap:8px;align-items:flex-start;}
+.cv-sec-body ul li::before{content:'→';color:var(--navy);font-weight:700;flex-shrink:0;margin-top:1px;}
+.oral-q{background:var(--white);border-left:4px solid var(--gold);border:1px solid var(--line);border-left-width:4px;border-radius:9px;padding:14px 18px;margin-bottom:10px;}
+.oral-q .q{font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:8px;}
+.oral-q .r{font-size:13px;color:var(--ink2);line-height:1.75;}
+.oral-q .r strong{color:var(--navy);}
+.spec-card{background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.spec-head{padding:14px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;}
+.spec-head h3{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;}
+.spec-body{padding:16px 20px;font-size:13px;color:var(--ink2);line-height:1.8;}
+
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-badge">Module 6 · Préparation à l'oral</div>
+  <span class="header-tag">Leçon 6</span>
+  <h1 class="header-title">Réaliser son CV</h1>
+</div>
+
+<div class="page-body">
+
+  <div class="intro-box">
+    <p>Le CV est remis préalablement au service organisateur du concours, à l'attention des membres du jury. C'est un outil de préparation de l'entretien — le jury s'en sert pour orienter ses questions. <strong>Les membres du jury voient en moyenne 12 candidats par jour : votre CV doit être lisible, clair et en adéquation avec le poste de technicien PTS.</strong></p>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">01</span><div><div class="sec-title">Ce que doit contenir votre CV</div><div class="sec-sub">8 rubriques — 1 page maximum</div></div></div>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content"><h4>État civil</h4><p>Prénom + Nom (en capitales), âge ou date de naissance, situation familiale avec le nombre d'enfants le cas échéant. <strong>Information importante :</strong> si vous avez des enfants, attendez-vous à des questions sur votre organisation personnelle face aux astreintes.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content"><h4>Coordonnées</h4><p>Adresse actuelle, numéro de téléphone, e-mail professionnel (évitez les adresses fantaisistes). Si vous êtes mobile (permis, véhicule, possibilité de déménager), indiquez-le — c'est un plus pour un poste impliquant des astreintes.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content"><h4>Photo (facultative)</h4><p>Si vous en mettez une : fond blanc, tenue sobre, coiffure soignée — type photo d'identité avec le sourire. Pas de selfie.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content"><h4>Formation et parcours scolaire</h4><p>Ordre chronologique inversé (plus récent en premier). Année d'obtention, intitulé du diplôme, spécialisation, établissement. Pas besoin de remonter au-delà du bac si vous avez plus de 25 ans d'expérience.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content"><h4>Expériences professionnelles</h4><p>Mois + année de début et fin, intitulé du poste, entreprise, résultats marquants révélateurs de vos compétences. <strong>Cohérence avec le poste de TPTS :</strong> mettez en avant rigueur, travail en équipe, contact avec la réalité du terrain, compétences techniques.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-content"><h4>Compétences clés</h4><p>3 ou 4 grandes compétences développées, illustrées par des données concrètes. En lien avec le métier : rigueur, analyse, réactivité, travail en conditions difficiles.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">7</div>
+        <div class="step-content"><h4>Langues et informatique</h4><p>Langues : niveau standard européen (A1 à C2), uniquement les langues que vous pratiquez encore. Informatique : au-delà de la suite LibreOffice (utilisée dans la PN), mentionnez les logiciels spécifiques — retouche photo, Excel, logiciels techniques — c'est un vrai plus en PTS.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">8</div>
+        <div class="step-content"><h4>Activités extra-professionnelles</h4><p>Permet de révéler votre personnalité et d'illustrer vos savoir-être. Un sport collectif → travail d'équipe. La création d'une association → autonomie. Peut devenir un sujet de conversation à l'oral.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">02</span><div><div class="sec-title">La mise en page</div><div class="sec-sub">1 page · Police simple · Design aéré · Canva ou LibreOffice Writer</div></div></div>
+    <div class="info-2">
+      <div class="info-card">
+        <h4>✅ Principes à respecter</h4>
+        <ul>
+          <li>Une seule page — pas de dérogation</li>
+          <li>Une seule police de caractères, taille 12 pour le corps, plus grand pour les titres</li>
+          <li>Design aéré : lignes horizontales, puces, encadrés — 1 ou 2 éléments maximum</li>
+          <li>Couleur : une seule couleur sobre et lisible. Cohérente avec le poste visé.</li>
+          <li>Exporter en PDF pour que la mise en page reste intacte</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>❌ Erreurs fréquentes</h4>
+        <ul>
+          <li>Trop de couleurs ou de polices différentes</li>
+          <li>Adresse e-mail non professionnelle</li>
+          <li>Photo selfie ou informelle</li>
+          <li>Expériences sans lien apparent avec le poste de TPTS</li>
+          <li>CV qui déborde sur 2 pages</li>
+          <li>Fautes d'orthographe — rédhibitoires</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip-box"><strong>💡 Outil recommandé :</strong> <a href="https://www.canva.com/fr_fr/creer/cv/" style="color:var(--navy);">Canva.com</a> — gratuit, nombreux modèles, export PDF. Ou LibreOffice Writer pour ceux plus à l'aise avec un traitement de texte classique.</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">03</span><div><div class="sec-title">Comment valoriser votre profil pour la PTS</div></div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px;">
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;"><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:5px;">🎓 Profil scientifique</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">Mettez en avant vos formations en chimie, biologie, physique, informatique. Expériences en laboratoire ou en analyses techniques. Stage ou mémoire sur une thématique forensique.</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;"><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:5px;">🏥 Profil médico-social ou juridique</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">Travail en milieu difficile (urgences, aide à domicile, travail social) → montre que vous savez gérer le stress et la confrontation à des situations difficiles.</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;"><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:5px;">🏛️ Expérience en sécurité/défense</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">Police municipale, pompier, armée, gendarmerie — montre que vous connaissez le milieu institutionnel et les contraintes du service public.</div></div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px 16px;"><div style="font-size:12px;font-weight:700;color:var(--navy3);margin-bottom:5px;">📸 Compétences transversales</div><div style="font-size:12px;color:var(--muted);line-height:1.6;">Photographie → très valorisée en identité judiciaire. Informatique → indispensable en numérique. Langues étrangères → permet l'épreuve facultative.</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 04 — CV TYPES -->
+  <div class="sec">
+    <div class="sec-hd"><span class="sec-num">04</span><div><div class="sec-title">Exemples de CV types</div><div class="sec-sub">3 profils différents — fraîchement diplômé · reconversion · expérimenté</div></div></div>
+
+    <p class="body-text">Ces trois exemples illustrent des profils très différents qui peuvent tous réussir le concours TPTS. Ils montrent comment adapter la mise en valeur de son parcours selon sa situation.</p>
+
+    <!-- TABS -->
+    <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;">
+      <button onclick="showCV('cv1',this)" style="padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;background:var(--navy);color:#fff;font-family:'DM Sans',sans-serif;">Profil 1 — Jeune diplômé</button>
+      <button onclick="showCV('cv2',this)" style="padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--line);background:var(--white);color:var(--muted);font-family:'DM Sans',sans-serif;">Profil 2 — Reconversion</button>
+      <button onclick="showCV('cv3',this)" style="padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--line);background:var(--white);color:var(--muted);font-family:'DM Sans',sans-serif;">Profil 3 — Expérimenté</button>
+    </div>
+
+    <!-- CV 1 — JEUNE DIPLÔMÉ -->
+    <div id="cv1" class="cv-example" style="display:block;">
+      <div style="background:var(--sky);border-radius:9px;padding:10px 16px;margin-bottom:16px;font-size:12px;color:var(--navy);">
+        <strong>Profil :</strong> Léa Martin, 22 ans, diplômée d'un BTS Biotechnologies en alternance, sans expérience professionnelle hors alternance. Elle mise sur ses compétences techniques en laboratoire et son engagement associatif.
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(27,58,107,.08);max-width:680px;margin:0 auto;">
+        <!-- Header CV -->
+        <div style="background:var(--navy3);padding:24px 28px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:3px;">Léa MARTIN</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:8px;">22 ans · Célibataire · Permis B</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">📍 Bordeaux (33)</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">📱 06 XX XX XX XX</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">✉️ lea.martin@email.fr</span>
+            </div>
+          </div>
+          <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👩‍🔬</div>
+        </div>
+        <!-- Corps CV -->
+        <div style="padding:22px 28px;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <!-- Colonne gauche -->
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--navy);">Formation</div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">BTS Biotechnologies</div>
+              <div style="font-size:11px;color:var(--muted);">2022 · Lycée Victor Hugo, Bordeaux</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;line-height:1.5;">Option analyses biologiques · Mention Bien · Alternance en laboratoire médical</div>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Baccalauréat Scientifique</div>
+              <div style="font-size:11px;color:var(--muted);">2020 · Lycée Saint-Exupéry, Bordeaux</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;">Mention Bien · Spécialités SVT et Physique-Chimie</div>
+            </div>
+
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--navy);">Compétences</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--navy);flex-shrink:0;"></span>Techniques d'analyse biologique (PCR, ELISA, électrophorèse)</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--navy);flex-shrink:0;"></span>Rigueur documentaire et traçabilité (ISO 9001)</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--navy);flex-shrink:0;"></span>Photographie (pratique régulière, logiciel Lightroom)</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--navy);flex-shrink:0;"></span>Suite LibreOffice · Anglais B2</div>
+            </div>
+          </div>
+          <!-- Colonne droite -->
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--navy);">Expériences</div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Technicienne de laboratoire</div>
+              <div style="font-size:11px;color:var(--muted);">Sept. 2021 – Juin 2022 · Laboratoire Cerba, Bordeaux</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;line-height:1.5;">Alternance · Réception et traitement des prélèvements biologiques · Analyses biochimiques et hématologiques · Respect des protocoles qualité · Traçabilité informatique</div>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Vendeuse</div>
+              <div style="font-size:11px;color:var(--muted);">Étés 2019–2021 · Fnac, Bordeaux</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;line-height:1.5;">Contact client · Gestion des stocks · Esprit d'équipe</div>
+            </div>
+
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--navy);">Activités</div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--ps);flex-shrink:0;"></span>Trésorière d'une association d'aide aux devoirs depuis 2020</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--ps);flex-shrink:0;"></span>Pratique du volleyball en club (entraînements 2x/semaine)</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--ps);flex-shrink:0;"></span>Photographie naturaliste — concours régionaux</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--green-pale);border-radius:8px;padding:12px 16px;margin-top:14px;font-size:12px;color:var(--green);line-height:1.7;max-width:680px;margin-left:auto;margin-right:auto;">
+        ✅ <strong>Points forts de ce CV :</strong> compétences techniques directement transférables (labo, protocoles qualité, traçabilité). La photographie est un vrai plus en identité judiciaire. L'association montre l'engagement et les responsabilités. La mobilité (permis, célibataire) est un atout pour les astreintes.
+      </div>
+    </div>
+
+    <!-- CV 2 — RECONVERSION -->
+    <div id="cv2" class="cv-example" style="display:none;">
+      <div style="background:var(--orange-pale);border-radius:9px;padding:10px 16px;margin-bottom:16px;font-size:12px;color:var(--orange);">
+        <strong>Profil :</strong> Karim Benali, 34 ans, infirmier urgentiste depuis 8 ans, en reconversion. Il mise sur sa résistance psychologique, ses compétences médicales et sa motivation documentée.
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(27,58,107,.08);max-width:680px;margin:0 auto;">
+        <div style="background:#1a5276;padding:24px 28px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:3px;">Karim BENALI</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:8px;">34 ans · Marié, 2 enfants · Permis B · Véhicule personnel</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">📍 Lyon (69)</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">📱 06 XX XX XX XX</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">✉️ karim.benali@email.fr</span>
+            </div>
+          </div>
+          <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👨‍⚕️</div>
+        </div>
+        <div style="padding:22px 28px;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #1a5276;">Formation</div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Diplôme d'État Infirmier</div>
+              <div style="font-size:11px;color:var(--muted);">2014 · IFSI Lyon Sud</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;">Formation aux urgences vitales · AFGSU 2</div>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Baccalauréat Scientifique</div>
+              <div style="font-size:11px;color:var(--muted);">2009 · Lycée La Martinière, Lyon</div>
+            </div>
+
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #1a5276;">Compétences</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:#1a5276;flex-shrink:0;"></span>Gestion du stress en situation d'urgence</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:#1a5276;flex-shrink:0;"></span>Anatomie et connaissance des causes de décès</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:#1a5276;flex-shrink:0;"></span>Travail en équipe pluridisciplinaire</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:#1a5276;flex-shrink:0;"></span>Logiciel Osiris (dossiers médicaux) · Anglais B1</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #1a5276;">Expériences</div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Infirmier — Service des Urgences</div>
+              <div style="font-size:11px;color:var(--muted);">Sept. 2016 – aujourd'hui · CHU Lyon Sud</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;line-height:1.5;">Gestion quotidienne de situations d'urgence vitale · Travail de nuit et astreintes · Collaboration avec la police et les médecins légistes sur les décès suspects · Rigueur dans les protocoles de soins et la traçabilité médicale</div>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Infirmier — Médecine interne</div>
+              <div style="font-size:11px;color:var(--muted);">2014 – 2016 · Clinique Saint-Luc, Lyon</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;">Soins complexes · Encadrement aide-soignants</div>
+            </div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#1a5276;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid #1a5276;">Activités</div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--ps);flex-shrink:0;"></span>Secouriste PSE2 — Croix-Rouge (week-ends)</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--ps);flex-shrink:0;"></span>Course à pied (semi-marathon) · Lecture forensique</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--green-pale);border-radius:8px;padding:12px 16px;margin-top:14px;font-size:12px;color:var(--green);line-height:1.7;max-width:680px;margin-left:auto;margin-right:auto;">
+        ✅ <strong>Points forts de ce CV :</strong> la confrontation quotidienne aux situations difficiles (urgences, mort) est l'argument le plus fort — il n'aura pas de mal à répondre sur la gestion du stress et de l'aspect psychologique. La connaissance anatomique et la collaboration avec les médecins légistes sont très directement valorisables. Les astreintes et le travail de nuit sont déjà sa réalité — argument solide.
+      </div>
+    </div>
+
+    <!-- CV 3 — EXPÉRIMENTÉ -->
+    <div id="cv3" class="cv-example" style="display:none;">
+      <div style="background:var(--ps-pale);border-radius:9px;padding:10px 16px;margin-bottom:16px;font-size:12px;color:var(--ps);">
+        <strong>Profil :</strong> Sophie Leclerc, 41 ans, technicienne de laboratoire chimiste depuis 15 ans dans l'industrie pharmaceutique. Elle mise sur son expertise technique, sa rigueur qualité et sa motivation tardive mais documentée.
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 4px 20px rgba(27,58,107,.08);max-width:680px;margin:0 auto;">
+        <div style="background:var(--navy2);padding:24px 28px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:20px;">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.5px;margin-bottom:3px;">Sophie LECLERC</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:8px;">41 ans · Divorcée, 1 enfant · Permis B · Mobile zone Sud-Est</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">📍 Marseille (13)</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">📱 06 XX XX XX XX</span>
+              <span style="font-size:11px;color:rgba(255,255,255,.55);">✉️ s.leclerc@email.fr</span>
+            </div>
+          </div>
+          <div style="width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👩‍💼</div>
+        </div>
+        <div style="padding:22px 28px;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--navy2);">Formation</div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">BTS Chimie</div>
+              <div style="font-size:11px;color:var(--muted);">2006 · IUT Aix-Marseille</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;">Option analyses physico-chimiques</div>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Formation professionnelle — Auditeur qualité ISO 17025</div>
+              <div style="font-size:11px;color:var(--muted);">2018 · AFNOR Formation</div>
+            </div>
+
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--navy2);">Compétences</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--navy2);flex-shrink:0;"></span>Chromatographie (HPLC, GC-MS) · Spectroscopie IR/UV</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--navy2);flex-shrink:0;"></span>Management qualité ISO 17025 (auditrice interne)</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--navy2);flex-shrink:0;"></span>Encadrement d'équipe (3 personnes)</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--navy2);flex-shrink:0;"></span>LIMS · Python bases · Anglais C1</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--navy2);">Expériences</div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Responsable adjointe contrôle qualité</div>
+              <div style="font-size:11px;color:var(--muted);">Jan. 2018 – aujourd'hui · Sanofi Marseille</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;line-height:1.5;">Audit interne ISO 17025 · Validation des méthodes analytiques · Supervision des analyses libératoires · Encadrement de 3 techniciens · Traçabilité et documentation</div>
+            </div>
+            <div style="margin-bottom:14px;">
+              <div style="font-size:12px;font-weight:700;color:var(--navy3);">Technicienne analyses physico-chimiques</div>
+              <div style="font-size:11px;color:var(--muted);">2008 – 2018 · Sanofi Marseille</div>
+              <div style="font-size:11px;color:var(--ink2);margin-top:3px;line-height:1.5;">Analyses HPLC, GC-MS, spectroscopie IR/UV · Rédaction des rapports d'analyse · Respect des BPL</div>
+            </div>
+            <div style="font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:var(--navy2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--navy2);">Activités</div>
+            <div style="display:flex;flex-direction:column;gap:5px;">
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--ps);flex-shrink:0;"></span>Présidente d'une association de parents d'élèves</div>
+              <div style="font-size:11px;color:var(--ink2);display:flex;gap:6px;align-items:center;"><span style="width:5px;height:5px;border-radius:50%;background:var(--ps);flex-shrink:0;"></span>Randonnée en montagne · Lecture de romans policiers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--green-pale);border-radius:8px;padding:12px 16px;margin-top:14px;font-size:12px;color:var(--green);line-height:1.7;max-width:680px;margin-left:auto;margin-right:auto;">
+        ✅ <strong>Points forts de ce CV :</strong> la maîtrise de l'ISO 17025 est directement applicable aux plateaux techniques de la PS. GC-MS et spectroscopie IR/UV sont les techniques des sections stupéfiants et physico-chimie des LPS. Le jury lui demandera probablement pourquoi passer en catégorie B après 15 ans d'expérience — elle doit avoir une réponse solide sur sa motivation (sens du service public, intérêt pour le judiciaire, envie de terrain).
+      </div>
+    </div>
+
+  </div>
+
+<script>
+function showCV(id, btn) {
+  document.querySelectorAll('.cv-example').forEach(el => el.style.display = 'none');
+  document.getElementById(id).style.display = 'block';
+  document.querySelectorAll('[onclick^="showCV"]').forEach(b => {
+    b.style.background = 'var(--white)';
+    b.style.color = 'var(--muted)';
+    b.style.border = '1.5px solid var(--line)';
+  });
+  btn.style.background = 'var(--navy)';
+  btn.style.color = '#fff';
+  btn.style.border = 'none';
+}
+</script>
+
+</div>
+</body>
+</html>
